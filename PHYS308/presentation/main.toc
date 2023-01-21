@@ -1,5 +1,0 @@
-\babel@toc {english}{}\relax 
-\beamer@sectionintoc {1}{What's all about?}{4}{0}{1}
-\beamer@sectionintoc {2}{Design \& Implementaion}{7}{0}{2}
-\beamer@sectionintoc {3}{Limitations}{11}{0}{3}
-\beamer@sectionintoc {4}{What's Next ?}{13}{0}{4}
