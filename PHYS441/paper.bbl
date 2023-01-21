@@ -1,0 +1,336 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{aps-pol-photon}{article}{}
+      \name{author}{1}{}{%
+        {{hash=d469e733a8d7f8bbb51687c25096c165}{%
+           family={Adam},
+           familyi={A\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{d469e733a8d7f8bbb51687c25096c165}
+      \strng{fullhash}{d469e733a8d7f8bbb51687c25096c165}
+      \strng{bibnamehash}{d469e733a8d7f8bbb51687c25096c165}
+      \strng{authorbibnamehash}{d469e733a8d7f8bbb51687c25096c165}
+      \strng{authornamehash}{d469e733a8d7f8bbb51687c25096c165}
+      \strng{authorfullhash}{d469e733a8d7f8bbb51687c25096c165}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{5}
+      \field{journaltitle}{PHYSICAL REVIEW LETTERS}
+      \field{title}{Measurement of $e^+e^-$ Momentum and Angular Distributions from Linearly Polarized Photon Collisions}
+      \field{volume}{127}
+      \field{year}{2021}
+      \true{nocite}
+      \verb{doi}
+      \verb https://doi.org/10.1103/PhysRevLett.127.052302
+      \endverb
+      \verb{urlraw}
+      \verb https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.127.052302
+      \endverb
+      \verb{url}
+      \verb https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.127.052302
+      \endverb
+    \endentry
+    \entry{nonlinear-effect}{article}{}
+      \name{author}{2}{}{%
+        {{hash=6187dd248d0b586119911a3d88b500c5}{%
+           family={Costantini},
+           familyi={C\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod},
+           suffix={V.\bibnamedelimi De\bibnamedelima Tollis},
+           suffixi={V\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=9d34758ea68778528bd4bbdff82a599d}{%
+           family={Pistoni},
+           familyi={P\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{7de6b22076819b2ba412a3926c874c7f}
+      \strng{fullhash}{7de6b22076819b2ba412a3926c874c7f}
+      \strng{bibnamehash}{7de6b22076819b2ba412a3926c874c7f}
+      \strng{authorbibnamehash}{7de6b22076819b2ba412a3926c874c7f}
+      \strng{authornamehash}{7de6b22076819b2ba412a3926c874c7f}
+      \strng{authorfullhash}{7de6b22076819b2ba412a3926c874c7f}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{3}
+      \field{journaltitle}{physics reports}
+      \field{number}{4}
+      \field{title}{Nonlinear effects in quantum electrodynamics}
+      \field{volume}{2}
+      \field{year}{1971}
+      \true{nocite}
+      \field{pages}{183\bibrangedash 214}
+      \range{pages}{32}
+      \verb{doi}
+      \verb 10.1007/BF02736745
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/BF02736745
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/BF02736745
+      \endverb
+    \endentry
+    \entry{physrevlett}{article}{}
+      \name{author}{20}{}{%
+        {{hash=c1c24716fbbcd950492f3780e3258d75}{%
+           given={d.\bibnamedelimi l.},
+           giveni={d\bibinitperiod\bibinitdelim l\bibinitperiod},
+           prefix={burke\bibnamedelimb d.\bibnamedelimi l.},
+           prefixi={b\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim l\bibinitperiod}}}%
+        {{hash=f5f514eaa97c3f839c881d42ff31e891}{%
+           given={r.\bibnamedelimi c.},
+           giveni={r\bibinitperiod\bibinitdelim c\bibinitperiod},
+           prefix={field\bibnamedelimb r.\bibnamedelimi c.},
+           prefixi={f\bibinitperiod\bibinitdelim r\bibinitperiod\bibinitdelim c\bibinitperiod}}}%
+        {{hash=e307525cfe59416ccb47c271ff91374c}{%
+           given={g.},
+           giveni={g\bibinitperiod},
+           prefix={horton-smith\bibnamedelima g.},
+           prefixi={h\bibinithyphendelim s\bibinitperiod\bibinitdelim g\bibinitperiod}}}%
+        {{hash=bfec924ba2d6a53b116062bcefa22c1c}{%
+           given={j.\bibnamedelimi e.},
+           giveni={j\bibinitperiod\bibinitdelim e\bibinitperiod},
+           prefix={spencer\bibnamedelimb j.\bibnamedelimi e.},
+           prefixi={s\bibinitperiod\bibinitdelim j\bibinitperiod\bibinitdelim e\bibinitperiod}}}%
+        {{hash=3b5c519fa71b8a91ec904dc99171bb45}{%
+           given={d.},
+           giveni={d\bibinitperiod},
+           prefix={walz\bibnamedelima d.},
+           prefixi={w\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+        {{hash=0bce0258e66b7a95bf15c2da7921356e}{%
+           given={s.\bibnamedelimi c.},
+           giveni={s\bibinitperiod\bibinitdelim c\bibinitperiod},
+           prefix={berridge\bibnamedelimb s.\bibnamedelimi c.},
+           prefixi={b\bibinitperiod\bibinitdelim s\bibinitperiod\bibinitdelim c\bibinitperiod}}}%
+        {{hash=81e77011bdca3c41fb1c4bb5e1a97805}{%
+           given={w.\bibnamedelimi m.},
+           giveni={w\bibinitperiod\bibinitdelim m\bibinitperiod},
+           prefix={bugg\bibnamedelimb w.\bibnamedelimi m.},
+           prefixi={b\bibinitperiod\bibinitdelim w\bibinitperiod\bibinitdelim m\bibinitperiod}}}%
+        {{hash=05aafd2e80af2cfcc74e2c10ce6accf6}{%
+           given={k.},
+           giveni={k\bibinitperiod},
+           prefix={shmakov\bibnamedelima k.},
+           prefixi={s\bibinitperiod\bibinitdelim k\bibinitperiod}}}%
+        {{hash=c4ac6842f7a1eb25744bf2c6a9efc219}{%
+           given={a.\bibnamedelimi w.},
+           giveni={a\bibinitperiod\bibinitdelim w\bibinitperiod},
+           prefix={weidemann\bibnamedelimb a.\bibnamedelimi w.},
+           prefixi={w\bibinitperiod\bibinitdelim a\bibinitperiod\bibinitdelim w\bibinitperiod}}}%
+        {{hash=ec56471726f8250374025aaf5ff661a1}{%
+           given={c.},
+           giveni={c\bibinitperiod},
+           prefix={bula\bibnamedelima c.},
+           prefixi={b\bibinitperiod\bibinitdelim c\bibinitperiod}}}%
+        {{hash=d5e013e5b3e0a07bff779adf8bde05ee}{%
+           given={k.\bibnamedelimi t.},
+           giveni={k\bibinitperiod\bibinitdelim t\bibinitperiod},
+           prefix={mcdonald\bibnamedelimb k.\bibnamedelimi t.},
+           prefixi={m\bibinitperiod\bibinitdelim k\bibinitperiod\bibinitdelim t\bibinitperiod}}}%
+        {{hash=34efbdf0af3d37d0b2c3841d7b518bbe}{%
+           given={e.\bibnamedelimi j.},
+           giveni={e\bibinitperiod\bibinitdelim j\bibinitperiod},
+           prefix={prebys\bibnamedelimb e.\bibnamedelimi j.},
+           prefixi={p\bibinitperiod\bibinitdelim e\bibinitperiod\bibinitdelim j\bibinitperiod}}}%
+        {{hash=abab28127055e6625dbe46406fafffdb}{%
+           given={c.},
+           giveni={c\bibinitperiod},
+           prefix={bamber\bibnamedelima c.},
+           prefixi={b\bibinitperiod\bibinitdelim c\bibinitperiod}}}%
+        {{hash=54f7445472884516db6958acbe31e7e6}{%
+           given={s.\bibnamedelimi j.},
+           giveni={s\bibinitperiod\bibinitdelim j\bibinitperiod},
+           prefix={boege\bibnamedelimb s.\bibnamedelimi j.},
+           prefixi={b\bibinitperiod\bibinitdelim s\bibinitperiod\bibinitdelim j\bibinitperiod}}}%
+        {{hash=fcd264a9a4bfa3aace0ec544db26f842}{%
+           given={t.},
+           giveni={t\bibinitperiod},
+           prefix={koffas\bibnamedelima t.},
+           prefixi={k\bibinitperiod\bibinitdelim t\bibinitperiod}}}%
+        {{hash=3c92946af8dc89b7704d2027065bdc20}{%
+           given={t.},
+           giveni={t\bibinitperiod},
+           prefix={kotseroglou\bibnamedelima t.},
+           prefixi={k\bibinitperiod\bibinitdelim t\bibinitperiod}}}%
+        {{hash=7caf9c1dee1f0e19c051a0546633eb5d}{%
+           given={a.\bibnamedelimi c.},
+           giveni={a\bibinitperiod\bibinitdelim c\bibinitperiod},
+           prefix={melissinos\bibnamedelimb a.\bibnamedelimi c.},
+           prefixi={m\bibinitperiod\bibinitdelim a\bibinitperiod\bibinitdelim c\bibinitperiod}}}%
+        {{hash=586ddb91c6e73f3ffb855c10ee7a99df}{%
+           given={d.\bibnamedelimi d.},
+           giveni={d\bibinitperiod\bibinitdelim d\bibinitperiod},
+           prefix={meyerhofer\bibnamedelimb d.\bibnamedelimi d.},
+           prefixi={m\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+        {{hash=85fac790f43db60b103713b7bf2fbe18}{%
+           given={d.\bibnamedelimi a.},
+           giveni={d\bibinitperiod\bibinitdelim a\bibinitperiod},
+           prefix={reis\bibnamedelimb d.\bibnamedelimi a.},
+           prefixi={r\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
+        {{hash=81a80ef6d41d41eab3b9be57b276c5be}{%
+           given={w.},
+           giveni={w\bibinitperiod},
+           prefix={ragg\bibnamedelima w.},
+           prefixi={r\bibinitperiod\bibinitdelim w\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {american physical society}%
+      }
+      \strng{namehash}{0aad109c44fc5a6c4b66dd2beb358440}
+      \strng{fullhash}{a852d22457a3f820c87188addf7d2f2d}
+      \strng{bibnamehash}{0aad109c44fc5a6c4b66dd2beb358440}
+      \strng{authorbibnamehash}{0aad109c44fc5a6c4b66dd2beb358440}
+      \strng{authornamehash}{0aad109c44fc5a6c4b66dd2beb358440}
+      \strng{authorfullhash}{a852d22457a3f820c87188addf7d2f2d}
+      \field{sortinit}{d}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{9}
+      \field{journaltitle}{phys. rev. lett.}
+      \field{month}{9}
+      \field{title}{positron production in multiphoton light-by-light scattering}
+      \field{volume}{79}
+      \field{year}{1997}
+      \field{pages}{1626\bibrangedash 1629}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1103/physrevlett.79.1626
+      \endverb
+      \verb{urlraw}
+      \verb https://link.aps.org/doi/10.1103/physrevlett.79.1626
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/physrevlett.79.1626
+      \endverb
+    \endentry
+    \entry{einstein}{online}{}
+      \name{author}{1}{}{%
+        {{hash=3ebf53e52a3ce84f0ffb8553200a6a63}{%
+           family={Einstein},
+           familyi={E\bibinitperiod},
+           given={Albert},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{3ebf53e52a3ce84f0ffb8553200a6a63}
+      \strng{fullhash}{3ebf53e52a3ce84f0ffb8553200a6a63}
+      \strng{bibnamehash}{3ebf53e52a3ce84f0ffb8553200a6a63}
+      \strng{authorbibnamehash}{3ebf53e52a3ce84f0ffb8553200a6a63}
+      \strng{authornamehash}{3ebf53e52a3ce84f0ffb8553200a6a63}
+      \strng{authorfullhash}{3ebf53e52a3ce84f0ffb8553200a6a63}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Annalen der Physik}
+      \field{number}{10}
+      \field{title}{{Zur Elektrodynamik bewegter Körper}. ({German}) [{On} the electrodynamics of moving bodies]}
+      \field{volume}{322}
+      \field{year}{1905}
+      \field{pages}{891\bibrangedash 921}
+      \range{pages}{31}
+      \verb{doi}
+      \verb http://dx.doi.org/10.1002/andp.19053221004
+      \endverb
+      \keyw{physics}
+    \endentry
+    \entry{milstein1994183}{article}{}
+      \name{author}{2}{}{%
+        {{hash=32e441bdd3d4b5fc5844e104b6c0ab04}{%
+           family={milstein},
+           familyi={m\bibinitperiod},
+           prefix={a.i.},
+           prefixi={a\bibinitperiod}}}%
+        {{hash=3aa1ca52ce84c7da5c829b194ce0b3b1}{%
+           family={schumacher},
+           familyi={s\bibinitperiod},
+           prefix={m.},
+           prefixi={m\bibinitperiod}}}%
+      }
+      \strng{namehash}{cd10d9f79d979b1cffe26aab9852a931}
+      \strng{fullhash}{cd10d9f79d979b1cffe26aab9852a931}
+      \strng{bibnamehash}{cd10d9f79d979b1cffe26aab9852a931}
+      \strng{authorbibnamehash}{cd10d9f79d979b1cffe26aab9852a931}
+      \strng{authornamehash}{cd10d9f79d979b1cffe26aab9852a931}
+      \strng{authorfullhash}{cd10d9f79d979b1cffe26aab9852a931}
+      \field{sortinit}{m}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{recent developments in the theory of delbrück scattering and experimental results obtained after the latest review article of 1975 are discussed. theoretical predictions and experimental data are in a general agreement at energies below 12 mev, except for the coulomb correction effect which remains to be calculated. information on the relative size of the coulomb correction effect compared to the lowest-order born approximation is extracted from the experimental data. in the 20 to 100 mev energy range delbrück scattering has also been clearly identified, but furthergoing studies are desirable both on the experimental and theoretical sides. in the high-energy range above 1 gev the high-energy small-angle approximation leads to a satisfactory agreement with experiment. attention is paid to the interference of delbrück scattering with atomic rayleigh scattering and with scattering through the excitation of different modes of nuclear excitation.}
+      \field{issn}{0370-1573}
+      \field{journaltitle}{physics reports}
+      \field{number}{4}
+      \field{title}{present status of delbrück scattering}
+      \field{volume}{243}
+      \field{year}{1994}
+      \true{nocite}
+      \field{pages}{183\bibrangedash 214}
+      \range{pages}{32}
+      \verb{doi}
+      \verb https://doi.org/10.1016/0370-1573(94)00058-1
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/0370157394000581
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/0370157394000581
+      \endverb
+    \endentry
+    \entry{ELI}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{The Quantum Vacuum and Quantum Dynamics}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://eli-laser.eu/science-applications/high-fields-physics/
+      \endverb
+      \verb{url}
+      \verb https://eli-laser.eu/science-applications/high-fields-physics/
+      \endverb
+    \endentry
+    \entry{astrobites}{online}{}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labeltitlesource}{title}
+      \field{title}{When photons talk to each other}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://astrobites.org/2011/05/21/when-photons-talk-to-each-other/
+      \endverb
+      \verb{url}
+      \verb https://astrobites.org/2011/05/21/when-photons-talk-to-each-other/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

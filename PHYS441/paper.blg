@@ -1,0 +1,19 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'paper.blg'
+[53] biber-darwin:340> INFO - === Thu Dec 15, 2022, 20:15:59
+[71] Biber.pm:418> INFO - Reading 'paper.bcf'
+[134] Biber.pm:969> INFO - Using all citekeys in bib section 0
+[148] Biber.pm:4383> INFO - Processing section 0
+[155] Biber.pm:4574> INFO - Looking for bibtex file 'ref.bib' for section 0
+[158] bibtex.pm:1713> INFO - LaTeX decoding ...
+[165] bibtex.pm:1518> INFO - Found BibTeX data source 'ref.bib'
+[189] Utils.pm:409> ERROR - Name "Y. Lu, N. Christensen, Q. Su," has too many commas, skipping entry 'aps-Breit'
+[218] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[218] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[218] Biber.pm:4203> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[218] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[227] bbl.pm:654> INFO - Writing 'paper.bbl' with encoding 'UTF-8'
+[232] bbl.pm:757> INFO - Output to paper.bbl
+[235] Biber.pm:130> WARN - legacy month field 'sep' in entry 'physrevlett' is not an integer - this will probably not sort properly.
+[235] Biber.pm:132> INFO - WARNINGS: 1
+[235] Biber.pm:135> INFO - ERRORS: 1
