@@ -16,7 +16,9 @@
 \maketitle
 
 \chapter{Energy in Thermal Physics}
-\section{Thermal Eequilibrium}%
+
+
+\section{Thermal Equilibrium}%
 \label{sec:thermal-equilibrium}
 
 \begin{itemize}
@@ -38,9 +40,43 @@
 
 \begin{itemize}
   \item A \textbf{mole} of molecules is Avogadro's number of them, \num{6.02d23}.
-  \item Number of molecules is $N=n n_{A}$
+  \item Number of molecules is $N=n \times N_{A}$
   \item Ideal gas law becomes $PV = NkT$, where $k$ is Boltzmann's constant.
+  \item The average transnational kinetic energy is $\bar{K}_{\text{trans}}= \frac{3}{2}kT$,
+        where $kT = \frac{1}{40} \unit{\electronvolt}$
+\end{itemize}
 
+\section{Equipartition of Energy}%
+\label{sec:equi of energy}
+
+\paragraph{Equipartition theorem} At a temperature $T$, the average energy of any
+quadratic degree of freedom is $\frac{1}{2}kT$.
+
+For a system of $N$ molecules, each with $f$ degree of freedom, and there are no other
+(non-quadratic) temperature-dependent forms of energy, then its \textbf{total thermal energy} is
+
+\begin{align}
+U = Nf \frac{1}{2}kT
+\end{align}
+Note, This is the \textit{average} total thermal energy,
+but for large $N$, fluctuations become negligible.
+
+
+\section{Heat and Work}%
+\label{sec:heat and work}
+
+\begin{itemize}
+  \item Total amount of energy in the universe never changes, \textbf{Conservation of energy}
+  \item \textbf{Heat} any spontaneous flow of energy form on e object to another, caused by
+        difference in temperature.
+  \item \textbf{Work}, in thermodynamics, is any other transfer of energy into or out of a system.
+  \item Work and heat refer to energy \textit{in transit}.
+  \item The total energy in a system is determined, but not the work nor the heat, it's meaningless.
+  \item We ask about how much heat \textit{entered} a system and how much work
+        \textit{was done on} a system.
+  \item $\Delta{U} = Q + W$
+        is just a statement of the law of conservation of energy, but it's still called
+        \textbf{first law of thermodynamics}.
 \end{itemize}
 
 \end{document}
