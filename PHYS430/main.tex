@@ -35,7 +35,7 @@
 \section{The Ideal Gas}%
 \label{sec:The Ideal Gas}
 \begin{align}
-  PV = nRT; \qquad R = \qty{8.31}{J / mol . K}
+  PV = nRT; \qquad R = \si{8.31}{J / mol . K}
 \end{align}
 
 \begin{itemize}
@@ -43,7 +43,7 @@
   \item Number of molecules is $N=n \times N_{A}$
   \item Ideal gas law becomes $PV = NkT$, where $k$ is Boltzmann's constant.
   \item The average transnational kinetic energy is $\bar{K}_{\text{trans}}= \frac{3}{2}kT$,
-        where $kT = \frac{1}{40} \unit{\electronvolt}$
+        where $kT = \frac{1}{40} \si{\electronvolt}$
 \end{itemize}
 
 \section{Equipartition of Energy}%
@@ -78,5 +78,28 @@ but for large $N$, fluctuations become negligible.
         is just a statement of the law of conservation of energy, but it's still called
         \textbf{first law of thermodynamics}.
 \end{itemize}
+
+ \section{Commpression Work}%
+ \label{sec:Compression Work}
+
+\begin{itemize}
+ \item From classical mmechanics work is $W = \vec{F} \cdot d\vec{r}$
+ \item  Consider compressing gas with a piston of area $A$ a distance $\Delta{x}$,
+   the change in volume is $\Delta{V} = -A \Delta{x}$
+ \item Volume change should be quasistatic, meaning very slow so that the pressure defined is uniform.
+     then $W = P A \Delta{V}$, but $\Delta{x} = - \Delta{V}$; minus since the volume decreases.
+ \item $W =- P A \Delta{V}$  -  quasistatic.
+ \item If $P$ is not constant, $$W = - \int_{V_i}^{V_f} P(V) dV$$
+  \item \textbf{isothermal compression} is slow thst the temperature doesn't raise.
+  \item \textbf{adiabatic compression} is so fast that no heat escapes from the gas.
+\end{itemize}
+
+
+\chapter{The Second Law}
+
+\section{Two-State system}%
+\label{sec:two state}
+
+
 
 \end{document}
