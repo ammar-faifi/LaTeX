@@ -35,7 +35,7 @@
 \section{The Ideal Gas}%
 \label{sec:The Ideal Gas}
 \begin{align}
-  PV = nRT; \qquad R = \si{8.31}{J / mol . K}
+  PV = nRT; \qquad R = \qty{8.31}{J / mol . K}
 \end{align}
 
 \begin{itemize}
@@ -77,6 +77,7 @@ but for large $N$, fluctuations become negligible.
   \item $\Delta{U} = Q + W$
         is just a statement of the law of conservation of energy, but it's still called
         \textbf{first law of thermodynamics}.
+  \item Processes of heat transfer: Conduction, Convection, and Radiation.
 \end{itemize}
 
  \section{Commpression Work}%
@@ -89,9 +90,110 @@ but for large $N$, fluctuations become negligible.
  \item Volume change should be quasistatic, meaning very slow so that the pressure defined is uniform.
      then $W = P A \Delta{V}$, but $\Delta{x} = - \Delta{V}$; minus since the volume decreases.
  \item $W =- P A \Delta{V}$  -  quasistatic.
- \item If $P$ is not constant, $$W = - \int_{V_i}^{V_f} P(V) dV$$
-  \item \textbf{isothermal compression} is slow thst the temperature doesn't raise.
+  \item If $P$ is not constant,
+\begin{align}
+\label{eq:gas work}
+        W = - \int_{V_i}^{V_f} P(V) \, dV
+\end{align}
+
+  \item \textbf{isothermal compression} is slow that the temperature doesn't raise.
   \item \textbf{adiabatic compression} is so fast that no heat escapes from the gas.
+  \item Isothermal process
+        \begin{itemize}
+          \item  the change will be along an \textbf{ isotherm } line,
+                with $P = NkT / V$.
+          \item The work done is
+        \begin{align}
+          W  = - \int_{V_i}^{V_f} P(V) \, dV = NkT \, \ln{ \frac{V_{i}}{V_{f}} }
+        \end{align}
+          \item The heat enters the system, from the first law, is
+
+                \begin{align}
+                  Q = \Delta{U} - W = \underbrace{ \Delta{( \frac{1}{2}NfkT )} }_{0} - W = NkT \ln{\frac{V_{f}}{V_{i}}}
+                \end{align}
+    \end{itemize}
+
+  \item adiabatic process
+        \begin{itemize}
+          \item In the PV plot the change is from one isotherm to another.
+          \item There should be no trasfer of heat so
+                \begin{align}
+                  \Delta{U} = Q+W = W
+                \end{align}
+          \item If it's \textit{ideal} gas, $U$ is proportional to $T$, so the
+                temperature increases.
+          \item By the equipartition theorem $U = \frac{f}{2} NkT$, so $dU = \frac{f}{2} Nk\, dT$,
+                then from \eqref{eq:gas work}
+                \begin{align}
+                  \frac{f}{2} Nk \, dT = -P\, dV
+                \end{align}
+                Using the ideal gas law for $P$ and integrate
+                \begin{align}
+                  \frac{f}{2} \ln{\frac{T_{f}}{T_{i}}} = - {\frac{V_{f}}{V_{i}}} \quad \text{or} \quad
+                  V_{f} T_{f}^{f/2} = V_{i} T_{i}^{f/2} = \text{const.}
+                \end{align}
+          \item Using the ideal gas law to eliminate $T$, $V^{\gamma}P = \text{const.}$,
+                $\gamma$ is the \textbf{adiabatic exponent}.
+        \end{itemize}
+\end{itemize}
+
+
+\section{Heat Capacities}%
+\label{sec:Heat Capacities}
+
+\begin{itemize}
+  \item \textbf{Heat capacity} of an object is the amount of heat needed to raise its temperature,
+        per degree change
+        \begin{align}
+          \label{eq:heat capacity}
+          C = \frac{Q}{\Delta{T}}
+        \end{align}
+  \item The more matter you have the larger the heat capacity, by factoring out the mass $m$
+        we get \textbf{specific heat}
+        \begin{align}
+          \label{eq:specific heat}
+          c \equiv \frac{C}{m}
+        \end{align}
+  \item Note \eqref{eq:specific heat} is ambiguous, plug in the first law
+        \begin{align}
+          \label{eq:heat cap ambig}
+          C \frac{Q}{\Delta{T}} = \frac{\Delta{U} - W}{\Delta{T}}
+        \end{align}
+        Even if the energy of an object is a well-defined function of its temperature alone,
+        the work $W$ done on the object is not; it depends on the process path on PV plot.
+  \item From \eqref{eq:heat cap ambig} The \textbf{heat capacity at constant volume}, denoted $C_{V}$
+        \begin{align}
+          \label{eq:heat cap v}
+          C_{V} = \left( \frac{\Delta{U}}{\Delta{T}} \right) _{V} =
+          \left( \frac{\partial U}{\partial T} \right)_{V}
+        \end{align}
+  \item From \eqref{eq:heat cap ambig} and \eqref{eq:gas work}
+        the \textbf{heat capacity at constant pressure}, denoted $C_{P}$
+        \begin{align}
+          \label{eq:heat cap p}
+          C_{P} = \left( \frac{\Delta{U} - (- P \Delta{V})}{\Delta{T}}  \right)_{P}
+          = \left ( \frac{\partial U}{\partial T}  \right)_{P}
+            + P \left ( \frac{\partial V}{\partial T}  \right)_{P}
+        \end{align}
+        for solid last term is almost negligible.
+  \item At a \textbf{phase transformation}, you add heat in a system without increasing its temperature;
+        such as melting of boiling water. Then $C = \frac{Q}{\Delta{T}} = \infty$
+  \item The amount of heat needed to do this pahse transformation is called \textbf{latent heat} $L$,
+        and the \textbf{specific latent heat} is
+        \begin{align}
+          \label{eq:specific latent}
+          l \equiv \frac{L}{m}= \frac{Q}{m}
+        \end{align}
+        It's ambiguous, but we assume the pressure is constant, and no other work done.
+  \item Adding $PV$ onto the energy gives the \textbf{enthalpy}
+        \begin{align}
+          \label{eq:enthalpy}
+          H = U + PV
+        \end{align}
+        it's the \textit{total} energy you would need to create the system out of nothing.
+
+
+
 \end{itemize}
 
 
