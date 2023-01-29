@@ -164,7 +164,7 @@ but for large $N$, fluctuations become negligible.
   \item From \eqref{eq:heat cap ambig} The \textbf{heat capacity at constant volume}, denoted $C_{V}$
         \begin{align}
           \label{eq:heat cap v}
-          C_{V} = \left( \frac{\Delta{U}}{\Delta{T}} \right) _{V} =
+          C_{V} = {\left( \frac{\Delta{U}}{\Delta{T}} \right)}_{V} =
           \left( \frac{\partial U}{\partial T} \right)_{V}
         \end{align}
   \item From \eqref{eq:heat cap ambig} and \eqref{eq:gas work}
@@ -201,7 +201,28 @@ but for large $N$, fluctuations become negligible.
 
 \section{Two-State system}%
 \label{sec:two state}
+\begin{itemize}
+
+    \item Irrevesible processes are not \textit{inevitable}, they are just overwhelmingly \textit{probable}.
+    \item A \textbf{microstate} is an outcome.
+    \item A \textbf{macrostate} is saying number of particle for each stete, e.g., two heads.
+    \item \textbf{multiplcity} of a macrostate is the number of microstates for a given macrostate.
+      \item Total multiplcity of all macrostates is the total number of microstates. Then the probability
+        of a macrostate is
+        \begin{align}
+          p = \frac{\Omega(n)}{\Omega(\text{all})}
+        \end{align}
+        \item Number of different ways of choosing $n$ items ouf of $N$, or the \textit{combination} of $n$
+          chosen from $N$.
+          \begin{align}
+            \label{eq:multiplcity formula}
+            \Omega(N, n) = \frac{N!}{n! \, (N-n)!} =
+            \begin{pmatrix}
+              N \\ n
+            \end{pmatrix}
+          \end{align}
 
 
+\end{itemize}
 
 \end{document}
