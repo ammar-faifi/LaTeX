@@ -207,7 +207,7 @@ but for large $N$, fluctuations become negligible.
 	\item A \textbf{microstate} is an outcome.
 	\item A \textbf{macrostate} is saying number of particle for each state, e.g., two heads.
 	\item \textbf{multiplcity} of a macrostate is the number of microstates for a given macrostate.
-	\item Total multiplcity of all macrostates is the total number of microstates. Then the probability
+	\item Total multiplicity of all macrostates is the total number of microstates. Then the probability
 	      of a macrostate is
 	      \begin{align}
 		      p = \frac{\Omega(n)}{\Omega(\text{all})}
@@ -215,7 +215,7 @@ but for large $N$, fluctuations become negligible.
 	\item Number of different ways of choosing $n$ items out of $N$, or the \textit{combination} of $n$
 	      chosen from $N$.
 	      \begin{align}
-		      \label{eq:multiplcity formula}
+		      \label{eq:multiplicity formula}
 		      \Omega(N, n) = \frac{N!}{n! \, (N-n)!} =
 		      \begin{pmatrix}
 			      N \\ n
@@ -252,22 +252,74 @@ To understand the heat flow and irreversible processes, consider two Einstein so
 share energy back and forth
 
 \begin{itemize}
-  \item Assume the two solids are \textbf{weakly coupled}; the exchange of energy between them
-				is slower then the exchange of energy among atom within each solid.
-  \item Then the inidivisual energies of solids, $U_A$ and $U_B$, will change slowly;
-    over short time they are fixed.
-    \item on longer time scales the values of $U_A$ and $U_B$ will change, so we consider
-      $U_\text{total} = U_A + U_A$
-   \item The total multipliciy for independent system is just the product of $\Omega_A$ and $Omega_B$.
-   \item \textbf{Fundamental assumption statistical mechanics} In an isolated system
-    in thermal equilibrium, all accessible microstates are equally probable.
-    \item Invoking this principle on the two Einstein solids, we conclude that, while all the
-      \textit{micro}states are equally probable, some \textit{macro}states are more probable than others.
-      \item The \textit{heat},then, is a probabilistic phenomenon; if system started \textit{initially}
-        with all the energy in solid $B$ and wait for a while, it's more certain to find that the
-        energy has flowed from $B$ to $A$.
-
-
+	\item Assume the two solids are \textbf{weakly coupled}; the exchange of energy between them
+	      is slower then the exchange of energy among atom within each solid.
+	\item Then the individual energies of solids, $U_A$ and $U_B$, will change slowly;
+	      over short time they are fixed.
+	\item on longer time scales the values of $U_A$ and $U_B$ will change, so we consider
+	      $U_\text{total} = U_A + U_A$
+	\item The total multiplicity for independent system is just the product of $\Omega_A$ and $Omega_B$.
+	\item \textbf{Fundamental assumption of statistical mechanics} In an isolated system
+	      in thermal equilibrium, all accessible microstates are equally probable.
+	\item Invoking this principle on the two Einstein solids, we conclude that, while all the
+	      \textit{micro}states are equally probable, some \textit{macro}states are more probable than others.
+	\item The \textit{heat}, then, is a probabilistic phenomenon; if system started \textit{initially}
+	      with all the energy in solid $B$ and wait for a while, it's more certain to find that the
+	      energy has flowed from $B$ to $A$.
+	\item The tendency of increasing multiplicity is the \textbf{second law of thermodynamics}.
 \end{itemize}
+
+
+\section{Large Systems}%
+\label{sec:large systems}
+
+\begin{itemize}
+	\item There three categories of numbers here:
+	      \begin{itemize}
+		      \item	\textbf{small numbers}, 12, 43
+		      \item	\textbf{large numbers}, in order of Avogadro's number \num{d23}
+		      \item	\textbf{very large numbers}, exponentiating of large numbers.
+	      \end{itemize}
+	\item Adding a small number to a large number doesn't change.
+	      Multiplying a large number by a very large number.
+	\item Using Stirling's approximation for factorial of a large number
+	      \begin{align}
+		      \label{eq:Stirling}
+		      N! \approx N^{N} e^{-N} \sqrt{2 \pi N} ; \qquad  N \gg 1
+	      \end{align}
+	\item The approximated multiplicity is
+	      \begin{align}
+		      \label{eq:appox omega}
+		      \Omega (N, q) \approx \left( \frac{eq}{N} \right)^{N}; \qquad q \gg N
+	      \end{align}
+	      within the high-temperature limit.
+	\item Multiplicity of two Einstein interacting solids with $N$ oscillators and total $q$ energy units is
+	      \begin{align}
+		      \label{eq:total multipliciy}
+		      \Omega = \left( \frac{eq_{A}}{N} \right)^{N}  \left( \frac{eq_B}{N} \right)^{N}
+		      = \left( \frac{e}{N} \right)^{2N} (q_A q_B)^N
+	      \end{align}
+	\item Taking $\Omega = \Omega(q_A)$, it has a peak at $q_A= q/2$ with a very large number value of
+	      \begin{align}
+		      \label{eq:Omega max}
+		      \Omega_{\text{max}} = \left( \frac{e}{N} \right)^{2N} \left(\frac{q}{2} \right)^{2N}
+	      \end{align}
+
+	\item Around this maximum, $\Omega$ is a \textbf{Gaussian} as
+	      \begin{align}
+		      \Omega = \Omega_{\text{max}} \, e^{-N(2x/q)^2}
+	      \end{align}
+	\item  $\Omega = \Omega_{\text{max}}/e$ when
+	      \begin{align*}
+		      x = \frac{q}{2 \sqrt{N}}
+	      \end{align*}
+	      the width is $q/\sqrt{N}$
+\end{itemize}
+
+
+
+
+
+
 
 \end{document}
