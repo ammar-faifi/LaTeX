@@ -385,6 +385,40 @@ share energy back and forth
 \section{Entropy}%
 \label{sec:entropy}
 
+\begin{itemize}
+	\item Any large systems in equilibrium will be found in the macrostate with the greatest multiplicity,
+				a general statement for the \textbf{second law of thermodynamics}
+  \item Or multiplicity tends to increase.
+  \item To simplify dealing with very large number of $\Omega$, we define the \textbf{entropy} as
+				\begin{align}
+					\label{eq:entropy}
+					S \equiv k \ln{\Omega} \quad [\unit{J/K}]
+				\end{align}
+  \item Entropy tends to increase.
+  \item No matter what you do to decrease the entropy in one place, you're bound to create at least
+				as much entropy somewhere else.
+	\item Entropy for idea gas, with Stirling's approximation, is called
+				\textbf{Sackur-Tetrode equation}
+				\begin{align}
+					S = Nk \left[
+						\ln{ \left( \frac{V}{N} \left( \frac{4\pi m U}{3Nh^2} \right)^{3/2} \right) + \frac{5}{2}}
+					\right]
+				\end{align}
+	\item Entropy of an ideal gas depends on its volume, energy, and number of particles.
+  \item If the volume changes from $V_i$ to $V_f$
+				\begin{align}
+					\label{eq:entropy of volume}
+					\Delta{S} = Nk \ln{\frac{V_f}{V_i}} \qquad \text{($U$, $N$ fixed)}
+				\end{align}
+  \item In \textbf{free expansion} no work is done by gas nor heat
+				$\Delta{U} = Q + W = 0 + 0 =0$, however there's an increase in entropy by
+				\eqref{eq:entropy of volume}
+  \item  Suppose two different monoatomic idea gases, $A$ and $B$,
+				each with the same energy, volume and # of particles. After mixing them, each gas will expand
+				to twice its initial volume, so $\Delta{S_A} = Nk \ln{2}$, then the total entropy is
+				\textbf{Entropy of mixing} $\Delta{S_{\text{total}} = 2Nk \ln{2}}$
 
+
+\end{itemize}
 
 \end{document}
