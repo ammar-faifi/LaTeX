@@ -282,11 +282,21 @@ share energy back and forth
 	      \end{itemize}
 	\item Adding a small number to a large number doesn't change.
 	      Multiplying a large number by a very large number.
-	\item Using Stirling's approximation for factorial of a large number
+	\item Using \textbf{Stirling's approximation} for factorial of a large number
 	      \begin{align}
 		      \label{eq:Stirling}
 		      N! \approx N^{N} e^{-N} \sqrt{2 \pi N} ; \qquad  N \gg 1
 	      \end{align}
+  \item Or for $N$ is a large number, roughly
+				\begin{align}
+					N! \approx \left( \frac{N}{e} \right)^N = N^N e^{-N}
+				\end{align}
+  \item For \textit{logarithm} of $N!$ from above result
+				\begin{align}
+					\ln{N!} \approx N \ln{N} - N
+				\end{align}
+
+
 	\item The approximated multiplicity is
 	      \begin{align}
 		      \label{eq:appox omega}
