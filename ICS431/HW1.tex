@@ -5,6 +5,7 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{enumitem}
 
 
 \def\code#1{\texttt{#1}}
@@ -338,5 +339,37 @@ It shows  previous executed commands.
 \end{figure}
 
 
+\begin{enumerate}
+  \item  The program could set a timer for some time in the future and go to sleep. When it is awakened by the interrupt, it could update its local state, which it is using to keep track of the number of interrupts it has received thus far. It could then repeat this process of continually setting timer interrupts and updating its local state when the interrupts are actually raised.
+
+  \item In general not all users are intrested in operating systems to use specifically those application. So it's wise not to overwhelm the OS implementation with non-essential code. Furthermode, those applications
+        are just built upon the operating system calls and services.
+
+  \item It helps in preventing exposing crucial system calls to the user scope. For example,
+        in Kernel mode, the whole operating system might go down if an interrupt occurs but
+        in user mode, a single process fails if an interrupt occurs.
+
+  \item OS will waste large portion of the memory, leading to slower responsive of the system while
+        running other processes. Also,  it will make system call as well as managing the system resources much harder.
+
+  \item It makes the execution of repeated tasks faster, by save the part of the process to be fast loaded into
+        CPU and CPU registers. Also, they reduce the throughput on the main memory allowing other processes to access
+        it faster. Large cache can replace disks, but only if it has a state-saving when the power is down then up again
+        it should preserve the same data without lose. And it should cheap, because caches usually so expensive due to
+        their used technology to provied very fast I/O.
+
+  \item In client-server model, the client requests a server from a ready server. In the peer-to-peer model, all node
+        in the network can be either client requesting service or server providing it.
+
+  \item They are methods used by application programs to communicate with the system core.
+
+  \item It receives text-based commands from the user or a file then runs them, by translating them into one or more system
+        calls. It might have an update or changes so they are nor part of the kernel.
+  \item It is easier to debug issues and easier to change any part since it affects just small parts not the entire system.
+        A disadvantage of this approach is that it has a very poor performance due to many communication happening between
+        every layer to reach a service provied by the OS.
+
+  \item Some very simple machines do not have a disk with a file system to store OS on it. So the OS is stored in a firmware.
+\end{enumerate}
 
 \end{document}
