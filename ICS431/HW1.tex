@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\usepackage[a4paper, margin=10mm]{geometry}
+\usepackage[a4paper, margin=15mm]{geometry}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -24,7 +24,7 @@ It shows live current running processes
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.7\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-13 at 23.54.25.png}
+  \includegraphics[width=0.7\textwidth]{~/Screenshots/Screenshot 2023-02-13 at 23.54.25.png}
 \end{figure}
 
 
@@ -35,7 +35,306 @@ the RAM and CPU usages
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.7\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-13 at 23.54.33.png}
+  \includegraphics[width=0.7\textwidth]{~/Screenshots/Screenshot 2023-02-13 at 23.54.33.png}
+\end{figure}
+
+\newpage
+
+\subsection{\code{ps}}%
+Show a set of the current running processes, with default parameters
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{~/Screenshots/Screenshot 2023-02-16 at 11.50.37.png}
+\end{figure}
+
+
+\subsection{\code{ps -A | less}}%
+\code{ps -A} shows all processes, the pipe operator ($|$) will redirect stdout of the left
+command into the stdin of the right command. Here \code{less} command shows the output as
+scrollable list.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 11.56.35.png}
+\end{figure}
+
+
+\subsection{\code{ps -A | grep}}%
+As above but it use command \code{grep} for filtering
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 11.59.00.png}
+\end{figure}
+
+
+\newpage
+
+
+\subsection{\code{pstree}}%
+Like \code{ps}, but in  tree-like format.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 12.19.27.png}
+\end{figure}
+
+\subsection{\code{kill}}%
+Like \code{ps}, but in  tree-like format.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 12.41.57.png}
+\end{figure}
+
+\subsection{\code{pgrep}}%
+Like \code{ps}, but in  tree-like format.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 12.42.38.png}
+\end{figure}
+
+\newpage
+
+
+\subsection{\code{pkill}}%
+Using power of filtering in \code{grep}, and perform \code{kill} for all matched pattern.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 12.42.46.png}
+\end{figure}
+
+\subsection{\code{killall}}%
+Send a kill signal to all processes by command name.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 12.42.59.png}
+\end{figure}
+
+\subsection{\code{pstree}}%
+Change the priority value of running processes.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 12.57.53.png}
+\end{figure}
+
+
+\newpage
+
+
+\subsection{\code{xkill}}%
+forcing the X server to close connections to clients.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 12.42.46.png}
+\end{figure}
+
+\subsection{\code{nohup}}%
+To run a command that cannot be affected by hangup singal.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 12.42.59.png}
+\end{figure}
+
+\subsection{\code{ls}}%
+List all the current working directory contents.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 12.57.53.png}
+\end{figure}
+
+
+\newpage
+
+
+\subsection{\code{ls -R}}%
+forcing the X server to close connections to clients.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 13.23.20.png}
+\end{figure}
+
+\subsection{\code{ls -a}}%
+Do not ignore contents with name starting with dot (.example).
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 13.23.27.png}
+\end{figure}
+
+\subsection{\code{ls -al}}%
+In recursive mode, meaning list all sub directories
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 13.23.41.png}
+\end{figure}
+
+
+\newpage
+
+
+\subsection{\code{cat > filename}}%
+Create a file with the name \code{filename}, and anything typed in terminal will be part of the file
+until termination by Ctrl+X.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 16.09.44.png}
+\end{figure}
+
+\subsection{\code{cat filename}}%
+Prints a file named \code{filename} to the stdout.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 16.09.52.png}
+\end{figure}
+
+\subsection{\code{cat file1 file2 > file3}}%
+Take content of both \code{file1} \code{file2} into new file named \code{file3}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 16.11.39.png}
+\end{figure}
+
+\newpage
+
+
+\subsection{\code{mv file new/file/path'}}%
+It can be used to move file to another dir, if it's the same dir, it rename the file.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 16.22.19.png}
+\end{figure}
+
+\subsection{\code{mv filename new\_file\_name}}%
+Moved the file to the same directory, meaning it got renamed.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 16.22.44.png}
+\end{figure}
+
+\subsection{\code{sudo}}%
+Super user do; run a command in the root user permission.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 16.22.55.png}
+\end{figure}
+
+\newpage
+
+\subsection{\code{rm filename}}%
+Remove the file name \code{filename} from existence.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-16 at 16.31.14.png}
+\end{figure}
+
+\subsection{\code{man ls}}%
+Remove the file name \code{filename} from existence.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 16.41.35.png}
+\end{figure}
+
+\subsection{\code{netstat}}%
+Print  network  connections, routing tables, interface statistics, masquerade connections, and multicast memberships
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 16.51.41.png}
+\end{figure}
+
+\newpage
+
+\subsection{\code{clear}}%
+Clear all outputs
+
+\subsection{\code{mkdir dir-name}}%
+Create a new directory
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 17.04.57.png}
+\end{figure}
+
+
+\subsection{\code{mv old\_file new\_file}}%
+We knew the \code{mv} moves file from a path to a new one, but if it's on the same path, it's like renaming
+the file.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 17.08.55.png}
+\end{figure}
+
+
+\subsection{\code{pr -x}}%
+This is not a valid argument.
+
+\subsection{\code{pr -h}}%
+It helps to prepare file for printing it, the option \code{-h} is
+used to a centered HEADER instead of filename in page header.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 17.17.37.png}
+\end{figure}
+
+\newpage
+
+\subsection{\code{pr -n}}%
+Same as above, but adds line numbering.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 17.22.39.png}
+\end{figure}
+
+
+\subsection{\code{vmstat}}%
+It reports  information  about processes, memory, paging, block IO, traps,
+disks and cpu activity.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 17.26.20.png}
+\end{figure}
+
+\subsection{\code{df}}%
+It reports file system disk space usage
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 17.26.27.png}
+\end{figure}
+
+\newpage
+
+\subsection{\code{vi filename}}%
+Command for the \code{vim} editor. It opens the file called \code{filename} or creates it.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 17.26.46.png}
+\end{figure}
+
+\subsection{\code{traceroute}}%
+tracks the route packets taken from an IP network on their way to a given host.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 17.39.08.png}
+\end{figure}
+
+\subsection{\code{cp file new\_file}}%
+It copies a content of file \cdoe{file} to a new one called \code{new\_file}.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 17.39.37.png}
+\end{figure}
+
+\newpage
+
+\subsection{\code{mv dir new\_die}}%
+It moves directories into another one.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 17.22.39.png}
+\end{figure}
+
+
+\subsection{\code{history}}%
+It shows  previous executed commands.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-02-20 at 17.40.11.png}
 \end{figure}
 
 
