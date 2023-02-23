@@ -287,14 +287,14 @@ share energy back and forth
 		      \label{eq:Stirling}
 		      N! \approx N^{N} e^{-N} \sqrt{2 \pi N} ; \qquad  N \gg 1
 	      \end{align}
-  \item Or for $N$ is a large number, roughly
-				\begin{align}
-					N! \approx \left( \frac{N}{e} \right)^N = N^N e^{-N}
-				\end{align}
-  \item For \textit{logarithm} of $N!$ from above result
-				\begin{align}
-					\ln{N!} \approx N \ln{N} - N
-				\end{align}
+	\item Or for $N$ is a large number, roughly
+	      \begin{align}
+		      N! \approx \left( \frac{N}{e} \right)^N = N^N e^{-N}
+	      \end{align}
+	\item For \textit{logarithm} of $N!$ from above result
+	      \begin{align}
+		      \ln{N!} \approx N \ln{N} - N
+	      \end{align}
 
 
 	\item The approximated multiplicity is
@@ -337,25 +337,25 @@ share energy back and forth
 	      \end{align*}
 
 	\item To have a finite number of microstates we invoke quantum mechanics principles of wavefuntion,
-	      which is spread in both position and momentum spaces; it adhers to the \textit{Heidenberg}
+	      which is spread in both position and momentum spaces; it adheres to the \textit{Heisenberg}
 
 	\item The molecule's kinetic energy equals $U$,
 	      \begin{align}
 		      U = \frac{1}{2} m (v_x^2 + v_y^2 + v_z^2) = \frac{1}{2m} (p_x^2  + p_y^2 + p_z^2)
 		      \quad \text{or} \quad p_x^2  + p_y^2 + p_z^2 = 2m U
 	      \end{align}
-	      which is the surface of a \textit{sphere} in momentum space with redius $\sqrt{2mU}$
+	      which is the surface of a \textit{sphere} in momentum space with Redis $\sqrt{2mU}$
 
 	\item Multiplicity of an ideal gas of two \textit{distinguishable} molecules is
 	      \begin{align}
-		      \Omega_2 = \frac{V^2}{h^6} \tiem A
+		      \Omega_2 = \frac{V^2}{h^6} \times A
 	      \end{align}
 	      Where $A$ is area of momentum hypersphere.
 
 	\item Multiplicity of an ideal gas of two \textit{indistinguishable} is less by
-	      a foactor of 2
+	      a factor of 2
 	      \begin{align}
-		      \Omega_2 = \frac{1}{2} \frac{V^2}{h^6} \tiem A
+		      \Omega_2 = \frac{1}{2} \frac{V^2}{h^6} \times A
 	      \end{align}
 
 
@@ -382,13 +382,13 @@ share energy back and forth
 		      \Omega (U, V, N) = f(N) V^N U^{3N/2}
 	      \end{align}
 	\item Suppose \textit{two} ideal gases separated by a partition that allows
-				energy to flow, and if each gas has $N$ molecules, the total multiplicity is
-				\begin{align}
-					\Omega_{\text{total}} = [f(N)]^2 (V_A V_B)^N (U_A U_B)^{3N/2}
-				\end{align}
-				with a peak-width of $\frac{U_{\text{total}}}{\sqrt{3N/2}}$
+	      energy to flow, and if each gas has $N$ molecules, the total multiplicity is
+	      \begin{align}
+		      \Omega_{\text{total}} = [f(N)]^2 (V_A V_B)^N (U_A U_B)^{3N/2}
+	      \end{align}
+	      with a peak-width of $\frac{U_{\text{total}}}{\sqrt{3N/2}}$
 	\item Now allow gases to exchange volume with a movable partition, we'll have
-				a width-peak of $\frac{V_{\text{total}}}{\sqrt{3N/2}}$
+	      a width-peak of $\frac{V_{\text{total}}}{\sqrt{3N/2}}$
 
 \end{itemize}
 
@@ -397,37 +397,36 @@ share energy back and forth
 
 \begin{itemize}
 	\item Any large systems in equilibrium will be found in the macrostate with the greatest multiplicity,
-				a general statement for the \textbf{second law of thermodynamics}
-  \item Or multiplicity tends to increase.
-  \item To simplify dealing with very large number of $\Omega$, we define the \textbf{entropy} as
-				\begin{align}
-					\label{eq:entropy}
-					S \equiv k \ln{\Omega} \quad [\unit{J/K}]
-				\end{align}
-  \item Entropy tends to increase.
-  \item No matter what you do to decrease the entropy in one place, you're bound to create at least
-				as much entropy somewhere else.
+	      a general statement for the \textbf{second law of thermodynamics}
+	\item Or multiplicity tends to increase.
+	\item To simplify dealing with very large number of $\Omega$, we define the \textbf{entropy} as
+	      \begin{align}
+		      \label{eq:entropy}
+		      S \equiv k \ln{\Omega} \quad [\unit{J/K}]
+	      \end{align}
+	\item Entropy tends to increase.
+	\item No matter what you do to decrease the entropy in one place, you're bound to create at least
+	      as much entropy somewhere else.
 	\item Entropy for idea gas, with Stirling's approximation, is called
-				\textbf{Sackur-Tetrode equation}
-				\begin{align}
-					S = Nk \left[
-						\ln{ \left( \frac{V}{N} \left( \frac{4\pi m U}{3Nh^2} \right)^{3/2} \right) + \frac{5}{2}}
-					\right]
-				\end{align}
+	      \textbf{Sackur-Tetrode equation}
+	      \begin{align}
+		      S = Nk \left[
+			      \ln{ \left( \frac{V}{N} \left( \frac{4\pi m U}{3Nh^2} \right)^{3/2} \right) + \frac{5}{2}}
+			      \right]
+	      \end{align}
 	\item Entropy of an ideal gas depends on its volume, energy, and number of particles.
-  \item If the volume changes from $V_i$ to $V_f$
-				\begin{align}
-					\label{eq:entropy of volume}
-					\Delta{S} = Nk \ln{\frac{V_f}{V_i}} \qquad \text{($U$, $N$ fixed)}
-				\end{align}
-  \item In \textbf{free expansion} no work is done by gas nor heat
-				$\Delta{U} = Q + W = 0 + 0 =0$, however there's an increase in entropy by
-				\eqref{eq:entropy of volume}
-  \item  Suppose two different monoatomic idea gases, $A$ and $B$,
-				each with the same energy, volume and # of particles. After mixing them, each gas will expand
-				to twice its initial volume, so $\Delta{S_A} = Nk \ln{2}$, then the total entropy is
-				\textbf{Entropy of mixing} $\Delta{S_{\text{total}} = 2Nk \ln{2}}$
-
+	\item If the volume changes from $V_i$ to $V_f$
+	      \begin{align}
+		      \label{eq:entropy of volume}
+		      \Delta{S} = Nk \ln{\frac{V_f}{V_i}} \qquad \text{($U$, $N$ fixed)}
+	      \end{align}
+	\item In \textbf{free expansion} no work is done by gas nor heat
+	      $\Delta{U} = Q + W = 0 + 0 =0$, however there's an increase in entropy by
+	      \eqref{eq:entropy of volume}
+	\item  Suppose two different monoatomic idea gases, $A$ and $B$,
+	      each with the same energy, volume and \# of particles. After mixing them, each gas will expand
+	      to twice its initial volume, so $\Delta{S_A} = Nk \ln{2}$, then the total entropy is
+	      \textbf{Entropy of mixing} $\Delta{S_{\text{total}} = 2Nk \ln{2}}$
 
 \end{itemize}
 
