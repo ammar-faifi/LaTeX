@@ -427,7 +427,59 @@ share energy back and forth
 	      each with the same energy, volume and \# of particles. After mixing them, each gas will expand
 	      to twice its initial volume, so $\Delta{S_A} = Nk \ln{2}$, then the total entropy is
 	      \textbf{Entropy of mixing} $\Delta{S_{\text{total}} = 2Nk \ln{2}}$
+	\item Process that creates new entropy is said to be \textbf{irreversible}.
+
+	\item A process that leaves the total entropy of the universe unchanged is called \textbf{reversible}.
+	\item The sudden expansion of gas created new entropy, but if it's slow enough, its entropy is unchanged.
+	\item The can be explained by the quantum adiabatic process, where very slow squeeze of gas, takes the a molecule
+	      from the $n$th level to the $n$th level in the new volume.
+\end{itemize}
+
+
+\chapter{Interactions and Implications}
+\label{ch:Interactions and Implications}
+We saw that when two systems interact, they will evolve toward a macrostate with the highest entropy.
+Which is the statement of the second law of thermodynamics. This isn't built into the fundamental laws of nature,
+it arises from the probabilistic law. From now on, we treat it as a fundamental law.
+
+\section{Temperature}%
+\label{sec:temperature}
+
+\begin{itemize}
+	\item when two objects are in thermal equilibrium, their entropy has reached the minimum as well as their temperature
+	      are the same.
+	      \begin{figure}[ht]
+		      \centering
+		      \includegraphics[width=0.5\linewidth]{figures/out.pdf}
+		      \caption{\label{fig:Entropies of two systems} Entropies of two systems}
+	      \end{figure}
+
+	\item We see that it reached equilibrium when
+	      \begin{align}
+		      \frac{\partial S_{t}}{\partial q_A} = 0
+		      \quad \text{or} \quad \frac{\partial S_{t}}{\partial U_A} = 0
+	      \end{align}
+	      where the energy $U_A$ is just $q_A$ times a constant.
+	\item But $S_t = S_A + S_B$, so
+	      \begin{align}
+		      \frac{\partial S_A}{\partial U_A} + \frac{\partial S_B}{\partial U_A} = 0 \quad \text{or} \quad
+		      \frac{\partial S_A}{\partial U_A} = \frac{\partial S_B}{\partial U_B}
+	      \end{align}
+	      because $dU_A = -dU_B$
+  \item From Figure \ref{fig:Entropies of two systems}, if small values, say $q_A= 10$, for a bit of energy
+				passes from solid $B$ to $A$, the entropy gained by $A$ is greater than entropy lost by $B$. Then the overall
+				entropy will increase, this happens spontaneously according to the second law.
+	\item So energy flows from object with smaller slope into solid with larger slope. We know energy flows from
+				object with larger \textit{temperature} into object with a lower one.
+	\item So we can define the temperature , with correct units and at constant volume and
+				number of particles, as
+				\begin{align}
+					\frac{1}{T} \equiv \left( \frac{\partial S}{\partial U} \right)_{N,V}
+				\end{align}
 
 \end{itemize}
+
+
+
 
 \end{document}
