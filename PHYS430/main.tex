@@ -466,18 +466,98 @@ it arises from the probabilistic law. From now on, we treat it as a fundamental 
 		      \frac{\partial S_A}{\partial U_A} = \frac{\partial S_B}{\partial U_B}
 	      \end{align}
 	      because $dU_A = -dU_B$
-  \item From Figure \ref{fig:Entropies of two systems}, if small values, say $q_A= 10$, for a bit of energy
-				passes from solid $B$ to $A$, the entropy gained by $A$ is greater than entropy lost by $B$. Then the overall
-				entropy will increase, this happens spontaneously according to the second law.
+	\item From Figure \ref{fig:Entropies of two systems}, if small values, say $q_A= 10$, for a bit of energy
+	      passes from solid $B$ to $A$, the entropy gained by $A$ is greater than entropy lost by $B$. Then the overall
+	      entropy will increase, this happens spontaneously according to the second law.
 	\item So energy flows from object with smaller slope into solid with larger slope. We know energy flows from
-				object with larger \textit{temperature} into object with a lower one.
+	      object with larger \textit{temperature} into object with a lower one.
 	\item So we can define the temperature , with correct units and at constant volume and
-				number of particles, as
+	      number of particles, as
+	      \begin{align}
+		      \frac{1}{T} \equiv \left( \frac{\partial S}{\partial U} \right)_{N,V}
+	      \end{align}
+\end{itemize}
+
+\section{Entropy and Heat}%
+\label{sec:entropy and heat}
+
+We saw how to calculate the temperature as a function of energy (and vice versa) for any system with
+explicit formula for the multiplicity. To have something experimental, we differentiate the function
+$U(T)$
+
+\begin{itemize}
+	\item	volume we have
+	      \begin{align}
+		      C_V \equiv \left( \frac{\partial U}{\partial T} \right)_{N,V}
+	      \end{align}
+	\item For an Einstein solid with $ q \gg N $e heat capacity is
+	      \begin{align}
+		      C_V = \frac{\partial }{\partial T} (NkT)  = Nk
+	      \end{align}
+	      and for a monoatomic ideal gas
+	      \begin{align}
+		      C_V = \frac{\partial }{\partial T} \left( \frac{3}{2} NkT \right) = \frac{3}{2} Nk
+	      \end{align}
+
+	\item To measure the entropy, if you add a bit of heat to a system, its entropy will be
+	      \begin{align}
+		      dS = \frac{dU}{T} = \frac{dQ}{T}
+	      \end{align}
+	      this is valid even for changing volume, must be quasistatic.
+	\item But if the temperature is changing, we write in terms of heat capacity at constant volume
+	      \begin{align}
+		      dS = \frac{C_V dT}{T} \qquad \text{then} \qquad
+		      \Delta{S} = S_f - S_i = \int_{T_i}^{T_f} \frac{C_{V}}{T} dT
+	      \end{align}
+	\item If we know the $C_{V}(T)$, then we find the \textit{total} entropy of the system
+	      \begin{align}
+		      S_f - S(0) = \int_{0}^{T_f} \frac{C_V}{T} dT
+	      \end{align}
+	\item At zero temperature a system should settle into its unique lowest-energy state,
+	      so $ \Omega=1 $ and $ S=0 $. This fact is the \textbf{third law of thermodynamics}.
+	\item In practice $ S(0) $ is nonzero. As in the water molecules, we say it has a frozed-in \textbf{residual entropy}.
+	\item To prevent the integral form divergence at $ T=0 $, we say
+	      \begin{align}
+		      C_{V} \to 0 \qquad \text{as} \qquad T \to 0
+	      \end{align}
+\end{itemize}
+
+
+
+\section{Paramagnetism}%
+\label{sec:paramagnetism}
+
+Consider the \textbf{two-state paramagnet}. It consists of $ N $ spin-1/2 particles, immersed in a constant
+magnetic field $ \vec{B} $ pointing in the $ +z $ direction. Assume no interaction between dipoles.
+\begin{itemize}
+	\item The alignment is quantized, only two values are allowed, `up' (parallel) and `down' (antiparallel).
+	\item The energy is given by $ U = - \vec{\mu} \cdot \vec{B} $. Energy required to flip one dipole to be
+				down is $ \mu B - (-\mu B) = 2\mu B $
+  \item The \textit{total} energy of the system is
 				\begin{align}
-					\frac{1}{T} \equiv \left( \frac{\partial S}{\partial U} \right)_{N,V}
+					U = \mu B  (N_\downarrow - N_\uparrow)= \mu B(N - 2N_{\uparrow})
 				\end{align}
+  \item The \textbf{magnetization} is defined as the total magnetic moment of the whole system,
+				\begin{align}
+					M = \mu (N_\uparrow - N_\downarrow) = - \frac{U}{B}
+				\end{align}
+  \item We note from the graph that the largest multiplicity and largest entropy occur at $ U = 0 $ when exactly
+				half of the dipoles point down and
+
+	\item At $ U = 0 $,	$ T $ is infinite, with a higher energy $ T $ becomes negative. 
+
+				
+
+
+
 
 \end{itemize}
+
+
+
+
+
+
 
 
 
