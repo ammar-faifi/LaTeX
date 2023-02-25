@@ -35,6 +35,7 @@
 \section{The Ideal Gas}%
 \label{sec:The Ideal Gas}
 \begin{align}
+	\label{eq:ideal gas law}
 	PV = nRT; \qquad R = \qty{8.31}{J / mol . K}
 \end{align}
 
@@ -379,6 +380,7 @@ share energy back and forth
 	      \end{align}
 	      or to simplify the formula where,  $f(N)$ is function of $N$
 	      \begin{align}
+		      \label{eq:multiplicity simple}
 		      \Omega (U, V, N) = f(N) V^N U^{3N/2}
 	      \end{align}
 	\item Suppose \textit{two} ideal gases separated by a partition that allows
@@ -474,6 +476,7 @@ it arises from the probabilistic law. From now on, we treat it as a fundamental 
 	\item So we can define the temperature , with correct units and at constant volume and
 	      number of particles, as
 	      \begin{align}
+		      \label{eq:temperatue def}
 		      \frac{1}{T} \equiv \left( \frac{\partial S}{\partial U} \right)_{N,V}
 	      \end{align}
 \end{itemize}
@@ -515,7 +518,7 @@ $U(T)$
 	      \end{align}
 	\item At zero temperature a system should settle into its unique lowest-energy state,
 	      so $ \Omega=1 $ and $ S=0 $. This fact is the \textbf{third law of thermodynamics}.
-	\item In practice $ S(0) $ is nonzero. As in the water molecules, we say it has a frozed-in \textbf{residual entropy}.
+	\item In practice $ S(0) $ is nonzero. As in the water molecules, we say it has a frozen-in \textbf{residual entropy}.
 	\item To prevent the integral form divergence at $ T=0 $, we say
 	      \begin{align}
 		      C_{V} \to 0 \qquad \text{as} \qquad T \to 0
@@ -530,36 +533,145 @@ $U(T)$
 Consider the \textbf{two-state paramagnet}. It consists of $ N $ spin-1/2 particles, immersed in a constant
 magnetic field $ \vec{B} $ pointing in the $ +z $ direction. Assume no interaction between dipoles.
 \begin{itemize}
-	\item The alignment is quantized, only two values are allowed, `up' (parallel) and `down' (antiparallel).
+	\item The alignment is quantized, only two values are allowed, `up' (parallel) and `down' (anti-parallel).
 	\item The energy is given by $ U = - \vec{\mu} \cdot \vec{B} $. Energy required to flip one dipole to be
-				down is $ \mu B - (-\mu B) = 2\mu B $
-  \item The \textit{total} energy of the system is
-				\begin{align}
-					U = \mu B  (N_\downarrow - N_\uparrow)= \mu B(N - 2N_{\uparrow})
-				\end{align}
-  \item The \textbf{magnetization} is defined as the total magnetic moment of the whole system,
-				\begin{align}
-					M = \mu (N_\uparrow - N_\downarrow) = - \frac{U}{B}
-				\end{align}
-  \item We note from the graph that the largest multiplicity and largest entropy occur at $ U = 0 $ when exactly
-				half of the dipoles point down and
-
-	\item At $ U = 0 $,	$ T $ is infinite, with a higher energy $ T $ becomes negative. 
-
-				
-
-
-
-
+	      down is $ \mu B - (-\mu B) = 2\mu B $
+	\item The \textit{total} energy of the system is
+	      \begin{align}
+		      U = \mu B  (N_\downarrow - N_\uparrow)= \mu B(N - 2N_{\uparrow})
+	      \end{align}
+	\item The \textbf{magnetization} is defined as the total magnetic moment of the whole system,
+	      \begin{align}
+		      M = \mu (N_\uparrow - N_\downarrow) = - \frac{U}{B}
+	      \end{align}
+	\item We note from the graph that the largest multiplicity and largest entropy occur at $ U = 0 $ when exactly
+	      half of the dipoles point down and
+	\item At $ U = 0 $,	$ T $ is infinite, with a higher energy $ T $ becomes negative.
+	\item Analytical solution, the entropy is
+	      \begin{align}
+		      \label{eq:entropy of paramg}
+		      \frac{S}{k} & = \ln{N!} - \ln{N_\uparrow}! - \ln{(N - N_\uparrow)!}                                  \\
+		                  & \approx N \ln{N} - N_\uparrow \ln{N_\uparrow} - (N - N_\uparrow) \ln{(N - N_\uparrow)}
+	      \end{align}
+	\item Using the temperature definition \eqref{eq:temperatue def}, we get
+	      \begin{align}
+		      \label{eq:temp of paramag}
+		      \frac{1}{T} = \left( \frac{\partial S}{\partial U} \right)_{N, B}
+		      = \frac{\partial N_\uparrow}{\partial U} \frac{\partial S}{\partial N_\uparrow}
+		      = - \frac{1}{2 \mu B} \frac{\partial S}{\partial N_\uparrow}
+	      \end{align}
+	\item Now putting \eqref{eq:entropy of paramg} in \eqref{eq:temp of paramag} gives
+	      \begin{align}
+		      \frac{1}{T} = \frac{k}{2 \mu B} \ln{\left( \frac{N - U/\mu B}{N + U/\mu B} \right) }
+	      \end{align}
+	\item Solving for $ U $ gives
+	      \begin{align}
+		      U =-  N \mu B \tanh{\left( \frac{\mu B}{kT} \right) }
+	      \end{align}
 \end{itemize}
 
 
+\section{Mechanical Equilibrium and Pressure}%
+\label{sec:mech equili and pressure}
+
+To consider systems that can change their volume as they interact.
+
+\begin{itemize}
+	\item exchange of volume between systems is governed by their pressures. So there should be a relation
+	      between pressure and entropy, analogous to \eqref{eq:temperatue def}.
+	\item The total entropy is a function of two variables, $ U_A $  and $ V_A $. So the equilibrium point
+	      is where $ S_{total} $ is maximum,
+	      \begin{align}
+		      \frac{\partial  S_{t}}{\partial U_A} =0, \qquad \frac{\partial S_{t}}{\partial V_A} = 0.
+	      \end{align}
+
+	\item We've saw the first condition, but for the second one, we have
+	      \begin{align}
+		      \frac{\partial S_{t}}{\partial V_A} =
+		      \frac{\partial S_{A}}{\partial V_{A}} + \frac{\partial S_{B}}{\partial V_{A}}
+	      \end{align}
+	\item Knowing that the volume is conserved, $ dV_{A}  = -dV_{B}$, we have at equilibrium
+	      \begin{align}
+		      \frac{\partial S_{A}}{\partial V_{A}} = \frac{\partial S_{B}}{\partial V_{B}}
+	      \end{align}
+	\item Since, at equilibrium they have the same $T$, we can find a relation for pressure as
+	      \begin{align}
+		      \label{eq:pressure with entropy}
+		      P = T \left( \frac{\partial S}{\partial V} \right)_{U, N}
+	      \end{align}
+	\item We can derive \eqref{eq:ideal gas law} by using \eqref{eq:multiplicity simple}, then substitute it in the
+	      above equation.
+	\item Consider a two-step process where we change the energy while the volume is fixed then
+	      change the volume while the energy is fixed, the entropy is
+	      \begin{align}
+		      \label{eq:two-step process entropy}
+		      dS = \left( \frac{\partial S}{\partial U} \right)_{V} \, dU
+		      + \left( \frac{\partial S}{\partial V} \right)_{U}\, dV
+	      \end{align}
+	\item The \textbf{thermodynamic identity} is
+	      \begin{align}
+		      \label{eq:thermo identity}
+		      dU = T \, dS - P \, dV
+	      \end{align}
+	\item If the change in volume takes place quasistatically, no other forms of work are done, and no other relevant
+	      variables are changing, then we know
+	      \begin{align}
+		      W = -P \, dV \quad \text{and} \quad
+		      Q = T \, dS
+	      \end{align}
+	\item So even if the volume is changing we know the entropy is $ Q/T $.
+	\item As an special case of an adiabatic process ($ Q=0 $) and quasistatic, the entropy is unchanged; it is called
+	      \textbf{isentropic}.
+\end{itemize}
 
 
+\section{Diffusive Equilibrium and Chemical Potential}%
+\label{sec:diffusive equi}
+
+We saw when two system are in \textit{thermal} equilibrium their temperatures are equal.
+When they're in \textit{mechanical} equilibrium their pressures are equal.
+Now what about if they're \textit{diffusive} equilibrium ?
+Consider two systems $ A $ and $ B $, that can exchange both energy and particle, but of the same species.
 
 
+\begin{itemize}
+	\item As previous section, if the total energy and total number of particles are fixed, the total entropy is a
+	      function of $ U_{A} $ and $ N_{A} $.
+	\item At equilibrium, the total entropy is maximized, so
+	      \begin{align}
+		      \left( \frac{\partial S_{t}}{\partial U_{A}} \right)_{N_A, V_A} = 0
+		      \quad \text{and} \quad
+		      \left( \frac{\partial S_{t}}{\partial N_{A}} \right)_{U_A, V_A} = 0
+	      \end{align}
+	\item So we get
+	      \begin{align}
+		      \frac{\partial S_{A}}{\partial N_{A}} = \frac{\partial S_{B}}{\partial N_{B}}
+	      \end{align}
+	\item After multiplying each side with $-T$, since they are in thermal equilibrium, we define the
+	      \textbf{chemical potential}.
+	      \begin{align}
+		      \label{eq:chemical potential}
+		      \mu \equiv -T \left( \frac{\partial S}{\partial N} \right)_{U,V}
+	      \end{align}
+	      \textit{this} is the quantity that's the same for both systems when they're in \textit{diffusive} equilibrium.
+	\item The system with larger $ \partial S/ \partial N$ tends to gain particles. So Particles tend to flow
+	      form the system with higher $ \mu $ into the system with lower $ \mu $.
+	\item To generalize the thermodynamic identity,
+	      \begin{align}
+		      dS = \left( \frac{\partial S}{\partial U} \right)_{V} \, dU
+		      + \left( \frac{\partial S}{\partial V} \right)_{U}\, dV
+		      + \left( \frac{\partial S}{\partial N} \right)_{U, V} \, dN
+	      \end{align}
 
-
+				so it becomes
+				\begin{align}
+					\label{eq:thermo identity with N}
+					dU = T\, dS - P\, dV + \mu \, dN
+				\end{align}
+	\item It helps in remembering the partial-derivative formulas for $ T $, $ P $, and $ \mu $.
+	\item Note there are four variables changing, $ U $, $ S $, $ V $, and $ N $. By fixing any two you get different
+				formula.
+\end{itemize}
 
 
 \end{document}
