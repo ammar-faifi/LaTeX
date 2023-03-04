@@ -7,6 +7,8 @@
 \usepackage{graphicx}
 \usepackage{siunitx}
 
+\newcommand{\dbar}{d\hspace*{-0.08em}\bar{}\hspace*{0.1em}}
+
 \title{PHYS430 - Thermal Physics}
 \author{Alfaifi, Ammar}
 \date{}
@@ -75,17 +77,28 @@ but for large $N$, fluctuations become negligible.
 	\item The total energy in a system is determined, but not the work nor the heat, it's meaningless.
 	\item We ask about how much heat \textit{entered} a system and how much work
 	      \textit{was done on} a system.
-	\item $\Delta{U} = Q + W$
+	\item
+				\begin{align}
+					\label{eq:1st law thermo}
+					dU = \dbar Q + \dbar W
+				\end{align}
+
 	      is just a statement of the law of conservation of energy, but it's still called
 	      \textbf{first law of thermodynamics}.
+  \item Note that the $ dQ $ and $ dW $ are \textit{inexact differentials}. There are no such as
+				$ Q(P, V) $ and $ W(P, V) $ that depend only on the state of the system; they are path-dependent.
+
+
+
+
 	\item Processes of heat transfer: Conduction, Convection, and Radiation.
 \end{itemize}
 
-\section{Commpression Work}%
+\section{Compression Work}%
 \label{sec:Compression Work}
 
 \begin{itemize}
-	\item From classical mmechanics work is $W = \vec{F} \cdot d\vec{r}$
+	\item From classical mechanics work is $W = \vec{F} \cdot d\vec{r}$
 	\item  Consider compressing gas with a piston of area $A$ a distance $\Delta{x}$,
 	      the change in volume is $\Delta{V} = -A \Delta{x}$
 	\item Volume change should be quasistatic, meaning very slow so that the pressure defined is uniform.
@@ -671,6 +684,16 @@ Consider two systems $ A $ and $ B $, that can exchange both energy and particle
 	\item It helps in remembering the partial-derivative formulas for $ T $, $ P $, and $ \mu $.
 	\item Note there are four variables changing, $ U $, $ S $, $ V $, and $ N $. By fixing any two you get different
 				formula.
+
+
+
+
+
+
+
+
+
+
 \end{itemize}
 
 
