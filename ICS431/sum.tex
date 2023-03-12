@@ -1,0 +1,120 @@
+\documentclass{report}
+
+\usepackage[a4paper, lmargin=10mm, rmargin=70mm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\def\code#1{\texttt{#1}}
+
+\title{ICS431 Ch. 6 \& 7}
+\author{Alfaifi, Ammar}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\chapter{Synchronization Tools}%
+\label{sec:synchronization tool}
+
+\section{Background}
+
+\begin{itemize}
+	\item A \textbf{cooperating process} is one that can affect or be affected by other processes
+	      executing in the system.
+	\item Cooperating processes can either directly share a logical address space or be allowed
+	      to share data through message passing.
+	\item Concurrent access to shared data may result in data inconsistency, so synchronization is a must!
+	\item Recall the \textbf{unbound buffer} places no practical limit on the size of the buffer. The consumer
+	      may have to wait for new items, but the producer can always add new items.
+	\item For the \textbf{bounded buffer}, it assumes a fixed buffer size. The consumer must wait if the buffer is
+	      empty, and the producer must wait if it's full.
+	\item We consider the code of bounded buffer from Section 3.5, we add a new variable \code{count}, to
+	      track the number of items in the buffer.
+	\item As you see in the consumer's and producer's codes, page 274, the producer increment \code{count} and
+	      the producer tries to decrement it each time. When running concurrently, there are clashing!
+	\item When several processes access and manipulate the same data concurrently and the
+	      outcome of the execution depends on the particulate order in which the access takes place is called
+	      \textbf{race condition}.
+	\item Since we are interleaving the lower-level statements of both codes (but the order withing each
+	      high-level is preserved), both \code{count++} and \code{count--} are executed using the same old value,
+	      resulting wrong result; this is a race condition.
+\end{itemize}
+
+\section{The Critical-Section Problem}%
+
+\begin{itemize}
+	\item Consider a system with $ n $ processes $ {P_0, P_1, \dots, P_{n-1}} $. Each process ha a segment of code
+	      is a \textbf{critical section}, meaning a process can modify a data that's shared with at least one
+	      other process.
+	\item The section of code implementing this request is called \textbf{entry section}. There can be also
+	      \textbf{exit section}.
+	\item A solution to he critical-section problem must satisfy the following
+	      \begin{enumerate}
+		      \item \textbf{Mutual exclusion} if process $P_i$ is executing it its critical section, no other processes
+		            can be executing in their critical sections.
+		      \item \textbf{Progress} if no process is executing in its critical section and some processes want to
+		            enter their critical sections, then only those aren't executing in their remainder section can
+		            decide which will enter its critical section next.
+		      \item \textbf{Bounded waiting} a bound (limit) on the number of times that other processes are allowed
+		            to enter their critical section after a process made a request to enter its critical section
+		            and that request.
+	      \end{enumerate}
+	\item Let \code{next\_available\_pid} be the pid to be assigned to a process after calling \code{fork()}. If
+	      \code{fork()} is called twice these will lead to a race condition in a kernel data structure.
+	\item This problem can be avoided in single-core environment, by disabling interrupts while a modifying
+	      a shared variable. But this inefficiency solution, and not feasible in multiprocessor environment.
+	\item Two approaches are used to handle this problem:
+	      \begin{enumerate}
+		      \item \textbf{Preemptive kernels} allows a process to be preempted while it is running in kernel mode.
+		      \item \textbf{Nonpreemptive kernels} does not allow a process running in kernel mode to be
+		            preempted; a kernel-mode process will run until it exits kernel mode, blocks, or yields control of
+		            CPU back.
+	      \end{enumerate}
+	\item Obviously, nonpreemptive doesn't have the race condition problem on kernel data structure,
+	      since only one process at time can run.
+\end{itemize}
+
+\section{Peterson's Solution}%
+
+\begin{itemize}
+	\item This is a software-based solution to the critical-section problem.
+	\item It requires the two processes to share two data items as, written in \code{C++}
+	      \begin{verbatim}
+            int turn;
+            boolean flags[2];
+\end{verbatim}
+	\item \code{turn} indicates whose turn it is to enter its critical section.
+	      if \code{turn == i}, then process $ P_{i} $ is allowed to execute its critical section.
+	\item \code{flag} array indicates if a process is ready to enter its critical section;
+	      if \code{flag[i]} is \code{true}, $ P_i $ is ready to enter its critical section.
+	\item The process $ P_i $	code should be
+	      \begin{verbatim}
+						While (true) {
+							flag[i] = true;
+							turn = j;
+							while (flag[j] && turn == j)
+								;
+
+							/* Here is the critical section */
+
+							flag[i] = false;
+
+							/* remainder section */
+					}
+				\end{verbatim}
+  \item A downside of the solution is that, it is affected by compilation process where reordering
+				for the read and write operation may happen.
+\end{itemize}
+
+\section{Hardware Support for Synchronization}%
+
+\begin{itemize}
+  \item
+\end{itemize}
+
+
+\end{document}
