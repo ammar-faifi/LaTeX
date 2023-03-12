@@ -47,6 +47,11 @@
 	\item Ideal gas law becomes $PV = NkT$, where $k$ is Boltzmann's constant.
 	\item The average transnational kinetic energy is $\bar{K}_{\text{trans}}= \frac{3}{2}kT$,
 	      where $kT = \frac{1}{40} \si{\electronvolt}$
+	      The root-mean-square velocity is
+	      \begin{align}
+		      v_\text{rms} = \sqrt{\bar{v}^2} = \sqrt{\frac{3kT}{m}}
+	      \end{align}
+
 \end{itemize}
 
 \section{Equipartition of Energy}%
@@ -78,15 +83,15 @@ but for large $N$, fluctuations become negligible.
 	\item We ask about how much heat \textit{entered} a system and how much work
 	      \textit{was done on} a system.
 	\item
-				\begin{align}
-					\label{eq:1st law thermo}
-					dU = \dbar Q + \dbar W
-				\end{align}
+	      \begin{align}
+		      \label{eq:1st law thermo}
+		      dU = \dbar Q + \dbar W
+	      \end{align}
 
 	      is just a statement of the law of conservation of energy, but it's still called
 	      \textbf{first law of thermodynamics}.
-  \item Note that the $ dQ $ and $ dW $ are \textit{inexact differentials}. There are no such as
-				$ Q(P, V) $ and $ W(P, V) $ that depend only on the state of the system; they are path-dependent.
+	\item Note that the $ dQ $ and $ dW $ are \textit{inexact differentials}. There are no such as
+	      $ Q(P, V) $ and $ W(P, V) $ that depend only on the state of the system; they are path-dependent.
 
 
 
@@ -103,7 +108,7 @@ but for large $N$, fluctuations become negligible.
 	      the change in volume is $\Delta{V} = -A \Delta{x}$
 	\item Volume change should be quasistatic, meaning very slow so that the pressure defined is uniform.
 	      then $W = P A \Delta{V}$, but $\Delta{x} = - \Delta{V}$; minus since the volume decreases.
-	\item $W =- P A \Delta{V}$  -  quasistatic.
+	\item $W =- P \Delta{V}$  for  quasistatic.
 	\item If $P$ is not constant,
 	      \begin{align}
 		      \label{eq:gas work}
@@ -190,8 +195,13 @@ but for large $N$, fluctuations become negligible.
 		      + P \left ( \frac{\partial V}{\partial T}  \right)_{P}
 	      \end{align}
 	      for solid last term is almost negligible.
+	\item So for ideal gases we can write
+	      \begin{align}
+		      C_P = C_v + Nk
+	      \end{align}
+
 	\item At a \textbf{phase transformation}, you add heat in a system without increasing its temperature;
-	      such as melting of boiling water. Then $C = \frac{Q}{\Delta{T}} = \infty$
+	      such as melting or boiling water. Then $C = \frac{Q}{\Delta{T}} = \infty$
 	\item The amount of heat needed to do this phase transformation is called \textbf{latent heat} $L$,
 	      and the \textbf{specific latent heat} is
 	      \begin{align}
@@ -205,14 +215,16 @@ but for large $N$, fluctuations become negligible.
 		      H = U + PV
 	      \end{align}
 	      it's the \textit{total} energy you would need to create the system out of nothing.
-  \item Also at constant pressure
-				\begin{align}
-					\Delta{H} = Q + W_\text{other}
-				\end{align}
-  \item We can think of $C_P$ as the enthalpy capacity
-				\begin{align}
-					C_P = \left( \frac{\partial H}{\partial T} \right)_P
-				\end{align}
+	\item Also at constant pressure
+	      \begin{align}
+		      \Delta{H} = Q + W_\text{other}
+	      \end{align}
+	      that is, the change in enthalpy is caused by heat and other type of work, \textit{not} by
+	      compression-expansion work.
+	\item We can think of $C_P$ as the enthalpy capacity
+	      \begin{align}
+		      C_P = \left( \frac{\partial H}{\partial T} \right)_P
+	      \end{align}
 
 
 
@@ -431,7 +443,7 @@ share energy back and forth
 	\item Entropy tends to increase.
 	\item No matter what you do to decrease the entropy in one place, you're bound to create at least
 	      as much entropy somewhere else.
-	\item Entropy for idea gas, with Stirling's approximation, is called
+	\item Entropy for ideal gas, with Stirling's approximation, is called
 	      \textbf{Sackur-Tetrode equation}
 	      \begin{align}
 		      S = Nk \left[
@@ -447,7 +459,7 @@ share energy back and forth
 	\item In \textbf{free expansion} no work is done by gas nor heat
 	      $\Delta{U} = Q + W = 0 + 0 =0$, however there's an increase in entropy by
 	      \eqref{eq:entropy of volume}
-	\item  Suppose two different monoatomic idea gases, $A$ and $B$,
+	\item  Suppose two different monoatomic ideal gases, $A$ and $B$,
 	      each with the same energy, volume and \# of particles. After mixing them, each gas will expand
 	      to twice its initial volume, so $\Delta{S_A} = Nk \ln{2}$, then the total entropy is
 	      \textbf{Entropy of mixing} $\Delta{S_{\text{total}} = 2Nk \ln{2}}$
@@ -455,7 +467,7 @@ share energy back and forth
 
 	\item A process that leaves the total entropy of the universe unchanged is called \textbf{reversible}.
 	\item The sudden expansion of gas created new entropy, but if it's slow enough, its entropy is unchanged.
-	\item The can be explained by the quantum adiabatic process, where very slow squeeze of gas, takes the a molecule
+	\item They can be explained by the quantum adiabatic process, where very slow squeeze of gas, takes the a molecule
 	      from the $n$th level to the $n$th level in the new volume.
 \end{itemize}
 
@@ -528,7 +540,7 @@ $U(T)$
 	      \begin{align}
 		      dS = \frac{dU}{T} = \frac{dQ}{T}
 	      \end{align}
-	      this is valid even for changing volume, must be quasistatic.
+	      This is valid even for changing volume, but it must be quasistatic.
 	\item But if the temperature is changing, we write in terms of heat capacity at constant volume
 	      \begin{align}
 		      dS = \frac{C_V dT}{T} \qquad \text{then} \qquad
@@ -680,19 +692,19 @@ Consider two systems $ A $ and $ B $, that can exchange both energy and particle
 	      form the system with higher $ \mu $ into the system with lower $ \mu $.
 	\item To generalize the thermodynamic identity,
 	      \begin{align}
-		      dS = \left( \frac{\partial S}{\partial U} \right)_{V} \, dU
-		      + \left( \frac{\partial S}{\partial V} \right)_{U}\, dV
+		      dS = \left( \frac{\partial S}{\partial U} \right)_{N,V} \, dU
+		      + \left( \frac{\partial S}{\partial V} \right)_{N,U}\, dV
 		      + \left( \frac{\partial S}{\partial N} \right)_{U, V} \, dN
 	      \end{align}
 
-				so it becomes
-				\begin{align}
-					\label{eq:thermo identity with N}
-					dU = T\, dS - P\, dV + \mu \, dN
-				\end{align}
+	      so it becomes
+	      \begin{align}
+		      \label{eq:thermo identity with N}
+		      dU = T\, dS - P\, dV + \mu \, dN
+	      \end{align}
 	\item It helps in remembering the partial-derivative formulas for $ T $, $ P $, and $ \mu $.
 	\item Note there are four variables changing, $ U $, $ S $, $ V $, and $ N $. By fixing any two you get different
-				formula.
+	      formula.
 \end{itemize}
 
 
@@ -704,12 +716,116 @@ Consider two systems $ A $ and $ B $, that can exchange both energy and particle
 \label{sec:heat engines}
 
 \begin{itemize}
-  \item A \textbf{heat engines} is any device that absorbs heat and converts part of it into work.
-				 \item
 
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=0.15\linewidth]{figures/engine.png}
+		\caption{\label{fig:Heat Engine}}
+	\end{figure}
+
+	\item A \textbf{heat engine} is any device that absorbs heat and converts part of it into work.
+	\item Only \textit{part} of the energy absorbed as heat can be converted to work by a heat engine. This is
+	      because as the heat flows in it brings along entropy, which must get rid of it.
+	\item The absorbed heat of an engine comes from a \textbf{hot reservoir} with a temperature of $T_{h}$
+	      and the waste heat goes into \textbf{cold reservoir} with a temperature of $T_{c}$.
+	\item $Q_{h}$ is the heat absorbed form the host reservoir, and $Q_{c}$ is for the heat expelled to the cold
+	      reservoir, all in given time interval.
+	\item $W$ is the net work done by the engine during this time.
+	\item The benegit of heat engine is the ratio of the benfit (work) to the cost (heat of hot
+	      reservoir),
+	      \begin{align}
+		      e \equiv \frac{W}{Q_{h}}
+	      \end{align}
+	\item For given values of $ T_h $ and $ T_c $, what is the maximum possible efficiency?
+	\item We need the first and second laws of thermodynamics, plus the assumption the engine is operating
+	      in cycles
+	\item First law tells us the energy is conserved, since the state of the engine must be unchanged at the end
+	      of each cycle. So
+	      \begin{align}
+		      Q_{h} = Q_{c} + W
+	      \end{align}
+	\item Substitute this into the efficiency formula
+	      \begin{align}
+		      e = \frac{Q_{h} - Q_{c}}{Q_{h}} = 1 - \frac{Q_{c}}{Q_{h}}
+	      \end{align}
+	\item Second law tells us the entropy of the engine plus its surroundings must increase.
+	      since the state must be unchanged, the entropy it expels must be at least as much as the
+	      entropy it absorbs. so
+	      \begin{align}
+		      \frac{Q_{c}}{T_{c}} \ge \frac{Q_{h}}{T_{h}} \quad \text{or} \quad
+		      \frac{Q_{c}}{Q_{h}} \ge \frac{T_{c}}{T_{h}}
+	      \end{align}
+	      putting it back to the efficiency
+	      \begin{align}
+		      e \le 1- \frac{T_{c}}{T_{h}}
+	      \end{align}
+
+	\item \textbf{Carnot cycle}
+	      \begin{itemize}
+		      \item The first law tells us that $e$ cannot bet greater than 1. That is, you can't produce work more than
+		            heat put in. The second law just make impossible to get $ e=1 $.
+		      \item To make engine with max $ e $. Suppose we have gas as working substance, which is the matterial
+		            that absorbs heat, expels waste heat, and does work.
+		      \item First we want the gas absorb heat $ Q_{h} $ form the hot reservoir. The entropy of the
+		            reservoir drops by $ Q_{h} /T_{h}$, and the entropy of the gas increases by $ Q_{h}/T_{gas} $.
+		      \item But heat won't transfer to the gas unless gas' temperature is less than the reservoir,
+		            meaning creating new entropy. To avoid that we assume $ T_{gas} $ is very small than the reservoir
+		            and we keep it constant by letting it expand, so we can say $ T_{h}= T_{gas} $. But this is an
+		            isothermal process.
+		      \item And the same goes for dumping the waste heat into cold reservoir, by having $ T_{c} $
+		            infinitesimal larger than $ T_{gas} $
+		      \item For the intermediate, $ T_{h} $ to $ T_{c} $ steps we don't the gas to lose heat,
+		            so it should be adiabatic.
+	      \end{itemize}
 \end{itemize}
 
 
+\section{Refrigerators}%
+\label{sec:refrigerators}
+
+\begin{itemize}
+	\item To define the efficiency, we care about the ratio benefit/cost, to avoid confusion this formula
+	      is called \textbf{coefficient of performance}
+
+	      \begin{align}
+		      \frac{Q_{h}}{T_{h}} \ge \frac{Q_{c}}{T_{c}} \quad \text{or} \quad
+		      \frac{Q_{h}}{Q_{c}} \ge \frac{T_{h}}{T_{c}}
+	      \end{align}
+	\item  Plugging this result into COP
+	      \begin{align}
+		      \text{COP}  \le \frac{1}{T_{h}/T_{c} - 1} = \frac{T_{c}}{T_{h} - T_{c}}
+	      \end{align}
+\end{itemize}
+
+\section{Real Heat Engines}%
+\label{sec:real heat engines}
+
+\begin{itemize}
+	\item \textbf{Otto cycle} explains the internal combustion engines.
+	\item Note that there is not such hot reservoirs, but the heat is produces internally by burning the fuel.
+	\item The efficiency of a gasoline engine is the net work produces during the cycle
+	      divided by the heat absorbled during the ignition step. Which is given by
+	      \begin{align}
+		      e = 1- \left( \frac{V_2}{V_1} \right) ^{\gamma -1}
+	      \end{align}
+	\item Knowing $ TV^{\gamma -1} $ si constant, we can requite the previous formula as
+	      \begin{align}
+		      e = 1  - \frac{T_{1}}{T_{2}}= 1- \frac{T_{4}}{T_{3}}
+	      \end{align}
+	\item In steam engine the cycle is called \textbf{Rankine cycle}.
+	\item Recall that the enthalpy is $ H = U + PV $ under constant-pressure process.
+	      So the change in enthalpy is the heat absorbed under constant-pressure conditions, where no
+	      other work is done.
+	\item in Rankine cycle, heat is absorbed at constant pressure in the boiler and expelled at \item constant
+	      pressure in the condenser, so we can write the efficiency as
+	      \begin{align}
+		      e = 1- \frac{Q_{c}}{Q_{h}} = \frac{H_{4} - H_1}{H_3 - H_{2}} \approx 1- \frac{H_4-H_1}{H_3-H_1}
+	      \end{align}
+				 \item Where $ H_2 \approx H_1 $ is good, because the change in $ PV $ is negligible for liquids.
+\end{itemize}
+
+\section{Real Refrigerators}%
+\label{sec:real refrigerators}
 
 
 
