@@ -186,12 +186,83 @@ do {
 		      \item It takes three arguments: a pointer to the memory location
 		            to be updated, the expected value of that memory location, and the new value to be written
 		            to that memory location. The operation will only update the memory location if its current value
-		            matches the expected value.
+		            matches the expected value. It is defined as
+                \begin{verbatim}
+int compare_and_swap(int *value, int expected, int new_value) {
+    int temp = *value;
+    if (*value == expected)
+        *value = new_value;
 
+    return temp;
+}
+\end{verbatim}
+          \item And the process structure becomes
+              \begin{verbatim}
+while (true) {
+    while (compare_and_swap(&lock, 0, 1) != 0)
+        ;
+
+        /* critical section */
+
+        lock = 0;
+
+        /* remainder section */
+}
+\end{verbatim}
+          \item A global variable, \code{lock}, is declared and initialized to 0. The first process invokes
+                \code{compare\_and\_swap()} will set \code{lock = 1} and enters its critical section.
+          \item Any next calls to \code{compare\_and\_swap()} will fail, because \code{lock} now is not
+                equal to the expected value of 0.
+          \item This algorithm does not satisfy the bounded-waiting requirement.
 	      \end{itemize}
+
 	\item \textbf{Atomic variables}
-
-
+        \begin{itemize}
+          \item They provide atomic operations on basic data types such as integers and booleans.
+          \item Atomic variables can be implemented using low-level hardware instructions such as
+                test-and-set, compare-and-swap, and fetch-and-add. In modern
+                programming languages, atomic variables are typically provided as language-specific constructs,
+                such as \code{std::atomic} in C++ or \code{Atomic} in Java.
+          \item Note that they don't solve the problem of bounded-buffer problem, where to consumer could be triggered
+                at the same time even if there is only one item in the buffer.
+        \end{itemize}
 \end{enumerate}
+
+
+
+
+\section{Mutex Locks}%
+
+\begin{itemize}
+  \item Since the hardware-based solution to the critical-section problem are quite complicated, OS designers
+        build a software-level tools to solve it; such as \textbf{mutex lock} (from \textbf{mu}tual \textbf{ex}clusion)
+  \item A process must acquire a lock before entering critical section and releases it back once it exits.
+  \item A boolean variable \code{available}. If the lock is available, a call to \code{acquire()} succeeds.
+  \item Call to either \code{acquire()} or \code{release()} must be performed atomically.
+        Meaning mutex locks should use CAS operation.
+\end{itemize}
+
+\section{Semaphores}%
+\begin{itemize}
+  \item A \textbf{semaphore} \code{S} is an integer variable that, excluding the initialization, is accessed only through two
+        standard atomic operations: \code{wait()} and \code{signal()}.
+  \item Again all modifications to the integer value of the semaphore in the \code{wait()} and \code{signal()}
+        must be done atomically. Meaning, no other process can simultaneously modify the same semaphore value.
+  \item When a process wishes to use a resource it calls \code{wait()}. When it releases a resource, it calls
+        \code{signal()}. If all resources are in use, \code{S = 0}, the process gets block.
+\end{itemize}
+
+
+\section{Liveness}%
+\begin{itemize}
+  \item The implementation of a semaphore with a waiting queue may result in a situation where two or more processes are
+        waiting indefinitely.
+  \item A process is in a \textbf{deadlock} state when every process in the set is waiting for an event that can be caused
+        only by another process in the set.
+
+
+\end{itemize}
+
+
 
 \end{document}
