@@ -1,6 +1,6 @@
 \documentclass{report}
 
-\usepackage[a4paper, lmargin=10mm, rmargin=70mm]{geometry}
+\usepackage[a4paper, lmargin=20mm, rmargin=20mm]{geometry}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -106,15 +106,92 @@
 							/* remainder section */
 					}
 				\end{verbatim}
-  \item A downside of the solution is that, it is affected by compilation process where reordering
-				for the read and write operation may happen.
+	\item A downside of the solution is that, it is affected by compilation process where reordering
+	      for the read and write operation may happen.
 \end{itemize}
 
 \section{Hardware Support for Synchronization}%
+\begin{enumerate}
+	\item \textbf{Memory Barriers}
+	      \begin{itemize}
+		      \item We saw that system may reorder instructions, leading to unreliable data states.
+		      \item \textbf{memory model} is how a computer determines what memory should provide to an application
+		            program.
+		            \begin{enumerate}
+			            \item \textit{Strongly ordered}: A memory modification in one process is visible immediately to all other processes.
+			            \item \textit{Weakly ordered}: Modifications to memory on one processor may not be visible to others.
+		            \end{enumerate}
+		      \item Memory models vary by process\textit{or}, so kernel developers cannot make assumptions if the visibility of
+		            modifications to memory on a shared-memory multiprocessor.
+		      \item computer architectures provide instructions that can \textit{force} any changes in memory to be propagated
+		            to all other possessors, they're called \textbf{memory barriers}
+		      \item The idea is that when a memory barrier instruction is performed, the system ensures all \code{load} \&
+		            \code{store} are completed before any coming \code{load} and \code{store} are executed.
+		      \item Consider this code
+		            \begin{verbatim}
+x = 100;
+memory_barrier();
+flag = true;
+\end{verbatim}
+		            we ensure the assignment to \code{x} occurs before the assignment to \code{flag}.
+	      \end{itemize}
+	\item \textbf{Hardware instructions}
+	      \begin{itemize}
+		      \item Modern computer systems provide special hardware instructions that allow us either to test and modify the content of a word or
+		            to swap the contents of two words \textbf{atomically}, as one uninterruptible unit.
+		      \item  Then we use these special instructions to solve the critical-section problem.
+		      \item In abstract, consider this code
+		            \begin{verbatim}
+boolean test_and_set(boolean *target) {
+    boolean rv = *target;
+    *target = true;
 
-\begin{itemize}
-  \item
-\end{itemize}
+    return rv;
+}
+\end{verbatim}
 
+		      \item This instruction is a low-level atomic operation used in operating systems and multi-threaded programming. It is used to set a flag or a lock on a shared resource while checking if it was previously set. The instruction performs the following steps atomically:
+
+		            \begin{enumerate}
+			            \item Read the current value of the flag or lock.
+			            \item Set the flag or lock to the desired value.
+			            \item Return the previous value of the flag or lock.
+		            \end{enumerate}
+
+		      \item This operation is used to implement synchronization primitives such as mutexes, semaphores, and spin locks. It ensures that multiple threads or processes do not access the shared resource simultaneously, preventing race conditions and other synchronization issues.
+
+
+		      \item The main characteristic of this instruction is that it is executed atomically;
+		            if two \code{test\_and\_set()} instructions are executed
+		            simultaneously, they will be executed sequentially in arbitrary order.
+		      \item If the machine support this instruction, then we can implement \textit{mutual exclusion} by declaring a boolean
+		            variable \code{lock}, initialized to \code{false}. The structure of process $ P_{i} $ becomes
+		            \begin{verbatim}
+do {
+    while (test_and_set(&lock))
+        ;
+
+        /* critical section */
+
+        lock = false;
+
+        /* remainder section */
+} while(true);
+\end{verbatim}
+
+		      \item \code{compare\_and\_swap()} (CAS) is another low-level atomic operation
+		            It is used to update the value of a memory location atomically, while
+		            also checking if the current value of the memory location matches an expected value.
+
+		      \item It takes three arguments: a pointer to the memory location
+		            to be updated, the expected value of that memory location, and the new value to be written
+		            to that memory location. The operation will only update the memory location if its current value
+		            matches the expected value.
+
+	      \end{itemize}
+	\item \textbf{Atomic variables}
+
+
+\end{enumerate}
 
 \end{document}
