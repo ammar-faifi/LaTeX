@@ -1,0 +1,163 @@
+\documentclass{article}
+
+\usepackage[a4paper, margin=15mm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+
+\def\c#1{\texttt{#1}}
+
+\title{Homework 2 - Operating Systems (ICS431)}
+\author{Alfaifi, Ammar}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Commands}%
+\subsection{\c{ps}}%
+
+This shows processes status. without any options, it will show you a list of processes
+running in your current terminal session.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 16.50.44.png}
+\end{figure}
+
+
+\subsection{\c{ps -e}}%
+
+show all processes, not just those related to the current terminal session
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 18.47.45.png }
+\end{figure}
+
+
+\subsection{\c{ps -u}}%
+
+will show only the processes started by the current user.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 18.47.59.png }
+\end{figure}
+
+\newpage
+
+\subsection{\c{ps -el}}%
+command will show the complete list of processes in a long format. It will include the process ID, parent process ID, user ID, group ID, virtual memory size, resident set size, CPU usage, start time, terminal, and command.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.9\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 18.48.12.png }
+\end{figure}
+
+\section{Zombie Processes}%
+This code is to simulate a zombie process.
+
+\begin{verbatim}
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+int main() {
+  pid_t pid;
+  pid = fork();
+
+  if (pid < 0) {
+    fprintf(stderr, "Fork failed.\n");
+    exit(1);
+  } else if (pid == 0) {
+    printf("This is the child process.\n");
+    exit(0);
+  } else {
+    printf("This is the parent process. Child's PID %d\n", pid);
+    sleep(10);
+    waitpid(pid, NULL, 0); // wait for child process to exit
+    printf("Parent process exiting.\n");
+    exit(0);
+  }
+
+  return 0;
+}
+\end{verbatim}
+
+
+\newpage
+
+From the follwing screenshots, the process with PID of 29296 is the \c{bash} itself.
+The running C program has PID of 33017, its parent is the \c{bash}. When \c{fork()} is called,
+a duplicate process from the parent (PID:33017) is created with PID of 33020. This child's PID is returned
+in the parent process, as seen in the first line in the second figure. When the child is finished but
+the parent is not, the child's process (33020) becomes a zombie process (see the status \c{Z}).
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 21.00.13.png}
+\end{figure}
+
+
+\section{Multithreaded Program}%
+
+The codes in C is
+\begin{verbatim}
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+void *print_primes(void *arg) {
+  int num = *(int *)arg;
+  int i, j, flag;
+  for (i = 2; i <= num; i++) {
+    flag = 1;
+    for (j = 2; j <= i / 2; j++) {
+      if (i % j == 0) {
+        flag = 0;
+        break;
+      }
+    }
+    if (flag == 1) {
+      printf("%d ", i);
+    }
+  }
+  printf("\n");
+  pthread_exit(NULL);
+}
+
+int main(int argc, char *argv[]) {
+  int num = atoi(argv[1]);
+
+  pthread_t tid;
+  pthread_attr_t attr;
+  pthread_attr_init(&attr);
+
+  pthread_create(&tid, &attr, print_primes, &num);
+  pthread_join(tid, NULL);
+
+  return 0;
+}
+\end{verbatim}
+\paragraph{}
+In the following screenshot, I ran the program with an input value of 100. Next I ran it with very large
+number so I can watch its thread using \c{ps -lfL} command. I use \c{>} to pipe the \c{stdout} to
+the virtual device \c{/dev/null} to discard any output, then I use \c{\&} to run it in background.
+
+\paragraph{}
+From the output of \c{ps}, there are to processes with same PID which indicated it's a multithreaded
+process. We see also the value of the thread ID (LWP). Also the CPU utilization (C) is large in the thread
+with value of 93.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.9\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 21.56.06.png }
+\end{figure}
+
+
+\end{document}
