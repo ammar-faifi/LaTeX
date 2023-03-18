@@ -25,8 +25,8 @@ This shows processes status. without any options, it will show you a list of pro
 running in your current terminal session.
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 16.50.44.png}
+	\centering
+	\includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 16.50.44.png}
 \end{figure}
 
 
@@ -35,8 +35,8 @@ running in your current terminal session.
 show all processes, not just those related to the current terminal session
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 18.47.45.png }
+	\centering
+	\includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 18.47.45.png }
 \end{figure}
 
 
@@ -45,8 +45,8 @@ show all processes, not just those related to the current terminal session
 will show only the processes started by the current user.
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 18.47.59.png }
+	\centering
+	\includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 18.47.59.png }
 \end{figure}
 
 \newpage
@@ -55,8 +55,8 @@ will show only the processes started by the current user.
 command will show the complete list of processes in a long format. It will include the process ID, parent process ID, user ID, group ID, virtual memory size, resident set size, CPU usage, start time, terminal, and command.
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.9\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 18.48.12.png }
+	\centering
+	\includegraphics[width=0.9\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 18.48.12.png }
 \end{figure}
 
 \section{Zombie Processes}%
@@ -100,8 +100,8 @@ in the parent process, as seen in the first line in the second figure. When the 
 the parent is not, the child's process (33020) becomes a zombie process (see the status \c{Z}).
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.8\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 21.00.13.png}
+	\centering
+	\includegraphics[width=0.8\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 21.00.13.png}
 \end{figure}
 
 
@@ -155,8 +155,107 @@ From the output of \c{ps}, there are to processes with same PID which indicated 
 process. We see also the value of the thread ID (LWP). Also the CPU utilization (C) is large in the thread
 with value of 93.
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.9\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 21.56.06.png }
+	\centering
+	\includegraphics[width=0.9\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 21.56.06.png }
+\end{figure}
+
+
+
+\section{Proc files}%
+\begin{enumerate}
+	\item By the commnad \c{cat cpuinfo}, it shows 4 CPU cores in my machine.
+	      \begin{figure}[ht]
+		      \centering
+		      \includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 22.25.50.png }
+	      \end{figure}
+        \newpage
+	\item From \c{cat meminfo}, I have 4002372 kB ($\sim$ 4 GB), this is true because I'm running VM in my Mac and I
+        specify 4 GB to the Ubuntu VM. And available of 287492 kB (287.49 MB).
+	      \begin{figure}[ht]
+		      \centering
+		      \includegraphics[height=0.7\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 22.28.45.png }
+	      \end{figure}
+   \item From running \c{cat stat}, then from the line field \c{ctxt}, It had 5417758 context switches.
+	      \begin{figure}[ht]
+		      \centering
+		      \includegraphics[width=0.7\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 22.44.12.png }
+	      \end{figure}
+   \item From the same output I see that my system had forked 42381 processes.
+\end{enumerate}
+
+
+\newpage
+\section{Shell Program in C}%
+\begin{verbatim}
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+#define MAX_COMMAND_LENGTH 100
+#define MAX_ARGUMENTS 10
+
+int main() {
+  char command[MAX_COMMAND_LENGTH];
+  char *arguments[MAX_ARGUMENTS];
+  pid_t pid;
+  int status;
+  printf("Enter commands (type 'exit' to quit): \n");
+  while (1) {
+    printf("201855360> ");
+    fgets(command, MAX_COMMAND_LENGTH, stdin);
+    // Remove newline character
+    command[strlen(command) - 1] = '\0';
+    if (strcmp(command, "exit") == 0) {
+      printf("Exiting shell program...\n");
+      break;
+    }
+    // Parse command-line arguments
+    char *token;
+    int i = 0;
+    token = strtok(command, " ");
+    while (token != NULL) {
+      arguments[i++] = token;
+      token = strtok(NULL, " ");
+    }
+    arguments[i] = NULL; // Set last element to NULL for execvp
+    pid = fork();
+    if (pid == -1) {
+      perror("fork");
+      exit(EXIT_FAILURE);
+    } else if (pid == 0) {
+      // Child process
+      if (execvp(arguments[0], arguments) == -1) {
+        perror("execvp");
+        exit(EXIT_FAILURE);
+      }
+    } else {
+      // Parent process
+      if (waitpid(pid, &status, 0) == -1) {
+        perror("waitpid");
+        exit(EXIT_FAILURE);
+      }
+      printf("Terminated: ");
+      if (WIFEXITED(status)) {
+        printf("Normally\n");
+        printf("Exit status: %d\n", WEXITSTATUS(status));
+      } else if (WIFSIGNALED(status)) {
+        printf("Due to signal\n");
+        printf("Signal number: %d\n", WTERMSIG(status));
+      }
+    }
+  }
+  return 0;
+}
+\end{verbatim}
+
+
+Images for running different commands
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 23.14.05.png }
 \end{figure}
 
 
