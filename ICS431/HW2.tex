@@ -6,7 +6,30 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
 
+\definecolor{codeblue}{RGB}{34, 112, 177}
+\definecolor{codegreen}{RGB}{28, 172, 120}
+\definecolor{codegray}{RGB}{100, 100, 100}
+\definecolor{codepurple}{RGB}{139, 0, 255}
+\definecolor{backgray}{RGB}{245, 245, 245}
+
+\lstdefinestyle{cstyle}{
+    language=C,
+    backgroundcolor=\color{backgray},
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\color{codepurple},
+    commentstyle=\color{gray},
+    stringstyle=\color{codegreen},
+    numbers=left,
+    numberstyle=\tiny\color{codegray},
+    stepnumber=1,
+    numbersep=10pt,
+    tabsize=4,
+    showspaces=false,
+    showstringspaces=false
+}
 
 \def\c#1{\texttt{#1}}
 
@@ -62,7 +85,7 @@ command will show the complete list of processes in a long format. It will inclu
 \section{Zombie Processes}%
 This code is to simulate a zombie process.
 
-\begin{verbatim}
+\begin{lstlisting}[style=cstyle]
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
@@ -88,7 +111,7 @@ int main() {
 
   return 0;
 }
-\end{verbatim}
+\end{lstlisting}
 
 
 \newpage
@@ -108,7 +131,7 @@ the parent is not, the child's process (33020) becomes a zombie process (see the
 \section{Multithreaded Program}%
 
 The codes in C is
-\begin{verbatim}
+\begin{lstlisting}[style=cstyle]
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -144,7 +167,10 @@ int main(int argc, char *argv[]) {
 
   return 0;
 }
-\end{verbatim}
+\end{lstlisting}
+
+
+\newpage
 \paragraph{}
 In the following screenshot, I ran the program with an input value of 100. Next I ran it with very large
 number so I can watch its thread using \c{ps -lfL} command. I use \c{>} to pipe the \c{stdout} to
@@ -186,7 +212,7 @@ with value of 93.
 
 \newpage
 \section{Shell Program in C}%
-\begin{verbatim}
+\begin{lstlisting}[style=cstyle][style=cstyle]
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -248,9 +274,9 @@ int main() {
   }
   return 0;
 }
-\end{verbatim}
+\end{lstlisting}
 
-
+\newpage
 Images for running different commands
 
 \begin{figure}[ht]
