@@ -194,19 +194,19 @@ with value of 93.
 		      \centering
 		      \includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 22.25.50.png }
 	      \end{figure}
-        \newpage
+	      \newpage
 	\item From \c{cat meminfo}, I have 4002372 kB ($\sim$ 4 GB), this is true because I'm running VM in my Mac and I
-        specify 4 GB to the Ubuntu VM. And available of 287492 kB (287.49 MB).
+	      specify 4 GB to the Ubuntu VM. And available of 287492 kB (287.49 MB).
 	      \begin{figure}[ht]
 		      \centering
 		      \includegraphics[height=0.7\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 22.28.45.png }
 	      \end{figure}
-   \item From running \c{cat stat}, then from the line field \c{ctxt}, It had 5417758 context switches.
+	\item From running \c{cat stat}, then from the line field \c{ctxt}, It had 5417758 context switches.
 	      \begin{figure}[ht]
 		      \centering
 		      \includegraphics[width=0.7\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 22.44.12.png }
 	      \end{figure}
-   \item From the same output I see that my system had forked 42381 processes.
+	\item From the same output I see that my system had forked 42381 processes.
 \end{enumerate}
 
 
@@ -281,8 +281,111 @@ Images for running different commands
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.6\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 23.14.05.png }
+	\includegraphics[width=1\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-18 at 23.14.05.png }
+	\caption{A screenshot for the ran program.}
 \end{figure}
+
+
+\newpage
+\section{N Threads}
+
+\begin{lstlisting}[style=cstyle]
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define N 100
+#define RANGE 10
+
+int A[N], B[N], C[N];
+
+void *sum(void *arg) {
+  int i = *(int *)arg;
+  C[i] = A[i] + B[i];
+  return NULL;
+}
+
+int main() {
+  srandom(time(NULL)); // randomize seed
+
+  // initialize A and B
+  for (int i = 0; i < N; i++) {
+    A[i] = random() % RANGE;
+    B[i] = random() % RANGE;
+  }
+
+  // create N threads to compute C[i] = A[i] + B[i]
+  pthread_t threads[N];
+  for (int i = 0; i < N; i++) {
+    pthread_create(&threads[i], NULL, sum, &i);
+  }
+
+  // wait for all threads to finish
+  for (int i = 0; i < N; i++) {
+    pthread_join(threads[i], NULL);
+  }
+
+  // print A, B, and C
+  printf("A = [");
+  for (int i = 0; i < N; i++) {
+    printf("%d ", A[i]);
+  }
+  printf("]\n");
+
+  printf("B = [");
+  for (int i = 0; i < N; i++) {
+    printf("%d ", B[i]);
+  }
+  printf("]\n");
+
+  printf("C = [");
+  for (int i = 0; i < N; i++) {
+    printf("%d ", C[i]);
+  }
+  printf("]\n");
+
+  return 0;
+}
+\end{lstlisting}
+
+
+The following figure shows the output of executing the program.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{/Users/ammar-imac/Screenshots/Screenshot 2023-03-19 at 08.28.24.png}
+	\caption{A screenshot for the ran program.}
+\end{figure}
+
+
+\newpage
+
+\section{Theoretical Part}%
+\begin{enumerate}
+	\item When a kernel context-switches between processes, it saves the current process state, including program counter, registers, and stack pointer, into the current process's PCB. It then loads the saved state of the next process to be executed from its PCB into the CPU's registers and program counter. The kernel also updates the memory management unit to switch the virtual memory mappings to the next process's memory space.
+
+	\item Ordinary pipes are more suitable in situations where a simple communication channel is required between two processes executing on the same machine. For example, a parent process might create a child process and want to pass data to the child's standard input. Named pipes are more suitable in situations where multiple processes need to communicate with each other, possibly across different machines. For example, in a distributed system, several processes might need to communicate over a network using a named pipe.
+
+	\item Yes, it is possible to have concurrency without parallelism. Concurrency refers to the ability of multiple tasks to be executed simultaneously, while parallelism refers to the actual simultaneous execution of those tasks on multiple CPUs or cores. For example, a single-core CPU can execute multiple threads in a concurrent manner, but they will not execute in parallel.
+
+	\item When a thread is created, it uses fewer resources than when a process is created because it shares the same memory space as the parent process. The resources used include a program counter, a stack, and registers. When a process is created, it requires its own memory space, including a separate virtual address space and memory allocation for code, data, and stack.
+
+	\item
+	      \begin{enumerate}
+		      \item CPU utilization and response time can conflict in situations where a process with a high CPU utilization is causing other processes to wait for CPU time, resulting in longer response times.
+		      \item I/O device utilization and CPU utilization can conflict in situations where a process with high I/O utilization is blocking the CPU from executing other processes, resulting in reduced CPU utilization.
+	      \end{enumerate}
+
+	\item
+	      \begin{enumerate}
+		      \item First-Come-First-Serve (FCFS) scheduling algorithm discriminates against short processes because long processes can monopolize the CPU, causing short processes to wait longer.
+		      \item Round-Robin (RR) scheduling algorithm discriminates in favour of short processes because each process is given a time slice, and short processes can complete their work within a single time slice.
+		      \item Multilevel feedback queues scheduling algorithm discriminates in favour of short processes because it assigns shorter time slices to processes with higher priority.
+	      \end{enumerate}
+\end{enumerate}
+
+
+
 
 
 \end{document}
