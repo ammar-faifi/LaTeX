@@ -1,0 +1,255 @@
+\documentclass{article}
+
+\usepackage[a4paper, margin=15mm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codeblue}{RGB}{34, 112, 177}
+\definecolor{codegreen}{RGB}{28, 172, 120}
+\definecolor{codegray}{RGB}{100, 100, 100}
+\definecolor{codepurple}{RGB}{139, 0, 255}
+\definecolor{backgray}{RGB}{245, 245, 245}
+
+\lstdefinestyle{cstyle}{
+    language=C,
+    backgroundcolor=\color{backgray},
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\color{codepurple},
+    commentstyle=\color{gray},
+    stringstyle=\color{codegreen},
+    numbers=left,
+    numberstyle=\tiny\color{codegray},
+    stepnumber=1,
+    numbersep=10pt,
+    tabsize=4,
+    showspaces=false,
+    showstringspaces=false
+}
+
+\def\c#1{\texttt{#1}}
+
+\title{Homework 3 - Operating Systems (ICS431)}
+\author{Alfaifi, Ammar - 201855360}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Modified Fiboncci}%
+
+\begin{lstlisting}[style=cstyle]
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SEQUENCE 100
+#define NUM_THREADS 2
+
+int fib_sequence[MAX_SEQUENCE];
+int last_idx = -1; // initialize last index to -1
+
+pthread_mutex_t mutex;
+
+void *fibonacci(void *arg) {
+  int n = *((int *)arg);
+  fib_sequence[0] = 0;
+  fib_sequence[1] = 1;
+
+  for (int i = 2; i < n; i++) {
+    pthread_mutex_lock(&mutex);
+    fib_sequence[i] = fib_sequence[i - 1] + fib_sequence[i - 2];
+    last_idx = i; // update last index to i
+    pthread_mutex_unlock(&mutex);
+  }
+  pthread_exit(NULL);
+}
+
+int main(int argc, char *argv[]) {
+  pthread_t threads[NUM_THREADS];
+
+  if (argc != 2) {
+    fprintf(stderr, "Usage: %s <Number of fib elements>\n", argv[0]);
+    exit(-1);
+  }
+  int n = atoi(argv[1]);
+
+  pthread_mutex_init(&mutex, NULL);
+
+  int rc = pthread_create(&threads[0], NULL, fibonacci, (void *)&n);
+  if (rc) {
+    printf("ERROR; return code from pthread_create() is %d\n", rc);
+    exit(-1);
+  }
+
+  while (last_idx < n - 1) { // loop until all values are updated by the child
+    pthread_mutex_lock(&mutex);
+    int idx = last_idx;
+    pthread_mutex_unlock(&mutex);
+
+    if (idx >= 0) { // print new values if there are any
+      for (int i = 0; i <= idx; i++) {
+        printf("%d ", fib_sequence[i]);
+      }
+      printf("\n");
+    }
+  }
+
+  pthread_join(threads[0], NULL);
+
+  pthread_mutex_destroy(&mutex);
+  pthread_exit(NULL);
+}
+\end{lstlisting}
+
+\section{Semphaore}%
+A list of needed variables as semaphores:
+\begin{enumerate}
+	\item \c{patient\_sem} - initialized to 1, used to ensure only one patient writes to the buffer at a time
+	\item \c{doctor\_sem} - initialized to 0, used to ensure doctor waits until there is new patient information in the buffer
+	\item \c{treat\_sem} - initialized to 0, used to ensure the patient waits until the doctor has written the treatment details to the buffer
+\end{enumerate}
+A pseudocode implementation can be as following:
+\begin{verbatim}
+semaphore patient_sem = 1;
+semaphore doctor_sem = 0;
+semaphore treat_sem = 0;
+
+void patient_process() {
+  // wait in waiting room until doctor is free
+  wait(doctor_sem);
+
+  // enter doctor's office and consult doctor
+  wait(patient_sem);
+  consultDoctor();
+  signal(patient_sem);
+
+  // wait for doctor to treat and update buffer
+  signal(doctor_sem);
+  wait(treat_sem);
+
+  // note treatment and leave doctor's office
+  noteTreatment();
+}
+
+void doctor_process() {
+  while (true) {
+    // wait for patient to arrive and update buffer
+    wait(patient_sem);
+    treatPatient();
+    signal(treat_sem);
+
+    // signal patient that treatment details are in buffer
+    signal(doctor_sem);
+  }
+}
+\end{verbatim}
+
+\pagebreak
+
+A real implementation in C will be as
+\begin{lstlisting}[style=cstyle]
+#include <pthread.h>
+#include <semaphore.h>
+
+sem_t patient_sem, doctor_sem, treat_sem;
+
+void* patient_process(void* arg) {
+    // wait in waiting room until doctor is free
+    sem_wait(&doctor_sem);
+
+    // enter doctor's office and consult doctor
+    sem_wait(&patient_sem);
+    consultDoctor();
+    sem_post(&patient_sem);
+
+    // wait for doctor to treat and update buffer
+    sem_post(&doctor_sem);
+    sem_wait(&treat_sem);
+
+    // note treatment and leave doctor's office
+    noteTreatment();
+    pthread_exit(NULL);
+}
+
+void* doctor_process(void* arg) {
+    while (1) {
+        // wait for patient to arrive and update buffer
+        sem_wait(&patient_sem);
+        treatPatient();
+        sem_post(&treat_sem);
+
+        // signal patient that treatment details are in buffer
+        sem_post(&doctor_sem);
+    }
+}
+
+int main() {
+    // initialize semaphores
+    sem_init(&patient_sem, 0, 1);
+    sem_init(&doctor_sem, 0, 0);
+    sem_init(&treat_sem, 0, 0);
+
+    // create threads for patient and doctor processes
+    pthread_t patient_thread, doctor_thread;
+    pthread_create(&patient_thread, NULL, patient_process, NULL);
+    pthread_create(&doctor_thread, NULL, doctor_process, NULL);
+
+    // wait for threads to finish
+    pthread_join(patient_thread, NULL);
+    pthread_join(doctor_thread, NULL);
+
+    // destroy semaphores
+    sem_destroy(&patient_sem);
+    sem_destroy(&doctor_sem);
+    sem_destroy(&treat_sem);
+
+    return 0;
+}
+\end{lstlisting}
+
+\pagebreak
+
+\section{Race Conditions Problem}%
+Here are the solution of each part:
+
+\begin{enumerate}
+	\item The variable is \c{available\_resources}.
+
+	\item The race condition occurs in both the \c{decrease\_count()} and \c{increase\_count()} functions.
+
+	\item To fix the race condition, a semaphore or mutex lock can be used to ensure mutual exclusion when accessing the \c{available\_resources} variable. One possible implementation is as follows:
+
+	      \begin{lstlisting}[style=cstyle]
+#define MAX_RESOURCES 5
+int available_resources = MAX_RESOURCES; // Critical section
+sem_t mutex;
+
+int decrease_count(int count) {
+    sem_wait(&mutex);
+    if (available_resources < count) {
+        sem_post(&mutex);
+        return -1;
+    } else {
+        available_resources -= count;
+        sem_post(&mutex);
+        return 0;
+    }
+}
+
+void increase_count(int count) {
+    sem_wait(&mutex);
+    available_resources += count;
+    sem_post(&mutex);
+}
+\end{lstlisting}
+\end{enumerate}
+
+
+
+\end{document}
