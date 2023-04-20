@@ -5,9 +5,9 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage{enumitem}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{enumitem}
 
 \definecolor{codeblue}{RGB}{34, 112, 177}
 \definecolor{codegreen}{RGB}{28, 172, 120}
@@ -249,6 +249,152 @@ void increase_count(int count) {
 }
 \end{lstlisting}
 \end{enumerate}
+
+\pagebreak
+
+\section{2-Thread Matrix}%
+The implementation of two matrices of size 40x40 with random values of 0 or 1 with two separate threads is as
+following:
+\begin{lstlisting}[style=cstyle]
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ROWS 40
+#define COLS 40
+
+int matrixA[ROWS][COLS];
+int matrixB[ROWS][COLS];
+int sumMatrix[ROWS][COLS];
+int diffMatrix[ROWS][COLS];
+
+void *computeSum(void *arg) {
+  for (int i = 0; i < ROWS; i++) {
+    for (int j = 0; j < COLS; j++) {
+      sumMatrix[i][j] = matrixA[i][j] + matrixB[i][j];
+    }
+  }
+  pthread_exit(NULL);
+}
+
+void *computeDiff(void *arg) {
+  for (int i = 0; i < ROWS; i++) {
+    for (int j = 0; j < COLS; j++) {
+      diffMatrix[i][j] = matrixA[i][j] - matrixB[i][j];
+    }
+  }
+  pthread_exit(NULL);
+}
+
+void printMatrix(int matrix[ROWS][COLS]) {
+  for (int i = 0; i < ROWS; i++) {
+    for (int j = 0; j < COLS; j++) {
+      printf("%d ", matrix[i][j]);
+    }
+    printf("\n");
+  }
+}
+
+int main() {
+  pthread_t threadSum, threadDiff;
+
+  // Initialize matrices with binary inputs
+  for (int i = 0; i < ROWS; i++) {
+    for (int j = 0; j < COLS; j++) {
+      matrixA[i][j] = rand() % 2;
+      matrixB[i][j] = rand() % 2;
+    }
+  }
+
+  // Create threads for computing sum and difference
+  pthread_create(&threadSum, NULL, computeSum, NULL);
+  pthread_create(&threadDiff, NULL, computeDiff, NULL);
+
+  // Wait for threads to complete
+  pthread_join(threadSum, NULL);
+  pthread_join(threadDiff, NULL);
+
+  printf("\nSum Matrix:\n");
+  printMatrix(sumMatrix);
+
+  printf("\nDifference Matrix:\n");
+  printMatrix(diffMatrix);
+
+  return 0;
+}
+\end{lstlisting}
+
+\pagebreak
+
+\section*{Theoretical Part}%
+\setcounter{section}{0}
+\section{Scheduling Policies}%
+
+\begin{enumerate}[label=(\alph*)]
+	\item Using FCFS scheduling algorithm and completing the table, we have the
+	      following:
+	      \begin{center}
+		      \begin{tabular}{|c|c|c|c|c|}
+			      \hline
+			      Process & Arrival T. & Burst T. & Turnaround T. \\
+			      \hline
+			      P1      & 0.0        & 8        & 8             \\
+			      \hline
+			      P2      & 0.4        & 4        & 11.6          \\
+			      \hline
+			      P3      & 1.0        & 1        & 12            \\
+			      \hline
+		      \end{tabular}
+	      \end{center}
+	      Then the average turn around time can be found as
+	      \begin{align*}
+		      \bar{T_{t}} = \frac{8 + 11.6 + 12}{3} = 10.5
+	      \end{align*}
+	      Where $\bar{T_{t}}$ is the average turnaround time.
+
+	\item Doing the same but with SJF algorithm we get
+	      \begin{center}
+		      \begin{tabular}{|c|c|c|c|c|}
+			      \hline
+			      Process & Arrival T. & Burst T. & Turnaround T. \\
+			      \hline
+			      P1      & 0.0        & 8        & 8             \\
+			      \hline
+			      P3      & 1.0        & 1        & 8             \\
+			      \hline
+			      P2      & 0.4        & 4        & 12.6          \\
+			      \hline
+		      \end{tabular}
+	      \end{center}
+	      So we have
+	      \begin{align*}
+		      \bar{T_{t}} = \frac{2(8)+ 12.6}{3} = 9.5
+	      \end{align*}
+	\item After waiting for 1 time unit, we get the following
+	      \begin{center}
+		      \begin{tabular}{|c|c|c|c|c|}
+			      \hline
+			      Process & Arrival T. & Burst T. & Turnaround T. \\
+			      \hline
+			      P3      & 1.0        & 1        & 1             \\
+			      \hline
+			      P2      & 0.4        & 4        & 4.6           \\
+			      \hline
+			      P1      & 0.0        & 8        & 13            \\
+			      \hline
+		      \end{tabular}
+	      \end{center}
+	      And we get
+
+	      \begin{align*}
+		      \bar{T_{t}} = \frac{1 + 4.6 + 13}{3} = 6.2
+	      \end{align*}
+\end{enumerate}
+
+
+
+
+
 
 
 
