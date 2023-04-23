@@ -391,8 +391,47 @@ int main() {
 	      \end{align*}
 \end{enumerate}
 
+\section{Dining-Philosopher' Problem}%
+One solution is if there is only one chopstick left and no other philosopher has two chopsticks, do not grant the request of a philosopher asking for the first chopstick.
 
 
+\section{Banker's Algorithm}
+
+\begin{enumerate}[label=(\alph*)]
+	\item The need matrix will be, $\text{Need}[i][j]= \text{Max}[i][j] - \text{Allocation}[i][j]$,
+	      \begin{align}
+		      \begin{bmatrix}
+			      0 & 0 & 0 & 0 \\
+			      0 & 7 & 5 & 0 \\
+			      1 & 0 & 0 & 2 \\
+			      0 & 0 & 2 & 0 \\
+			      0 & 6 & 4 & 2
+		      \end{bmatrix}
+	      \end{align}
+
+	\item Yes.
+
+	\item Yes, there's enough available resource instances.
+\end{enumerate}
+
+
+
+\section{Violation of Mutual Exclusion}%
+\textit{executing atomically} means that a set of operations is performed as a single, indivisible unit, such that it appears to the outside world as if it were a single operation. In other words, atomicity guarantees that all the steps of the operation are executed as a single, uninterrupted action, and any other process or thread executing on the same resource cannot interfere with it or observe it in a partially completed state.
+
+
+Assuming that there are two processes A and B with a shared resource and using semaphores to enforce mutual exclusion, let's consider the following scenario:
+
+\begin{enumerate}
+	\item Process A executes the `wait()' operation on the semaphore, which decreases the value of the semaphore by 1.
+	\item Before process A executes the `signal()' operation, the processor switches to process B.
+	\item Process B executes the `wait()' operation on the semaphore, which also decreases its value by 1.
+	\item Now the semaphore value is 0, which means that no process can access the shared resource.
+	\item The processor switches back to process A, which now executes the `signal()' operation, increasing the semaphore value by 1.
+	\item The semaphore value is now 1, but process B has not yet executed the `signal()' operation to release the semaphore.
+	\item Process A can now access the shared resource, violating mutual exclusion.
+\end{enumerate}
+This scenario shows that if the `wait()' and `signal()' semaphore operations are not executed atomically, i.e., without interruption from other processes or threads, then mutual exclusion may be violated. To prevent this, the `wait()' and `signal()' operations must be executed atomically, either by the operating system or by using special hardware instructions.
 
 
 
