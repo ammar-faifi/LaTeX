@@ -1,10 +1,5 @@
-.DS_Store
-.idea
-*.log
-tmp/
-
-# Created by https://www.toptal.com/developers/gitignore/api/latex
-# Edit at https://www.toptal.com/developers/gitignore?templates=latex
+# Created by https://www.toptal.com/developers/gitignore/api/macos,latex
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,latex
 
 ### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
@@ -316,82 +311,37 @@ TSWLatexianTemp*
 # glossaries
 *.glstex
 
-# End of https://www.toptal.com/developers/gitignore/api/latex
-# Created by https://www.toptal.com/developers/gitignore/api/c,c++
-# Edit at https://www.toptal.com/developers/gitignore?templates=c,c++
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
 
-### C ###
-# Prerequisites
-*.d
+# Icon must end with two \r
+Icon
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
 
-# Linker output
-*.ilk
-*.map
-*.exp
+# Thumbnails
+._*
 
-# Precompiled Headers
-*.gch
-*.pch
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+### macOS Patch ###
+# iCloud generated files
+*.icloud
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
-
-### C++ ###
-# Prerequisites
-
-# Compiled Object files
-*.slo
-
-# Precompiled Headers
-
-# Compiled Dynamic libraries
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-
-# Executables
-
-# End of https://www.toptal.com/developers/gitignore/api/c,c++
-HyperWrite Logo
+# End of https://www.toptal.com/developers/gitignore/api/macos,latex
