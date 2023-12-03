@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{geometry}[margin=20mm]
+\usepackage{listings}
 
 \def\c#1{\texttt{#1}}
 
@@ -154,13 +155,113 @@ Let's study different cases:
 				\begin{equation*}
 					S_1 Z_0 Z_1 [S_1 S_2 - i X_0] (1 + S_0 X_1)
 				\end{equation*}
-          But $ S_1 S_2 = -1 $, then 
-          \begin{equation*}
-            - S_1 Z_0 Z_1 [1 + i X_0] (1 + S_0 X_1)
-          \end{equation*}
+				But $ S_1 S_2 = -1 $, then
+				\begin{equation*}
+					- S_1 Z_0 Z_1 [1 + i X_0] (1 + S_0 X_1)
+				\end{equation*}
 				relizing the braiding operator
 		\end{description}
 \end{description}
 % section Constructing Protocol (end)
 
+\section{Statevector and Density Matrix} % (fold)
+\label{sec:Statevector and Density Matrix}
+Assume you have a state vector $|\psi\rangle$, which is a column vector with complex numbers:
+\begin{equation}
+	|\psi\rangle = \begin{bmatrix} \psi_1 \\ \psi_2 \\ \vdots \\ \psi_n \end{bmatrix}
+\end{equation}
+Here, $n$ is the dimensionality of the quantum system.
+Take the conjugate transpose of the state vector, denoted by $\langle \psi|$. This is obtained by taking the complex conjugate of each element and then transposing the vector:
+\begin{equation}
+	\langle \psi| = \begin{bmatrix} \psi_1^* & \psi_2^* & \ldots & \psi_n^* \end{bmatrix}^T
+\end{equation}
+Compute the outer product to obtain the density matrix $\rho$:
+\begin{equation}
+	\rho = |\psi\rangle \langle \psi| = \begin{bmatrix} \psi_1 \\ \psi_2 \\ \vdots \\ \psi_n \end{bmatrix} \begin{bmatrix} \psi_1^* & \psi_2^* & \ldots & \psi_n^* \end{bmatrix}
+\end{equation}
+The result is a square matrix of size $n \times n$, representing the density matrix.
+The density matrix $\rho$ is Hermitian (equal to its conjugate transpose) and positive semi-definite. If the state vector $|\psi\rangle$ is normalized (has a magnitude of 1), then the trace of the density matrix is equal to 1, which is a requirement for a valid density matrix representing a physical state.
+
+
+\textbf{Pure State:}
+
+For a pure state density matrix $\rho$, which satisfies $\rho^2 = \rho$ (idempotent), you can find the state vector $|\psi\rangle$ by:
+\[ |\psi\rangle = \sqrt{\lambda} \cdot |\phi\rangle \]
+Here, $\lambda$ is the non-zero eigenvalue of $\rho$, and $|\phi\rangle$ is the corresponding eigenvector.
+
+\textbf{Mixed State:}
+For a mixed state density matrix $\rho$ with multiple non-zero eigenvalues, it is not possible to uniquely determine a single state vector. The system is in a statistical mixture of pure states. However, you can find a set of state vectors and their corresponding probabilities:
+\[ \rho = \sum_i p_i |\psi_i\rangle\langle\psi_i| \]
+Here, $|\psi_i\rangle$ are the eigenvectors of $\rho$, and $p_i$ are the corresponding eigenvalues. The state vectors represent the pure states in the mixture, and the probabilities $p_i$ give the weight of each pure state in the mixture.
+
+\textbf{Implementation:}
+To implement this in practice, you can use a numerical linear algebra library (such as NumPy for Python) to compute the eigenvalues and eigenvectors of the density matrix. Depending on the specific form of the density matrix, you might need to use different methods.
+Keep in mind that this process may not be unique, especially for mixed states, where different sets of pure states and probabilities can lead to the same density matrix.
+% section Statevector and Density Matrix (end)
+
+\newpage
+\begin{lstlisting}[language=Python]
+def to_statevector(self, atol: float | None = None, rtol: float | None = None) -> Statevector:
+    """Return a statevector from a pure density matrix.
+
+    Args:
+        atol (float): Absolute tolerance for checking operation validity.
+        rtol (float): Relative tolerance for checking operation validity.
+
+    Returns:
+        Statevector: The pure density matrix's corresponding statevector.
+            Corresponds to the eigenvector of the only non-zero eigenvalue.
+
+    Raises:
+        QiskitError: if the state is not pure.
+    """
+
+    if atol is None:
+        atol = self.atol
+    if rtol is None:
+        rtol = self.rtol
+
+    if not is_hermitian_matrix(self._data, atol=atol, rtol=rtol):
+        raise QiskitError("Not a valid density matrix (non-hermitian).")
+
+    evals, evecs = np.linalg.eig(self._data)
+
+    nonzero_evals = evals[abs(evals) > atol]
+    if len(nonzero_evals) != 1 or not np.isclose(nonzero_evals[0], 1, atol=atol, rtol=rtol):
+        raise QiskitError("Density matrix is not a pure state")
+
+    psi = evecs[:, np.argmax(evals)]  # eigenvectors returned in columns.
+    return Statevector(psi)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+@classmethod
+def from_instruction(cls, instruction: Instruction | QuantumCircuit) -> DensityMatrix:
+    """Return the output density matrix of an instruction.
+
+    The statevector is initialized in the state :math:`|{0,\\ldots,0}\\rangle` of
+    the same number of qubits as the input instruction or circuit, evolved
+    by the input instruction, and the output statevector returned.
+
+    Args:
+        instruction (qiskit.circuit.Instruction or QuantumCircuit): instruction or circuit
+
+    Returns:
+        DensityMatrix: the final density matrix.
+
+    Raises:
+        QiskitError: if the instruction contains invalid instructions for
+                     density matrix simulation.
+    """
+    # Convert circuit to an instruction
+    if isinstance(instruction, QuantumCircuit):
+        instruction = instruction.to_instruction()
+    # Initialize an the statevector in the all |0> state
+    num_qubits = instruction.num_qubits
+    init = np.zeros((2**num_qubits, 2**num_qubits), dtype=complex)
+    init[0, 0] = 1
+    vec = DensityMatrix(init, dims=num_qubits * (2,))
+    vec._append_instruction(instruction)
+    return vec
+\end{lstlisting}
 \end{document}
