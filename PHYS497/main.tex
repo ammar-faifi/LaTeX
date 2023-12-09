@@ -7,33 +7,95 @@
 \usepackage{graphicx}
 \usepackage{geometry}[margin=20mm]
 \usepackage{listings}
+\usepackage{svg}
+
 
 \def\c#1{\texttt{#1}}
 
 \title{Physics Undergraduate Research (PHYS497)}
 \author{Alfaifi, Ammar -- 201855360}
-\date{Nov. 2023}
+\date{\today}
 
 \begin{document}
 \maketitle
 
 \section{Instroduction} % (fold)
 \label{sec:Instroduction}
-This paper shows the idea of relizaion of braiding of Majorana fermions but as
-series of measurement istead. And then using Jordan-Wigner transformation to
-write Majorana operators in terms of spin (fermionic) system. Hence, we can use
-methods provided by \c{qiskit} package to simulate such an idea and system.
+The inception of the concept dates back to Majorana's proposal in 1937, wherein he postulated that electrically neutral spin-1/2 particles could be characterized by a real-valued wave equation known as the Majorana equation. According to this proposition, these particles would be indistinguishable from their antiparticles due to the relationship between their wave functions through complex conjugation, thereby leaving the Majorana wave equation unaltered.
+
+This paper explores the realization of Majorana fermion braiding, shifting from the traditional approach to a series of measurements. Additionally, it employs the Jordan-Wigner transformation to express Majorana operators in the language of a spin (fermionic) system. By doing so, the study facilitates the utilization of techniques offered by the \c{qiskit} package to simulate and analyze this novel approach and its associated quantum system.
 % section Instroduction (end)
+
+\section{Majorana Definition} % (fold)
+\label{sec:Majorana Definition}
+The distinction between Majorana fermions and Dirac fermions can be mathematically articulated through the creation and annihilation operators of second quantization. Specifically, the creation operator $\gamma_j^{\dagger}$ generates a fermion in quantum state $j$ (described by a real wave function), while the annihilation operator $\gamma_j$ eliminates it, or equivalently, creates the corresponding antiparticle. In the case of a Dirac fermion, the operators $\gamma_j^{\dagger}$ and $\gamma_j$ are distinct, whereas for a Majorana fermion, they are identical. Expressing the ordinary fermionic annihilation and creation operators $f$ and $f^{\dagger}$ in terms of two Majorana operators $\gamma_1$ and $\gamma_2$ can be achieved as follows:
+
+$$
+	\begin{aligned}
+		 & f=\frac{1}{\sqrt{2}}\left(\gamma_1+i \gamma_2\right),            \\
+		 & f^{\dagger}=\frac{1}{\sqrt{2}}\left(\gamma_1-i \gamma_2\right) .
+	\end{aligned}
+$$
+
+Having an even number of Majorana fermions, $ 2n $, they obey the anitcommutation relation
+\begin{align}
+	\left\{\gamma_i, \gamma_j\right\}=2 \delta_{i j}, \qquad i=1, 2, \dots, 2n  .
+\end{align}
+Mathematically, the superconductor imposes electron hole "symmetry" on the quasiparticle excitations, relating the creation operator $\gamma(E)$ at energy $E$ to the annihilation operator $\gamma^{\dagger}(-E)$ at energy $-E$. Majorana fermions can be bound to a defect at zero energy, and then the combined objects are called Majorana bound states or Majorana zero modes. This name is more appropriate than Majorana fermion (although the distinction is not always made in the literature), because the statistics of these objects is no longer fermionic. Instead, the Majorana bound states are an example of non-abelian anyons: interchanging them changes the state of the system in a way that depends only on the order in which the exchange was performed. The non-abelian statistics that Majorana bound states possess allows them to be used as a building block for a topological quantum computer.
+% section Majorana Definition (end)
+
+\section{Non-abelian Theroy} % (fold)
+\label{sec:Non-abelian Theroy}
+Any Hermitian operator $ A $ can be written as unitary operator in form $ U = e^{i\beta A} $ to some angle $ \beta $.
+For a Majorana fermions operator, we can start from their parity operator, which is Hermitian, $ P_{nm} = i \gamma_n \gamma_m $
+So we can have
+\begin{align}
+	U \equiv e^{\beta \gamma_n \gamma_m} \quad \text{or} \quad U = \cos{\beta} + \gamma_n \gamma_m \sin{\beta}
+	\label{eq:U in beta}
+\end{align}
+We'll try to find a unitary operator that evolve Majorana fermion as following, in Heisenberg picture,
+\begin{align}
+	\gamma_n \rightarrow U \gamma_n U ^\dagger \\
+	\gamma_m \rightarrow U \gamma_m U ^\dagger
+	\label{eq:transform gammas}
+\end{align}
+Putting Equation~\ref{eq:U in beta} in Equation~\ref{eq:transform gammas} we get
+\begin{align}
+	\gamma_n \rightarrow \cos{2 \beta} \gamma_n - \sin{2 \beta} \gamma_m, \\
+	\gamma_n \rightarrow \cos{2 \beta} \gamma_m - \sin{2 \beta} \gamma_n.
+	\label{eq:subst in transformation}
+\end{align}
+Then we should have $ \beta = \pm \pi / 4 $. The we get braiding unitary operator of $ \gamma_n $ \& $ \gamma_m $
+\begin{align}
+	U = \exp \left( \pm \frac{\pi}{4} \gamma_n \gamma_m\right)
+	=\frac{1}{\sqrt{2}}\left(1 \pm \gamma_n \gamma_m\right)
+\end{align}
+% section Non-abelian Theroy (end)
+
+\section{Majorana Zero Modes} % (fold)
+\label{sec:Majorana Zero Modes}
+Assume we have the configuration of Majorana fermions shown in Figure~\ref{fig:4 mf conf}.
+The idea now is to do measurement only operations on the Majorana modes' configuration that will realize
+the same result as if we braid the two Majorana fermions.\cite{Leijnse_2012}
+\begin{figure}
+	\begin{center}
+		\includesvg[width=0.3\linewidth]{./figures/conf.svg}
+	\end{center}
+	\caption{Four Majorana fermions configuration.}
+	\label{fig:4 mf conf}
+\end{figure}
+
+% section Majorana Zero Modes (end)
 
 \section{As Series of Measurement} % (fold)
 \label{sec:As Series of measurement}
 As a demostration for the idea, we'll start with a system of 4 Majorana fermions,
 corresponding to two fermions. The configuration of Majorana fermions is shown in fig.
 The true braiding operator between $\gamma_0$ and $ \gamma_3 $ is given by
-\begin{equation}
+\begin{align}
 	U = e^{\frac{\pi}{4} \gamma_0 \gamma_3}
 	\label{eq:braiding op}
-\end{equation}
+\end{align}
 Then, to relize this braiding operator as just series of measurement we do this in four steps:
 \begin{enumerate}
 	\item $ (1 + i \gamma_1 \gamma_2) $
@@ -62,26 +124,26 @@ Then 4-step series of measurement on the system becomes
 	\item $ (1 + X_1) $
 \end{enumerate}
 Also for true braiding operator we get
-\begin{equation}
+\begin{align}
 	e^{i \frac{\pi}{4} X_0} = \frac{1}{\sqrt{2}}\, (1 + i X_0 ) \quad \text{or} \quad
 	e^{-i \frac{\pi}{4} X_0} = \frac{1}{\sqrt{2}}\, (1 - i X_0 )
 	\label{eq:br Jordan-Wigner}
-\end{equation}
+\end{align}
 % section Jordan-Wigner Transformation (end)
 
 \section{Applying all Measurements} % (fold)
 \label{sec:Applying all Measurements}
 Let's understand the possible outcomes from the general case of the measurement operator,
 that is,
-\begin{equation}
+\begin{align}
 	(1 +S_3 X_1) (1 +S_2 Z_0 Z_1) (1 +S_1 Y_0 Z_1) (1 +S_0 X_1)
 	\label{eq:general meas}
-\end{equation}
+\end{align}
 Expanding the middle two factors as
-\begin{equation}
+\begin{align}
 	(1 +S_3 X_1) (1 + S_2 Z_0 Z_1 + S_1 Y_0 Z_1 + S_2 S_1 Z_0 Z_1 Y_0 Z_1) (1 +S_0 X_1)
 	\label{eq:expanding}
-\end{equation}
+\end{align}
 Utilizing the Pauli gates anitcommutation relations, we move the LHS factor to RHS,
 as for first term we get
 \begin{equation*}
@@ -116,69 +178,69 @@ to apply to fix it. From Section~\ref{sec:Applying all Measurements}, we simplif
 Let's study different cases:
 \begin{description}
 	\item[Case 1: $ S_0 = S_3 $]
-		We get \begin{equation*}
-			[1 -i X_0 S_2 S_1] (1 + S_0 X_1)
-		\end{equation*}
-		Note, the right factor just acts on subsystem 1 that we don't care about
-		it outcomes.
+	      We get \begin{equation*}
+		      [1 -i X_0 S_2 S_1] (1 + S_0 X_1)
+	      \end{equation*}
+	      Note, the right factor just acts on subsystem 1 that we don't care about
+	      it outcomes.
 
-		\begin{description}
-			\item[Case 1.1: $ S_1 = -S_2 $]
-				\begin{equation*}
-					[1 + i X_0] (1 + S_0 X_1)
-				\end{equation*}
-				relizing counterclockwise braiding operator in Equation~\ref{eq:br Jordan-Wigner}.
-			\item[Case 1.2: $ S_1 = S_2 $]
-				\begin{equation*}
-					[1 - i X_0] (1 + S_0 X_1)
-				\end{equation*}
-				relizing clockwise braiding operator in Equation~\ref{eq:br Jordan-Wigner}.
-		\end{description}
+	      \begin{description}
+		      \item[Case 1.1: $ S_1 = -S_2 $]
+		            \begin{equation*}
+			            [1 + i X_0] (1 + S_0 X_1)
+		            \end{equation*}
+		            relizing counterclockwise braiding operator in Equation~\ref{eq:br Jordan-Wigner}.
+		      \item[Case 1.2: $ S_1 = S_2 $]
+		            \begin{equation*}
+			            [1 - i X_0] (1 + S_0 X_1)
+		            \end{equation*}
+		            relizing clockwise braiding operator in Equation~\ref{eq:br Jordan-Wigner}.
+	      \end{description}
 
 	\item[Case 2: $ S_0 \ne S_3 $]
-		We get \begin{equation*}
-			[S_2 Z_0 Z_1 + S_1 Y_0 Z_1]\, (1 + S_0 X_1)
-		\end{equation*}
-		let's factor out $ Z_0 Z_1 $
-		\begin{equation*}
-			Z_0 Z_1 [S_2 - i S_1 X_0]\, (1 + S_0 X_1)
-		\end{equation*}
+	      We get \begin{equation*}
+		      [S_2 Z_0 Z_1 + S_1 Y_0 Z_1]\, (1 + S_0 X_1)
+	      \end{equation*}
+	      let's factor out $ Z_0 Z_1 $
+	      \begin{equation*}
+		      Z_0 Z_1 [S_2 - i S_1 X_0]\, (1 + S_0 X_1)
+	      \end{equation*}
 
-		In this case we always want to multiply by $ Z_0 $, then we'll have
-		\begin{description}
-			\item[Case 2.1: $ S_1 = S_2 $]
-				\begin{equation*}
-					S_1 Z_0 Z_1 [1 - i X_0] (1 + S_0 X_1)
-				\end{equation*}
-				relizing the inverse braiding operator
-			\item[Case 2.2: $ S_1 = - S_2 $]
-				\begin{equation*}
-					S_1 Z_0 Z_1 [S_1 S_2 - i X_0] (1 + S_0 X_1)
-				\end{equation*}
-				But $ S_1 S_2 = -1 $, then
-				\begin{equation*}
-					- S_1 Z_0 Z_1 [1 + i X_0] (1 + S_0 X_1)
-				\end{equation*}
-				relizing the braiding operator
-		\end{description}
+	      In this case we always want to multiply by $ Z_0 $, then we'll have
+	      \begin{description}
+		      \item[Case 2.1: $ S_1 = S_2 $]
+		            \begin{equation*}
+			            S_1 Z_0 Z_1 [1 - i X_0] (1 + S_0 X_1)
+		            \end{equation*}
+		            relizing the inverse braiding operator
+		      \item[Case 2.2: $ S_1 = - S_2 $]
+		            \begin{equation*}
+			            S_1 Z_0 Z_1 [S_1 S_2 - i X_0] (1 + S_0 X_1)
+		            \end{equation*}
+		            But $ S_1 S_2 = -1 $, then
+		            \begin{equation*}
+			            - S_1 Z_0 Z_1 [1 + i X_0] (1 + S_0 X_1)
+		            \end{equation*}
+		            relizing the braiding operator
+	      \end{description}
 \end{description}
 % section Constructing Protocol (end)
 
 \section{Statevector and Density Matrix} % (fold)
 \label{sec:Statevector and Density Matrix}
 Assume you have a state vector $|\psi\rangle$, which is a column vector with complex numbers:
-\begin{equation}
+\begin{align}
 	|\psi\rangle = \begin{bmatrix} \psi_1 \\ \psi_2 \\ \vdots \\ \psi_n \end{bmatrix}
-\end{equation}
+\end{align}
 Here, $n$ is the dimensionality of the quantum system.
 Take the conjugate transpose of the state vector, denoted by $\langle \psi|$. This is obtained by taking the complex conjugate of each element and then transposing the vector:
-\begin{equation}
+\begin{align}
 	\langle \psi| = \begin{bmatrix} \psi_1^* & \psi_2^* & \ldots & \psi_n^* \end{bmatrix}^T
-\end{equation}
+\end{align}
 Compute the outer product to obtain the density matrix $\rho$:
-\begin{equation}
+\begin{align}
 	\rho = |\psi\rangle \langle \psi| = \begin{bmatrix} \psi_1 \\ \psi_2 \\ \vdots \\ \psi_n \end{bmatrix} \begin{bmatrix} \psi_1^* & \psi_2^* & \ldots & \psi_n^* \end{bmatrix}
-\end{equation}
+\end{align}
 The result is a square matrix of size $n \times n$, representing the density matrix.
 The density matrix $\rho$ is Hermitian (equal to its conjugate transpose) and positive semi-definite. If the state vector $|\psi\rangle$ is normalized (has a magnitude of 1), then the trace of the density matrix is equal to 1, which is a requirement for a valid density matrix representing a physical state.
 
@@ -199,69 +261,6 @@ To implement this in practice, you can use a numerical linear algebra library (s
 Keep in mind that this process may not be unique, especially for mixed states, where different sets of pure states and probabilities can lead to the same density matrix.
 % section Statevector and Density Matrix (end)
 
-\newpage
-\begin{lstlisting}[language=Python]
-def to_statevector(self, atol: float | None = None, rtol: float | None = None) -> Statevector:
-    """Return a statevector from a pure density matrix.
-
-    Args:
-        atol (float): Absolute tolerance for checking operation validity.
-        rtol (float): Relative tolerance for checking operation validity.
-
-    Returns:
-        Statevector: The pure density matrix's corresponding statevector.
-            Corresponds to the eigenvector of the only non-zero eigenvalue.
-
-    Raises:
-        QiskitError: if the state is not pure.
-    """
-
-    if atol is None:
-        atol = self.atol
-    if rtol is None:
-        rtol = self.rtol
-
-    if not is_hermitian_matrix(self._data, atol=atol, rtol=rtol):
-        raise QiskitError("Not a valid density matrix (non-hermitian).")
-
-    evals, evecs = np.linalg.eig(self._data)
-
-    nonzero_evals = evals[abs(evals) > atol]
-    if len(nonzero_evals) != 1 or not np.isclose(nonzero_evals[0], 1, atol=atol, rtol=rtol):
-        raise QiskitError("Density matrix is not a pure state")
-
-    psi = evecs[:, np.argmax(evals)]  # eigenvectors returned in columns.
-    return Statevector(psi)
-\end{lstlisting}
-
-\begin{lstlisting}[language=Python]
-@classmethod
-def from_instruction(cls, instruction: Instruction | QuantumCircuit) -> DensityMatrix:
-    """Return the output density matrix of an instruction.
-
-    The statevector is initialized in the state :math:`|{0,\\ldots,0}\\rangle` of
-    the same number of qubits as the input instruction or circuit, evolved
-    by the input instruction, and the output statevector returned.
-
-    Args:
-        instruction (qiskit.circuit.Instruction or QuantumCircuit): instruction or circuit
-
-    Returns:
-        DensityMatrix: the final density matrix.
-
-    Raises:
-        QiskitError: if the instruction contains invalid instructions for
-                     density matrix simulation.
-    """
-    # Convert circuit to an instruction
-    if isinstance(instruction, QuantumCircuit):
-        instruction = instruction.to_instruction()
-    # Initialize an the statevector in the all |0> state
-    num_qubits = instruction.num_qubits
-    init = np.zeros((2**num_qubits, 2**num_qubits), dtype=complex)
-    init[0, 0] = 1
-    vec = DensityMatrix(init, dims=num_qubits * (2,))
-    vec._append_instruction(instruction)
-    return vec
-\end{lstlisting}
+\bibliographystyle{plain}
+\bibliography{references}
 \end{document}

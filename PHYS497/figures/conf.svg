@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed, 2023-07-21)"
+   sodipodi:docname="conf.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.8269264"
+     inkscape:cx="204.44173"
+     inkscape:cy="204.16805"
+     inkscape:window-width="2240"
+     inkscape:window-height="1207"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <rect
+       x="79.368276"
+       y="16.421023"
+       width="221.68381"
+       height="51.999905"
+       id="rect5" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="opacity:1;fill:#000000;stroke:#ffffff;stroke-width:0"
+       id="circle1"
+       cx="35.59893"
+       cy="33.888885"
+       r="2.6792493" />
+    <circle
+       style="opacity:1;fill:#000000;stroke:#ffffff;stroke-width:0"
+       id="circle2"
+       cx="61.088009"
+       cy="33.888885"
+       r="2.6792493" />
+    <circle
+       style="opacity:1;fill:#000000;stroke:#ffffff;stroke-width:0"
+       id="circle4"
+       cx="48.154079"
+       cy="48.588551"
+       r="2.6792493" />
+    <circle
+       style="opacity:1;fill:#000000;stroke:#ffffff;stroke-width:0"
+       id="circle5"
+       cx="48.154079"
+       cy="65.677818"
+       r="2.6792493" />
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text5"
+       style="fill:#000000;stroke-width:0;stroke:#ffffff;-inkscape-font-specification:'Times New Roman, Bold';font-family:'Times New Roman';font-size:14.6666832px;letter-spacing:0px;line-height:1.2;text-align:justify;font-weight:bold;opacity:1;white-space:pre;shape-inside:url(#rect5)" />
+  </g>
+</svg>

@@ -5,9 +5,10 @@ MAIN_FILE = main
 
 # Set the LaTeX compiler
 LATEX_COMPILER = pdflatex
+BIBTEX_COMPILER = bibtex
 
 # Set additional flags for the LaTeX compiler if needed
-LATEX_FLAGS = -shell-escape -interaction=nonstopmode
+LATEX_FLAGS = --shell-escape -interaction=nonstopmode
 
 # Set the target PDF file
 TARGET = $(MAIN_FILE).pdf
@@ -15,6 +16,9 @@ TARGET = $(MAIN_FILE).pdf
 all: $(TARGET)
 
 $(TARGET): $(MAIN_FILE).tex
+	$(LATEX_COMPILER) $(LATEX_FLAGS) $(MAIN_FILE).tex
+	$(BIBTEX_COMPILER) $(MAIN_FILE)
+	$(LATEX_COMPILER) $(LATEX_FLAGS) $(MAIN_FILE).tex
 	$(LATEX_COMPILER) $(LATEX_FLAGS) $(MAIN_FILE).tex
 
 clean:
