@@ -69,6 +69,11 @@ Consider the wavefunctions $ \psi_1 $ and $ \psi_2 $ associated with two particl
 \end{equation}
 where for fermions, $ \lambda = -1 $, and for bosons, $ \lambda = +1 $—both being constant. However, in the case of Majorana fermions, as we will elaborate on shortly, the constant takes the form of a matrix. This distinction categorizes the former as abelian particles and the latter as non-abelian particles \cite{Nayak_2008}.
 
+- parity operator has +1 and -1 eigenvalues, hence its name. 
+- the state and space of its eigenstate can be trated as if it's qubit to be used as, like utilizing the Hilbert space as if it a subspace of a quit, then using it to store and do quantum computation.
+- it's non-local operator, since its property can be very away seperatred, giving it robustness against error and so on.
+- fact no of particle is conserved, unitary operators that we can apply are limited, to those leave total parity conserved, so we found out the braiding abid to this conservation.
+
 Any Hermitian operator $ A $ can be expressed as a unitary operator of the form $ U = e^{i\beta A} $ with some angle $ \beta $. For Majorana fermion operators, we can begin with their parity operator, denoted as $ P_{nm} = i \gamma_n \gamma_m $. 
 the parity operator plays a crucial role in describing the non-abelian statistics associated with the braiding of these particles. The braiding of Majorana fermions involves exchanging their positions in space, and the resulting transformation is characterized by non-trivial matrix elements rather than simple constants.
 
@@ -300,6 +305,9 @@ Here, $|\psi_i\rangle$ are the eigenvectors of $\rho$, and $p_i$ are the corresp
 To implement this in practice, you can use a numerical linear algebra library (such as NumPy for Python) to compute the eigenvalues and eigenvectors of the density matrix. Depending on the specific form of the density matrix, you might need to use different methods.
 Keep in mind that this process may not be unique, especially for mixed states, where different sets of pure states and probabilities can lead to the same density matrix.
 % section Statevector and Density Matrix (end)
+
+\newpage
+\section{What's Next ?}
 
 \newpage
 \bibliographystyle{plain}
