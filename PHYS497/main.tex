@@ -15,7 +15,7 @@
 \def\c#1{\texttt{#1}}
 
 \title{Quantum Information Analysis of Majorana Fermion Braiding: Exploring Realization and Error Assessment via a Series of Measurements}
-\author{Alfaifi, Ammar -- 201855360}
+\author{Ammar Alfaifi -- Supervised by Dr. Raditya W. Bomantara}
 \date{\today}
 
 \begin{document}
@@ -27,29 +27,28 @@ In 1937, Majorana proposed a groundbreaking idea suggesting that electrically ne
 
 Building upon Majorana's pioneering work, this paper delves into the fascinating realm of Majorana fermion braiding, transitioning from conventional approaches to a novel method centered around a sequence of measurements. A key aspect of this exploration involves leveraging the Jordan-Wigner transformation to express Majorana operators within the framework of a spin (fermionic) system. This transformative step not only enhances the understanding of Majorana fermions but also opens up possibilities for utilizing advanced techniques provided by the \c{qiskit} package.
 
-Expanding the discourse, it is imperative to delve into the realm of quantum commuting and its inherent power. Quantum commuting, a phenomenon where quantum particles exchange positions without any physical trace, plays a pivotal role in the dynamics of quantum systems. This capability is harnessed in various quantum computing paradigms, and understanding its nuances is crucial for the successful realization of Majorana fermion braiding.
+In the realm of two dimensions, executing two exchanges of particle positions mirrors the topological equivalence of one quasiparticle encircling another along a closed path, known as a braid. This action of exchanging identical particles or maneuvering one particle around another is formally termed "braiding" in mathematical terms. The act of "braiding" two anyons not only encapsulates a historical record of the event but also results in altered wave functions that effectively "count" the number of braids involved.\cite{Nakamura_2020}
 
 Furthermore, the introduction of the braiding operator adds another layer of complexity and significance to the discussion. The braiding operator is a mathematical entity that encapsulates the non-Abelian statistics associated with the braiding of anyons, a fundamental concept in the study of topological quantum computation. Exploring the properties and applications of the braiding operator provides valuable insights into the behavior of Majorana fermions during braiding processes.
 
 Fault-tolerant quantum computing is of particular interest due to the inherent challenges posed by the delicate nature of quantum information. Unlike classical computation, which can often rely on the reliability of classical gates, quantum systems are highly susceptible to errors and decoherence. In the classical realm, information storage on magnetic media, for instance, benefits from the collective behavior of spins in individual atoms. Although each spin is sensitive to thermal fluctuations, the interactions between spins tend to align them in the same direction. Consequently, if a spin deviates, the interactions compel it to return to the alignment of other spins, resembling a self-correcting mechanism akin to the repetition code in error correction.\cite{Kitaev_2003}
 
-Motivation behind utilizing a measurement-based protocol for realizing the braiding operator deserves attention. By adopting a measurement-based approach, the study aims to exploit the inherent advantages offered by this methodology, such as fault tolerance and scalability. Understanding the motivation behind choosing this protocol sheds light on the strategic decisions made in the pursuit of implementing Majorana fermion braiding.
+Quantum computers that operate based on measurements employ a sophisticated quantum state referred to as a cluster state. This state comprises three (or more) qubits interconnected through the non-classical phenomenon of entanglement, where the properties of quantum particles remain correlated even across vast distances. The functionality of measurement-based quantum computers revolves around initiating a measurement on the initial qubit within the cluster state. The result of this measurement dictates the subsequent measurement on the second entangled qubit, a process known as feedforward. Subsequently, this determination influences how the third qubit is measured. Through this approach, any desired quantum gate or circuit can be realized by carefully selecting the sequence of measurements.\cite{quantum_comp} Motivation behind utilizing a measurement-based protocol for realizing the braiding operator deserves attention. By adopting a measurement-based approach, the study aims to exploit the inherent advantages offered by this methodology, such as fault tolerance and scalability.
 
-Topological properties play a pivotal role in hosting quantum computation and Majorana braiding. The unique characteristics of topological systems, such as robustness against local perturbations, make them ideal candidates for quantum information processing. Examining why these properties are interesting in the context of Majorana braiding provides a comprehensive understanding of the broader implications and applications in quantum computing.
-
-In the context of quantum gates simulation, the discussion extends to the utilization of measurement-only approaches for simulating quantum gates. Specifically, exploring how measurement-only strategies can effectively simulate quantum gates is crucial for comprehending the intricacies involved in the proposed Majorana fermion braiding scheme. Drawing parallels to existing quantum computing platforms, like the IBM Q computer, underscores the practicality and feasibility of implementing such schemes in real-world quantum hardware.
+Topological properties play a pivotal role in hosting quantum computation and Majorana braiding. The unique characteristics of topological systems, such as robustness against local perturbations, make them ideal candidates for quantum information processing. In the context of quantum gates simulation, the discussion extends to the utilization of measurement-only approaches for simulating quantum gates. Specifically, exploring how measurement-only strategies can effectively simulate quantum gates is crucial for comprehending the intricacies involved in the proposed Majorana fermion braiding scheme. Drawing parallels to existing quantum computing platforms, like the IBM Q computer, underscores the practicality and feasibility of implementing such schemes in real-world quantum hardware.
 
 The exploration of accessing and running circuits on platforms such as the IBM Q computer is a crucial aspect. It is imperative to comprehend the processes and mechanisms involved in accessing and executing circuits on quantum computing hardware, as this knowledge forms the foundation for translating theoretical advancements into practical applications. In this report, we successfully employed the \c{qiskit} library and IBM online quantum computers to simulate our conceptual framework. This involved the creation of a two-qubit system that realizes our sequence of measurements through Pauli unitary gates. Through a comparison with a true braiding operator for a single qubit system, we assessed the results and error sensitivity of such circuits by calculating the average fidelity between the final state vector of the circuit after execution.
 % section Instroduction (end)
 
-\section{Majorana Definition} % (fold)
+\section{Majorana Definition \& Non-abelian Theroy} % (fold)
 \label{sec:Majorana Definition}
 The distinction between Majorana fermions and Dirac fermions can be mathematically articulated through the creation and annihilation operators of second quantization. Specifically, the creation operator $\gamma_j^{\dagger}$ generates a fermion in quantum state $j$ (described by a real wave function), while the annihilation operator $\gamma_j$ eliminates it, or equivalently, creates the corresponding antiparticle. In the case of a Dirac fermion, the operators $\gamma_j^{\dagger}$ and $\gamma_j$ are distinct, whereas for a Majorana fermion, they are identical. Expressing the ordinary fermionic annihilation and creation operators $f$ and $f^{\dagger}$ in terms of two Majorana operators $\gamma_1$ and $\gamma_2$ can be achieved as follows:
 
 $$
 	\begin{aligned}
-		 & f=\frac{1}{\sqrt{2}}\left(\gamma_1+i \gamma_2\right),            \\
-		 & f^{\dagger}=\frac{1}{\sqrt{2}}\left(\gamma_1-i \gamma_2\right) .
+		 & \hat{a}=\frac{1}{\sqrt{2}}\left(\gamma_1+i \gamma_2\right),            \\
+		 & \hat{a}^{\dagger}=\frac{1}{\sqrt{2}}\left(\gamma_1-i \gamma_2\right) .
+		\label{eq:ferm as mf}
 	\end{aligned}
 $$
 
@@ -58,32 +57,33 @@ Having an even number of Majorana fermions, $ 2n $, they obey the anitcommutatio
 	\left\{\gamma_i, \gamma_j\right\}=2 \delta_{i j}, \qquad i=1, 2, \dots, 2n  .
 \end{equation}
 Mathematically, the superconductor imposes electron hole "symmetry" on the quasiparticle excitations, relating the creation operator $\gamma(E)$ at energy $E$ to the annihilation operator $\gamma^{\dagger}(-E)$ at energy $-E$.\cite{Majorana-returns} Majorana fermions can be bound to a defect at zero energy, and then the combined objects are called Majorana bound states or Majorana zero modes. This name is more appropriate than Majorana fermion (although the distinction is not always made in the literature), because the statistics of these objects is no longer fermionic. Instead, the Majorana bound states are an example of non-abelian anyons: interchanging them changes the state of the system in a way that depends only on the order in which the exchange was performed. The non-abelian statistics that Majorana bound states possess allows them to be used as a building block for a topological quantum computer.
-% section Majorana Definition (end)
-
-\section{Non-abelian Theory} % (fold)
-\label{sec:Non-abelian Theory}
 
 Consider the wavefunctions $ \psi_1 $ and $ \psi_2 $ associated with two particles. Upon applying an exchange operator, one anticipates the form
 \begin{equation}
-	\hat{E} | \psi_1\, \psi_2 \rangle = \lambda | \psi_2\, \psi_1 \rangle,
+	\hat{B} | \psi_1\, \psi_2 \rangle = \lambda | \psi_2\, \psi_1 \rangle,
 \end{equation}
-where for fermions, $ \lambda = -1 $, and for bosons, $ \lambda = +1 $—both being constant. However, in the case of Majorana fermions, as we will elaborate on shortly, the constant takes the form of a matrix. This distinction categorizes the former as abelian particles and the latter as non-abelian particles \cite{Nayak_2008}.
+where for fermions, $ \lambda = -1 $, and for bosons, $ \lambda = +1 $—both being constant. However, in the case of Majorana fermions, as we will elaborate on shortly, the constant takes the form of a matrix. This distinction categorizes the former as abelian particles and the latter as non-abelian particles \cite{Nayak_2008}. The parity operator plays a crucial role in describing the non-abelian statistics associated with the braiding of these particles. The braiding of Majorana fermions involves exchanging their positions in space, and the resulting transformation is characterized by non-trivial matrix elements rather than simple constants.
 
-- parity operator has +1 and -1 eigenvalues, hence its name. 
-- the state and space of its eigenstate can be trated as if it's qubit to be used as, like utilizing the Hilbert space as if it a subspace of a quit, then using it to store and do quantum computation.
-- it's non-local operator, since its property can be very away seperatred, giving it robustness against error and so on.
-- fact no of particle is conserved, unitary operators that we can apply are limited, to those leave total parity conserved, so we found out the braiding abid to this conservation.
-
-Any Hermitian operator $ A $ can be expressed as a unitary operator of the form $ U = e^{i\beta A} $ with some angle $ \beta $. For Majorana fermion operators, we can begin with their parity operator, denoted as $ P_{nm} = i \gamma_n \gamma_m $. 
-the parity operator plays a crucial role in describing the non-abelian statistics associated with the braiding of these particles. The braiding of Majorana fermions involves exchanging their positions in space, and the resulting transformation is characterized by non-trivial matrix elements rather than simple constants.
-
-This allows us to define
+To assign a state to a system of Majoranas, we need to consider them as fermionic system, i.e., as pairs of the form of Equation~\ref{eq:ferm as mf}. In general, for $ 2N $ Majorana modes will have $ N $ fermionic modes. Each mode has the flexibility to be occupied or unoccupied by a fermion, resulting in two potentially degenerate quantum states $ | 0 \rangle $ and $ | 1 \rangle $ for every pair of Majoranas. Consdier the the \textit{fermion parity} operator
 \begin{equation}
-	U \equiv e^{\beta \gamma_n \gamma_m} \quad \text{or} \quad U = \cos{\beta} + \gamma_n \gamma_m \sin{\beta}
+	\hat{P} = 1- 2 \hat{N} = i \gamma_1 \gamma_2,
+	\label{eq:ferm parity}
+\end{equation}
+where $ N = \hat{a}^\dagger \hat{a} $ is the \textit{fermion number} operator. Let's apply it to a pair of Majoranas state as
+$$
+	\begin{aligned}
+		\hat{P} |0\rangle = (1-2\hat{N})\, |0\rangle = + |0\rangle, \\
+		\hat{P} |1\rangle = (1-2\hat{N})\, |1\rangle = - |1\rangle.
+	\end{aligned}
+$$
+The parity operator is characterized by eigenvalues of $ +1 $ and $ -1 $, hence its name. The Hilbert space associated with parity can be treated comparable to a qubit, functioning as a subspace within a qubit for information storage and quantum computation purposes. This non-local operator, endowed with robustness against errors in quantum computation, ensures stability over significant distances. Additionally, the preservation of the total parity within a system of Majorana particles becomes evident. Consequently, the application of unitary operators is constrained to those maintaining the conservation of total parity. This insight leads to the realization that the braiding of Majorana particles adheres to this conservation principle.
+
+In general, any unitary operator $ U $ can be expressed in terms of a Hermitian operator $ A $ of the form $ U = e^{i\beta A} $ with some angle $ \beta $. For Majorana fermion operators, we can begin with their parity operator, denoted as $ P_{nm} = i \gamma_n \gamma_m $. This allows us to define
+\begin{equation}
+	U \equiv e^{\beta \gamma_n \gamma_m} \quad \text{or} \quad U = \cos{\beta} + \gamma_n \gamma_m \sin{\beta},
 	\label{eq:U in beta}
 \end{equation}
-
-To find a unitary operator that evolves Majorana fermions according to the Heisenberg picture, i.e., 
+see Appendix~\ref{sec:Using Eauler's Formula Rewrite Exponential Form}. To find a unitary operator that evolves Majorana fermions according to the Heisenberg picture, i.e.,
 $$
 	\begin{aligned}
 		\gamma_n \rightarrow U \gamma_n U ^\dagger, \\
@@ -98,20 +98,27 @@ $$
 		\label{eq:subst in transformation}
 	\end{aligned}
 $$
-
-This leads to the condition $ \beta = \pm \pi / 4 $. Substituting this into the expression, we obtain the braiding unitary operator for $ \gamma_n $ and $ \gamma_m $:
+This leads to the condition $ \beta = \pm \pi / 4 $-through the text, we will refer to $ \pi /4 $ as the braiding operator and $ -\pi /4 $ the inverse braiding operator. Substituting this into the expression, we obtain the braiding unitary operator for $ \gamma_n $ and $ \gamma_m $:
 $$
 	\begin{aligned}
 		U = \exp \left( \pm \frac{\pi}{4} \gamma_n \gamma_m\right) = \frac{1}{\sqrt{2}}\left(1 \pm \gamma_n \gamma_m\right).
 	\end{aligned}
 $$
-% section Non-abelian Theroy (end)
+
+In case of two-level fermionic systems, to make projective measurement along $ z $-axis we apply the following operator
+\begin{equation*}
+	(1 + S \sigma_z),
+\end{equation*}
+where $ S $ can be $ \pm 1 $ with some probability, corresponding to the eigenvalues of $ \sigma_z $. The analogy operator for Majorana fermions to a projective measurement will be
+\[
+	(1 + S i \gamma_n \gamma_m),
+\]
+where again $ S $ can be $ +1 $ or $ -1 $.
+% section Majorana Definition \& Non-abelian Theroy (end)
 
 \section{Realizations of Braiding Via a Series of Measurements} % (fold)
 \label{sec:Realizations of Braiding Via a Series of Measurements}
-
 Consider the configuration of Majorana fermions depicted in Figure~\ref{fig:4 mf conf}. And, say, we want to braid the two Majorana fermions $ \gamma_0 $ \& $ \gamma_3 $. The conceptual approach here involves executing measurement-only operations on the configuration of Majorana modes, effectively achieving the same outcome as physically braiding the two Majorana fermions \cite{Leijnse_2012}.
-
 \begin{figure}
 	\begin{center}
 		\includesvg[width=0.2\linewidth]{./figures/conf.svg}
@@ -119,22 +126,21 @@ Consider the configuration of Majorana fermions depicted in Figure~\ref{fig:4 mf
 	\caption{Configuration of four Majorana fermions.}
 	\label{fig:4 mf conf}
 \end{figure}
-
 To illustrate this idea, we begin with a system of 4 Majorana fermions, corresponding to two fermions. The configuration of Majorana fermions is depicted in Figure~\ref{fig:4 mf conf}. The true braiding operator between $\gamma_0$ and $\gamma_3$ is given by
 \begin{equation}
-	U = e^{\frac{\pi}{4} \gamma_0 \gamma_3}
+	U = e^{\frac{\pm \pi}{4} \gamma_3 \gamma_0} = \frac{1}{\sqrt{2}} (1 \pm \gamma_3 \gamma_0).
 	\label{eq:braiding op}
 \end{equation}
+We call $ \gamma_0 $ and $ \gamma_3 $ the main Majorana fermions, and the rest are called the ancilla Majorana fermions. By utilizing the ancilla Majorana fermions we want to realize braiding operator in Equation~\ref{eq:braiding op}, using only measurement operations. We do not want to do any measurement on both main Majorana fermions. Further, first step and last step should not invlove the main Majoranas.
 
 To realize this braiding operator solely through a series of measurements, we follow these four steps:
-
 \begin{enumerate}
-	\item Apply the operator $ (1 + i \gamma_1 \gamma_2) $
-	\item Apply the operator $ (1 + i \gamma_1 \gamma_0) $
-	\item Apply the operator $ (1 + i \gamma_3 \gamma_1) $
-	\item Apply the operator $ (1 + i \gamma_1 \gamma_2) $
+	\item Apply the operator $ (1 + iS_0 \gamma_1 \gamma_2) $
+	\item Apply the operator $ (1 + iS_1 \gamma_1 \gamma_0) $
+	\item Apply the operator $ (1 + iS_2 \gamma_3 \gamma_1) $
+	\item Apply the operator $ (1 + iS_3 \gamma_1 \gamma_2) $
 \end{enumerate}
-Which all are illustrated in Figure~\ref{fig:meas 4 mfs}.
+as illustrated in Figure~\ref{fig:meas 4 mfs}.
 \begin{figure}
 	\begin{center}
 		\includesvg[width=0.7\linewidth]{./figures/conf-meas.svg}
@@ -142,10 +148,76 @@ Which all are illustrated in Figure~\ref{fig:meas 4 mfs}.
 	\caption{a-b shows measurements sequence that evantually realizes braiding of $ \gamma_0 $ and $ \gamma_3 $.}
 	\label{fig:meas 4 mfs}
 \end{figure}
+
+Now we need to verify this result wether it realizes the braiding operator. We start by writing all steps as one multiplication series from right to left, as
+\[
+	(1 + iS_3 \gamma_1 \gamma_2) (1 + iS_2 \gamma_3 \gamma_1) (1 + iS_1 \gamma_1 \gamma_0) (1 + iS_0 \gamma_1 \gamma_2)
+\]
+To simplify, we note the left most projector and the right most one are different only in $ S $, if we could bring them togather we can use some helpful properties of projectors. First, expand the middle two projectors
+\[
+	(1 + iS_3 \gamma_1 \gamma_2)
+	[1 + iS_2 \gamma_3 \gamma_1 + iS_1 \gamma_1 \gamma_0 - S_2 S_1 \gamma_3 \gamma_0]
+	(1 + iS_0 \gamma_1 \gamma_2),
+\]
+we used $ \gamma_n^2 = 1 $ on the last term. We employ the operators on the sides to encapsulate each term within the brackets. Starting with first terms we get
+\[
+	(1 + iS_3 \gamma_1 \gamma_2) (1 + iS_0 \gamma_1 \gamma_2).
+\]
+We have two cases; $ S_3 = S_0 $, then we get just $ (1 + iS_0 \gamma_1 \gamma_2) $, since projectors are idempotent (i.e., $ P^2 = P $). And if $ S_3 \ne S_0 $, it vanishes; since getting a measurement output $ S_0 $, then trying to get a measurement on other output will always result in zero. In compact, we write
+\[
+	\delta_{S_3, S_0} \, (1 + iS_0 \gamma_1 \gamma_2).
+\]
+Moving to the second term, we get
+\[
+	(1 + iS_3 \gamma_1 \gamma_2) iS_2 \gamma_3 \gamma_1 (1 + iS_0 \gamma_1 \gamma_2).
+\]
+As in Equation~\ref{eq:ferm as mf}, we exploit the property that all Majorana fermions anticommute with each other, and commute with themselves. Then, by moving enclosed factor to the right we introduce a minus sign,
+\[
+	(1 + iS_3 \gamma_1 \gamma_2)(1 - iS_0 \gamma_1 \gamma_2) iS_2 \gamma_3 \gamma_1 .
+\]
+In term of the Kronecker delta, we have
+\[
+	\delta_{S_3, -S_0}(1 - iS_0 \gamma_1 \gamma_2)iS_2 \gamma_3 \gamma_1 .
+\]
+We continue the same steps for the remaining terms, adding them app we get
+\[
+	\begin{aligned}
+		 & \delta_{S_3, S_0} \, (1 + iS_0 \gamma_1 \gamma_2)
+		+\delta_{S_3, -S_0}\, (1 - iS_0 \gamma_1 \gamma_2)iS_2 \gamma_3 \gamma_1    \\
+		 & +\delta_{S_3, -S_0}\, (1 - iS_0 \gamma_1 \gamma_2)iS_1 \gamma_1 \gamma_0
+		+\delta_{S_3, S_0}\, (1 + iS_0 \gamma_1 \gamma_2)S_2 S_1 \gamma_3 \gamma_0 .
+	\end{aligned}
+\]
+Factoring out the same Kroneckers and projectors
+\[
+	\begin{aligned}
+		 & \delta_{S_3, S_0} \, (1 + iS_0 \gamma_1 \gamma_2)  ( 1 + S_2 S_1 \gamma_3 \gamma_0 )                    \\
+		 & +\delta_{S_3, -S_0} \, (1 - iS_0 \gamma_1 \gamma_2) ( iS_2 \gamma_3 \gamma_1 +iS_1 \gamma_1 \gamma_0) .
+	\end{aligned}
+\]
+Since we are concerned about the main Majorana fermions ($ \gamma_3 $ \& $ \gamma_0 $), we ignore the left most projector; it just affects the the ancilla Majorana fermions.
+If $ S_3 = S_0 $, we get
+\[
+	( 1 + S_2 S_1 \gamma_3 \gamma_0 );
+\]
+but $ S_2 S_1 = \pm 1 $, thus
+\[
+	( 1 \pm \gamma_3 \gamma_0 ).
+\]
+That's it. We realize the braiding operator in Equation~\ref{eq:braiding op}. Based on the measurement outcomes, values of $ S_0 $ through $ S_3 $, we can get knowledge of the resulting overall operation as well as how to tune it gives always the braiding operator. Now consider $ -S_3 = S_0 $. We have
+\[
+	( iS_2 \gamma_3 \gamma_1 +iS_1 \gamma_1 \gamma_0)
+	= 	-i S_2 \gamma_1\, ( \gamma_3 \mp \gamma_0) ,
+\]
+where $ S_1 S_2 = \pm 1 $. Since the global phase factor has no physically observable consequences, we can ignore the factor $ -iS_2 $. For $ \gamma_1 $, again its effect is on the ancilla Majorana fermion. However, to realize a braiding operator we have to multiply by $ \gamma_3 $, to get
+\[
+	i \gamma_1\, (1 \mp \gamma_3 \gamma_0).
+\]
+By implementing a protocol that reads the values of the measurement outcomes we can, in predictable way, realize the braiding of $ \gamma_3 $ \& $ \gamma_0 $ shown in Equation~\ref{eq:braiding op}
 % section Realizations of Braiding Via a Series of Measurements (end)
 
-\section{Jordan-Wigner Transformation} % (fold)
-\label{sec:Jordan-Wigner Transformation}
+\section{Constructing Protocol} % (fold)
+\label{sec:Constructing Protocol}
 We shall redefine the our $ \gamma $ s in term of fermionic spin operators, giving us a way to model
 this system in much more fimiliar systems, such as qubits in quantum computing information. So we'll have:
 \begin{itemize}
@@ -154,7 +226,7 @@ this system in much more fimiliar systems, such as qubits in quantum computing i
 	\item $ \gamma_2 = X_0 Y_1 $
 	\item $ \gamma_3 = Y_0 $
 \end{itemize}
-Note: tensor product is understod, if there is one gate, tensor product with indentity of that subsystem is implicit.
+Note that tensor product is understod, if there is one gate, tensor product with indentity of that subsystem is implicit.
 Then 4-step series of measurement on the system becomes
 \begin{enumerate}
 	\item $ (1 + i X_0 Z_1 X_0 Y_1) = (1 + X_1) $
@@ -170,10 +242,7 @@ $$
 		\label{eq:br Jordan-Wigner}
 	\end{aligned}
 $$
-% section Jordan-Wigner Transformation (end)
 
-\section{Applying all Measurements} % (fold)
-\label{sec:Applying all Measurements}
 Let's understand the possible outcomes from the general case of the measurement operator,
 that is,
 $$
@@ -206,13 +275,10 @@ For the 3rd term,
 \begin{equation*}
 	(1 +S_3 X_1) S_2 S_1 Z_0 Z_1 Y_0 Z_1 (1 +S_0 X_1) = \delta_{S_0,S_3}\, -i X_0 S_2 S_1 (1 +S_0 X_1)
 \end{equation*}
-% section Applying all Measurements (end)
 
-\section{Constructing Protocol} % (fold)
-\label{sec:Constructing Protocol}
 Now, we'll investigate the protocol classic outcomes, then we shall decide based on it whether
 we did relize a braiding between $ \gamma_0 $ \& $ \gamma_3 $, if not, what operators
-to apply to fix it. From Section~\ref{sec:Applying all Measurements}, we simplify it to
+to apply to fix it. From previous paragraph, we simplify it to
 \begin{equation*}
 	[
 		\delta_{S_0,S_3} + \delta_{S_0,-S_3}\, S_2 Z_0 Z_1
@@ -271,21 +337,46 @@ Let's study different cases:
 \end{description}
 % section Constructing Protocol (end)
 
+
+\newpage
+\section{Conclusion \& Future Work} % (fold)
+\label{sec:Conclusion & Future Work}
+
+% section Conclusion \& Future Work (end)
+
+\newpage
+\appendix
+\section{Using Eauler's Formula to Rewrite Exponential Form} % (fold)
+\label{sec:Using Eauler's Formula Rewrite Exponential Form}
+The Euler formula is commonly expressed as \(e^{ix} = \cos(x) + i \sin(x)\). To rewrite \(U = e^{\beta i \gamma_n \gamma_m}\) in the desired form, we can use this formula:
+\[
+	U = e^{\beta i \gamma_n \gamma_m} = \cos(\beta) + i \gamma_n \gamma_m \sin(\beta)
+\]
+Here, \(\beta\) is the coefficient of the exponential, and \(\gamma_n\) and \(\gamma_m\) are matrices or operators. The rewritten expression utilizes the Euler formula to represent the exponential term as a combination of cosine and sine functions. Specifically, for $ \beta = \pi / 4 $
+$$ U = \frac{1}{\sqrt{2}}\, (1 + i \gamma_1 \gamma_2) $$
+% section Using Eauler's Formula Rewrite Exponential Form (end)
+
 \section{Statevector and Density Matrix} % (fold)
 \label{sec:Statevector and Density Matrix}
 Assume you have a state vector $|\psi\rangle$, which is a column vector with complex numbers:
-\begin{align}
-	|\psi\rangle = \begin{bmatrix} \psi_1 \\ \psi_2 \\ \vdots \\ \psi_n \end{bmatrix}
-\end{align}
+\[
+	\begin{aligned}
+		|\psi\rangle = \begin{bmatrix} \psi_1 \\ \psi_2 \\ \vdots \\ \psi_n \end{bmatrix}
+	\end{aligned}
+\]
 Here, $n$ is the dimensionality of the quantum system.
 Take the conjugate transpose of the state vector, denoted by $\langle \psi|$. This is obtained by taking the complex conjugate of each element and then transposing the vector:
-\begin{align}
-	\langle \psi| = \begin{bmatrix} \psi_1^* & \psi_2^* & \ldots & \psi_n^* \end{bmatrix}^T
-\end{align}
+\[
+	\begin{aligned}
+		\langle \psi| = \begin{bmatrix} \psi_1^* & \psi_2^* & \ldots & \psi_n^* \end{bmatrix}^T
+	\end{aligned}
+\]
 Compute the outer product to obtain the density matrix $\rho$:
-\begin{align}
-	\rho = |\psi\rangle \langle \psi| = \begin{bmatrix} \psi_1 \\ \psi_2 \\ \vdots \\ \psi_n \end{bmatrix} \begin{bmatrix} \psi_1^* & \psi_2^* & \ldots & \psi_n^* \end{bmatrix}
-\end{align}
+\[
+	\begin{aligned}
+		\rho = |\psi\rangle \langle \psi| = \begin{bmatrix} \psi_1 \\ \psi_2 \\ \vdots \\ \psi_n \end{bmatrix} \begin{bmatrix} \psi_1^* & \psi_2^* & \ldots & \psi_n^* \end{bmatrix}
+	\end{aligned}
+\]
 The result is a square matrix of size $n \times n$, representing the density matrix.
 The density matrix $\rho$ is Hermitian (equal to its conjugate transpose) and positive semi-definite. If the state vector $|\psi\rangle$ is normalized (has a magnitude of 1), then the trace of the density matrix is equal to 1, which is a requirement for a valid density matrix representing a physical state.
 
@@ -307,9 +398,7 @@ Keep in mind that this process may not be unique, especially for mixed states, w
 % section Statevector and Density Matrix (end)
 
 \newpage
-\section{What's Next ?}
-
-\newpage
 \bibliographystyle{plain}
 \bibliography{references}
+
 \end{document}
