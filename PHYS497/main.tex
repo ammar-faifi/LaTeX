@@ -15,7 +15,7 @@
 \def\c#1{\texttt{#1}}
 
 \title{Quantum Information Analysis of Majorana Fermion Braiding: Exploring Realization and Error Assessment via a Series of Measurements}
-\author{Ammar Alfaifi -- Supervised by Dr. Raditya W. Bomantara}
+\author{Ammar S. Alfaifi -- Supervised by Dr. Raditya W. Bomantara}
 \date{\today}
 
 \begin{document}
@@ -54,15 +54,22 @@ $$
 
 Having an even number of Majorana fermions, $ 2n $, they obey the anitcommutation relation
 \begin{equation}
-	\left\{\gamma_i, \gamma_j\right\}=2 \delta_{i j}, \qquad i=1, 2, \dots, 2n  .
+	\begin{aligned}
+		\left\{\gamma_i, \gamma_j\right\} & = 2 \delta_{i j}, \qquad i=1, 2, \dots, 2n  , \\
+		\gamma_i^2                        & = 1.
+	\end{aligned}
 \end{equation}
 Mathematically, the superconductor imposes electron hole "symmetry" on the quasiparticle excitations, relating the creation operator $\gamma(E)$ at energy $E$ to the annihilation operator $\gamma^{\dagger}(-E)$ at energy $-E$.\cite{Majorana-returns} Majorana fermions can be bound to a defect at zero energy, and then the combined objects are called Majorana bound states or Majorana zero modes. This name is more appropriate than Majorana fermion (although the distinction is not always made in the literature), because the statistics of these objects is no longer fermionic. Instead, the Majorana bound states are an example of non-abelian anyons: interchanging them changes the state of the system in a way that depends only on the order in which the exchange was performed. The non-abelian statistics that Majorana bound states possess allows them to be used as a building block for a topological quantum computer.
 
-Consider the wavefunctions $ \psi_1 $ and $ \psi_2 $ associated with two particles. Upon applying an exchange operator, one anticipates the form
+Consider the wavefunctions $ \psi_1 $ and $ \psi_2 $ associated with two indistinguishable particles. Indistinguishable particles gives
+\[
+	| \langle \psi_1 \psi_2 | \psi_2 \psi_1 \rangle |^2 = 1 .
+\]
+Upon applying an exchange operator, one anticipates the form
 \begin{equation}
-	\hat{B} | \psi_1\, \psi_2 \rangle = \lambda | \psi_2\, \psi_1 \rangle,
+	\hat{B} | \psi_1\, \psi_2 \rangle = e^{i\phi} | \psi_2\, \psi_1 \rangle,
 \end{equation}
-where for fermions, $ \lambda = -1 $, and for bosons, $ \lambda = +1 $—both being constant. However, in the case of Majorana fermions, as we will elaborate on shortly, the constant takes the form of a matrix. This distinction categorizes the former as abelian particles and the latter as non-abelian particles \cite{Nayak_2008}. The parity operator plays a crucial role in describing the non-abelian statistics associated with the braiding of these particles. The braiding of Majorana fermions involves exchanging their positions in space, and the resulting transformation is characterized by non-trivial matrix elements rather than simple constants.
+where for fermions, $ \phi = \pi \rightarrow -1 $, and for bosons, $ \phi = 0 \rightarrow +1 $—both being constant. However, in the case of Majorana fermions, as we will elaborate on shortly, the constant takes the form of a matrix. This distinction categorizes the former as abelian particles and the latter as non-abelian particles \cite{Nayak_2008}. The parity operator plays a crucial role in describing the non-abelian statistics associated with the braiding of these particles. The braiding of Majorana fermions involves exchanging their positions in space, and the resulting transformation is characterized by non-trivial matrix elements rather than simple constants.
 
 To assign a state to a system of Majoranas, we need to consider them as fermionic system, i.e., as pairs of the form of Equation~\ref{eq:ferm as mf}. In general, for $ 2N $ Majorana modes will have $ N $ fermionic modes. Each mode has the flexibility to be occupied or unoccupied by a fermion, resulting in two potentially degenerate quantum states $ | 0 \rangle $ and $ | 1 \rangle $ for every pair of Majoranas. Consdier the the \textit{fermion parity} operator
 \begin{equation}
@@ -145,7 +152,7 @@ as illustrated in Figure~\ref{fig:meas 4 mfs}.
 	\begin{center}
 		\includesvg[width=0.7\linewidth]{./figures/conf-meas.svg}
 	\end{center}
-	\caption{a-b shows measurements sequence that evantually realizes braiding of $ \gamma_0 $ and $ \gamma_3 $.}
+	\caption{a-d shows measurements sequence that evantually realizes braiding of $ \gamma_0 $ and $ \gamma_3 $.}
 	\label{fig:meas 4 mfs}
 \end{figure}
 
@@ -189,12 +196,13 @@ We continue the same steps for the remaining terms, adding them app we get
 	\end{aligned}
 \]
 Factoring out the same Kroneckers and projectors
-\[
+\begin{equation}
 	\begin{aligned}
 		 & \delta_{S_3, S_0} \, (1 + iS_0 \gamma_1 \gamma_2)  ( 1 + S_2 S_1 \gamma_3 \gamma_0 )                    \\
 		 & +\delta_{S_3, -S_0} \, (1 - iS_0 \gamma_1 \gamma_2) ( iS_2 \gamma_3 \gamma_1 +iS_1 \gamma_1 \gamma_0) .
 	\end{aligned}
-\]
+	\label{eq:seq 8 mfs}
+\end{equation}
 Since we are concerned about the main Majorana fermions ($ \gamma_3 $ \& $ \gamma_0 $), we ignore the left most projector; it just affects the the ancilla Majorana fermions.
 If $ S_3 = S_0 $, we get
 \[
@@ -204,16 +212,52 @@ but $ S_2 S_1 = \pm 1 $, thus
 \[
 	( 1 \pm \gamma_3 \gamma_0 ).
 \]
-That's it. We realize the braiding operator in Equation~\ref{eq:braiding op}. Based on the measurement outcomes, values of $ S_0 $ through $ S_3 $, we can get knowledge of the resulting overall operation as well as how to tune it gives always the braiding operator. Now consider $ -S_3 = S_0 $. We have
+That's it. We realize the braiding operator in Equation~\ref{eq:braiding op}. Based on the measurement outcomes, values of $ S_0 $ through $ S_3 $, we can get knowledge of the resulting overall operation as well as how to tune it gives always the braiding operator. Now consider the case where $ -S_3 = S_0 $. We have
 \[
 	( iS_2 \gamma_3 \gamma_1 +iS_1 \gamma_1 \gamma_0)
-	= 	-i S_2 \gamma_1\, ( \gamma_3 \mp \gamma_0) ,
+	= -i S_2 \gamma_1\, ( \gamma_3 - S_1 S_2 \gamma_0) ,
 \]
 where $ S_1 S_2 = \pm 1 $. Since the global phase factor has no physically observable consequences, we can ignore the factor $ -iS_2 $. For $ \gamma_1 $, again its effect is on the ancilla Majorana fermion. However, to realize a braiding operator we have to multiply by $ \gamma_3 $, to get
 \[
-	i \gamma_1\, (1 \mp \gamma_3 \gamma_0).
+	-iS_2 \gamma_1\, (1 \mp \gamma_3 \gamma_0).
 \]
-By implementing a protocol that reads the values of the measurement outcomes we can, in predictable way, realize the braiding of $ \gamma_3 $ \& $ \gamma_0 $ shown in Equation~\ref{eq:braiding op}
+By implementing a protocol that reads the values of the measurement outcomes we can, in predictable way, realize the braiding of $ \gamma_3 $ \& $ \gamma_0 $ shown in Equation~\ref{eq:braiding op}.
+
+\vspace{12pt}
+As observed, employing the ancilla as an auxiliary resource for Majorana fermions allowed us to implement the braiding operator solely through a series of measurements. Does the augmentation of these ancilla quantities contribute to the robustness and interrelation of the braiding process? This concept needs to be extended to accommodate any number of ancilla Majorana fermions. To explore this, we begin with a configuration involving a total of 8 Majorana fermions, as depicted in Figure~\ref{fig:8-conf-meas}.
+\begin{figure}
+	\begin{center}
+		\includesvg[width=0.65\textwidth]{./figures/8-conf-meas.svg}
+	\end{center}
+	\caption{a-d shows measurements sequence that evantually realizes braiding of $ \gamma_0 $ and $ \gamma_7 $ for a system of eight Majorana fermions.}
+	\label{fig:8-conf-meas}
+\end{figure}
+So the seriers of measurements will be, written from right to left,
+\[
+	\begin{aligned}
+		 & (1+ i S_0 \gamma_1 \gamma_2)(1+ i S_1 \gamma_3 \gamma_4)(1+ i S_2 \gamma_0 \gamma_1) (1+ i S_3 \gamma_2 \gamma_3)         \\
+		 & \times (1+ i S_4 \gamma_1 \gamma_3)(1+ i S_5 \gamma_2 \gamma_5)(1+ i S_6 \gamma_1 \gamma_2)(1+ i S_7 \gamma_3 \gamma_4) .
+	\end{aligned}
+\]
+
+\vspace{12pt}
+By automating the generation of measurement sequences for any number of Majorana fermions, we aim to investigate the impact of employing a larger number of ancilla Majorana fermions on achieving a more robust and fault-tolerant braiding process. However, to conduct these studies, it is imperative to transform the system into a fermionic one, leveraging established methods for running and simulating such processes. The Jordan-Wigner transformation, detailed in the next section, facilitates this conversion. Subsequently, a custom version of the concept of \textit{state fidelity} will be employed to assess the proximity of the measurement-only braiding operator to the exact one. This involves obtaining the final matrix by multiplying all measurement operators, flattening it into a vector, normalizing it, and then computing the inner product with the true braiding operator using the expression
+\[
+	|\langle A | B \rangle|^2 ,
+\]
+where \(A\) represents the normalized flattened matrix resulting from the product of the series of projectors, and \(B\) denotes the true braiding operator. See Appendix~\ref{sec:Code for Calculating Fidelity} for Python code to calculate the fidelity. To conduct a meaningful comparison of braiding on the primary Majoranas while mitigating the influence of the ancilla system, it is essential to perform a partial trace, isolating only the main Majorana fermions subsystem. Subsequently, the fidelity measure described above can be employed. This computational step is implemented programmatically using the \texttt{qutip} package, as detailed in the Appendix~\ref{sec:Jordan-Wigner Transformation Code}.
+
+\vspace{12pt}
+We start implementing the sequences in Equation~\ref{eq:seq 8 mfs}; for values of $ S_i $, we use all possible combination for now.
+\begin{figure}
+	\begin{center}
+		\includesvg[width=0.85\textwidth]{./figures/ideal-fid-all-combination.svg}
+	\end{center}
+	\caption{Shows the fidelity values, of all possible 4096 combinations of $ S_i $ for eight Majoranas, agains their index. This implements the sequence in Equation~\ref{eq:seq 8 mfs}.}
+	\label{fig:ideal fids all combs}
+\end{figure}
+As illustrated in Figure~\ref{fig:ideal fids all combs}, in the ideal scenario of fidelity calculation, the results manifest as either 1, indicating that that specific combination of measurement outcomes ($ S_i $) perfectly realizes the true braiding operator, or 0, signifying that it falls short of realizing the true braiding operator.
+
 % section Realizations of Braiding Via a Series of Measurements (end)
 
 \section{Constructing Protocol} % (fold)
@@ -337,12 +381,15 @@ Let's study different cases:
 \end{description}
 % section Constructing Protocol (end)
 
-
 \newpage
 \section{Conclusion \& Future Work} % (fold)
 \label{sec:Conclusion & Future Work}
 
-% section Conclusion \& Future Work (end)
+% section Conclusion & Future Work (end)
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{references}
 
 \newpage
 \appendix
@@ -397,8 +444,68 @@ To implement this in practice, you can use a numerical linear algebra library (s
 Keep in mind that this process may not be unique, especially for mixed states, where different sets of pure states and probabilities can lead to the same density matrix.
 % section Statevector and Density Matrix (end)
 
-\newpage
-\bibliographystyle{plain}
-\bibliography{references}
+\section{Code for Calculating Fidelity} % (fold)
+\label{sec:Code for Calculating Fidelity}
+\begin{lstlisting}[language=Python]
+import numpy as np
+
+def fid(matrix1, matrix2):
+    vec1 = np.array(matrix1).flatten()
+    vec2 = np.array(matrix2).flatten()
+
+    if not (np.linalg.norm(vec1) and np.linalg.norm(vec2)):
+        return 0.0
+
+    vec1 /= np.linalg.norm(vec1)
+    vec2 /= np.linalg.norm(vec2)
+
+    return np.round(np.abs(np.vdot(vec1, vec2))**2, 15)
+\end{lstlisting}
+% section Code for Calculating Fidelity (end)
+
+\section{Jordan-Wigner Transformation Code} % (fold)
+\label{sec:Jordan-Wigner Transformation Code}
+\begin{lstlisting}[language=Python]
+# From https://mareknarozniak.com/2020/10/14/jordan-wigner-transformation/
+# By dr marek narozniak
+def Is(i, levels=2): return [qeye(levels) for j in range(0, i)]
+def Sx(N, i): return tensor(Is(i) + [sigmax()] + Is(N - i - 1))
+def Sy(N, i): return tensor(Is(i) + [sigmay()] + Is(N - i - 1))
+def Sz(N, i): return tensor(Is(i) + [sigmaz()] + Is(N - i - 1))
+def I(N): return Sz(N, 0)*Sz(N, 0)
+
+def osum(lst): 
+    return np.sum(np.array(lst, dtype=object))
+
+def oprd(lst, d=None):
+    if len(lst) == 0:
+        return d
+    p = lst[0]
+    for U in lst[1:]:
+        p = p*U
+    return p
+
+# N is the exponent, L is the length of the chain
+def opow(L, op, N): return oprd([op for i in range(N)])
+
+def commutator(A, B):
+    return A*B - B*A
+
+def anticommutator(A, B):
+    return A*B + B*A
+
+def gamma_a(N, n, Opers=None):
+    Sa, Sb, Sc = Sz, Sx, Sy
+    if Opers is not None:
+        Sa, Sb, Sc = Opers
+    return oprd([Sb(N, j) for j in range(n)], d=I(N)) * Sa(N, n)
+
+def gamma_b(N, n, Opers=None):
+    Sa, Sb, Sc = Sz, Sx, Sy
+    if Opers is not None:
+        Sa, Sb, Sc = Opers
+    return oprd([Sb(N, j) for j in range(n)], d=I(N)) * Sc(N, n)
+\end{lstlisting}
+% section Jordan-Wigner Transformation Code (end)
 
 \end{document}
