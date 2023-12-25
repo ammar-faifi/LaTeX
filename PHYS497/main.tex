@@ -446,7 +446,7 @@ where $ H = H^\dagger $, i.e., Hermitian operator. For the joint measurement, $ 
 Armed with this information, our construction of the quantum circuit proceeds from left to right, aligning with the right-to-left order of measurements specified in Equation~\ref{eq:fermionic meas seq}. This alignment mirrors the standard operation sequence in \texttt{qiskit} quantum circuits. Additionally, as indicated by the Jordan-Wigner transformation, it is observed that the inclusion of two qubits in the circuit is adequate for the required representation.
 \begin{figure}
 	\begin{center}
-		\includesvg[width=0.95\textwidth]{./figures/q-circuit.svg}
+		\includesvg[width=\textwidth]{./figures/q-circuit.svg}
 	\end{center}
 	\caption{The figure illustrates the ultimate two-qubit circuit designed to implement the sequence of measurements outlined in Equation~\ref{eq:fermionic meas seq}. The drawing highlights the four distinct steps of applying each measurement operator, delineated by vertical dashed lines. The final line indicates the point where we extract the reference final state vector of the circuit for subsequent comparisons.}\label{fig:meas q circuit}
 \end{figure}
