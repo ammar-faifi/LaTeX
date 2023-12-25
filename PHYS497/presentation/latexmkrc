@@ -1,0 +1,4 @@
+$pdf_mode = 1;
+$pdf_previewer = 'open -a';
+$pdflatex = 'xelatex -synctex=1 -interaction=nonstopmode -shell-escape';
+@generated_exts = (@generated_exts, 'synctex.gz');

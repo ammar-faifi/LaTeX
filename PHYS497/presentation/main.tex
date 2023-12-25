@@ -1,0 +1,465 @@
+\documentclass{loyola-beamer}
+\renewcommand{\titlelogo}{logo/luc-rev.svg}
+\renewcommand{\slidelogo}{logo/luc.svg}
+\usepackage{physics}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\renewcommand{\slidefoot}{Department of Physics}
+\def\c#1{\texttt{#1}}
+
+\title{Quantum Information Analysis of Majorana Fermion Braiding}
+\subtitle{Exploring Realization and Error Assessment via a Series of Measurements}
+\author{Ammar S. Alfaifi \\ Supervised by Dr. Raditya W. Bomantara}
+\date{\today}
+\institute{KFUPM}
+
+\begin{document}
+
+\begin{titleframe}{}
+	\maketitle
+\end{titleframe}
+
+\begin{frame}{Contents}
+	\tableofcontents
+\end{frame}
+
+% Start of the main contents
+\begin{frame}{Introduction}
+	\begin{itemize}
+		\item In 1937, Majorana proposed the Majorana equation.
+		\item This work explores Majorana fermion braiding using a sequence of measurements.
+		\item Utilizes Jordan-Wigner transformation and qiskit package.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Braiding in Two Dimensions}
+	\begin{itemize}
+		\item Two exchanges of particle positions mirror topological equivalence.
+		\item Braiding encapsulates a historical record and alters wave functions.
+		\item Introduction of braiding operator adds complexity to non-Abelian statistics.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Fault-Tolerant Quantum Computing}
+	\begin{itemize}
+		\item Quantum systems are susceptible to errors and decoherence.
+		\item Measurement-based quantum computers offer fault tolerance and scalability.
+		\item Topological properties in quantum computation are crucial for stability.
+	\end{itemize}
+\end{frame}
+
+\begin{titleframe}{Majorana Definition \& Non-abelian Theory}
+\end{titleframe}
+
+\section{Majorana Definition}
+\subsection{Exchange Operator}
+
+\begin{frame}{Majorana Fermions and Non-Abelian Theory}
+	\begin{itemize}
+		\item Majorana fermions are identical to their antiparticles.
+		\item Majorana bound states exhibit non-Abelian statistics.
+	\end{itemize}
+	$$
+		\begin{aligned}
+			 & \hat{a}=\frac{1}{\sqrt{2}}\left(\gamma_1+i \gamma_2\right),            \\
+			 & \hat{a}^{\dagger}=\frac{1}{\sqrt{2}}\left(\gamma_1-i \gamma_2\right) .
+			\label{eq:ferm as mf}
+		\end{aligned}
+	$$
+
+	Having an even number of Majorana fermions, $ 2n $, they obey the anitcommutation relation
+	\begin{equation}
+		\begin{aligned}
+			\left\{\gamma_i, \gamma_j\right\} & = 2 \delta_{i j}, \qquad i=1, 2, \dots, 2n  , \\
+			\gamma_i^2                        & = 1.
+		\end{aligned}
+	\end{equation}
+\end{frame}
+
+\subsection{Indistinguishable Particles}
+
+\begin{frame}{Indistinguishable Particles}
+	Consider the wavefunctions $ \psi_1 $ and $ \psi_2 $ associated with two indistinguishable particles. Indistinguishable particles give
+	\[
+		| \langle \psi_1 \psi_2 | \psi_2 \psi_1 \rangle |^2 = 1 .
+	\]
+	Upon applying for an exchange operator, one anticipates the form
+	\begin{equation}
+		\hat{B} | \psi_1\, \psi_2 \rangle = e^{i\phi} | \psi_2\, \psi_1 \rangle,
+	\end{equation}
+	where for fermions, $ \phi = \pi \rightarrow -1 $, and for bosons, $ \phi = 0 \rightarrow +1 $\textendash both being constant.
+	Neither, will be called non-Abelian particles, i.e., Majorana fermions.
+\end{frame}
+
+\subsection{Parity Operator}
+
+\begin{frame}{Parity Operator for Majorana}
+	In general, for $ 2N $ Majorana modes will have $ N $ fermionic modes. Each mode has the flexibility to be occupied or unoccupied by a fermion, resulting in two potentially degenerate quantum states $ | 0 \rangle $ and $ | 1 \rangle $ for every pair of Majoranas. Consider the the \textit{fermion parity} operator
+	\begin{equation}
+		\hat{P} = 1- 2 \hat{N} = i \gamma_1 \gamma_2,
+		\label{eq:ferm parity}
+	\end{equation}
+	where $ N = \hat{a}^\dagger \hat{a} $ is the \textit{fermion number} operator. Let's apply it to a pair of Majoranas states as
+	$$
+		\begin{aligned}
+			\hat{P} |0\rangle = (1-2\hat{N})\, |0\rangle = + |0\rangle, \\
+			\hat{P} |1\rangle = (1-2\hat{N})\, |1\rangle = - |1\rangle.
+		\end{aligned}
+	$$
+
+\end{frame}
+
+\begin{frame}{Majorana Fermions Braiding}
+	\begin{itemize}
+		\item Braiding involves exchanging positions in space.
+		\item Non-trivial matrix elements characterize the transformation.
+		\item Unitary operators and the parity operator play crucial roles.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Unitary Operators}
+		In general, any unitary operator $ U $ can be expressed in terms of a Hermitian operator $ A $ of the form $ U = e^{i\beta A} $ with some angle $ \beta $.
+	\end{block}
+	we begin with their parity operator, denoted as $ P_{nm} = i \gamma_n \gamma_m $. This allows us to define
+	\begin{equation}
+		U \equiv e^{\beta \gamma_n \gamma_m} \quad \text{or} \quad U = \cos{\beta} + \gamma_n \gamma_m \sin{\beta},
+		\label{eq:U in beta}
+	\end{equation}
+	To find a unitary operator that evolves Majorana fermions according to the Heisenberg picture, i.e.,
+	$$
+		\begin{aligned}
+			\gamma_n \rightarrow U \gamma_n U ^\dagger, \\
+			\gamma_m \rightarrow U \gamma_m U ^\dagger,
+		\end{aligned}
+	$$
+\end{frame}
+
+\begin{frame}
+	while leaving other elements unaffected, we substitute Equation~\ref{eq:U in beta} into the transformation equation:
+	$$
+		\begin{aligned}
+			\gamma_n \rightarrow \gamma_n \cos{2 \beta}  - \gamma_m \sin{2 \beta}, \\
+			\gamma_m \rightarrow \gamma_m \cos{2 \beta} + \gamma_n \sin{2 \beta} .
+			\label{eq:subst in transformation}
+		\end{aligned}
+	$$
+	This leads to the condition $ \beta = \pm \pi / 4 $-through the text, we will refer to $ \pi /4 $ as the braiding operator and $ -\pi /4 $ as the inverse braiding operator. Substituting this into the expression, we obtain the braiding unitary operator for $ \gamma_n $ and $ \gamma_m $:
+	$$
+		\begin{aligned}
+			U = \exp \left( \pm \frac{\pi}{4} \gamma_n \gamma_m\right) = \frac{1}{\sqrt{2}}\left(1 \pm \gamma_n \gamma_m\right).
+		\end{aligned}
+	$$
+
+\end{frame}
+
+
+%%%%%%%%%%%%   Realizations of Braiding Via a Series of Measurements} %%%%%%%%%%%%%%
+\begin{titleframe}{Realizations of Braiding Via a Series of Measurements}
+\end{titleframe}
+\section{Realizations of Braiding Via a Series of Measurements}
+
+\begin{frame}{Braiding Realization Protocol}
+	\begin{itemize}
+		\item Series of measurements designed for a system of 4 Majorana fermions.
+		\item Measurement outcomes used to correct and realize braiding.
+		\item Ancilla Majorana fermions contribute to robustness.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Simple Measurement Projector}
+	In case of two-level fermionic systems, to make projective measurements along $ z $-axis we apply the following operator
+	\begin{equation*}
+		(1 + S \sigma_z),
+	\end{equation*}
+	where $ S $ can be $ \pm 1 $ with some probability, corresponding to the eigenvalues of $ \sigma_z $. The analogy operator for Majorana fermions to a projective measurement will be
+	\[
+		(1 + S i \gamma_n \gamma_m),
+	\]
+	where again $ S $ can be $ +1 $ or $ -1 $.
+\end{frame}
+
+\begin{frame}{4 Majorana Fermions Braiding}
+	\begin{figure}
+		\begin{center}
+			\includesvg[width=0.15\linewidth]{./figures/conf.svg}
+		\end{center}
+		\caption{Configuration of four Majorana fermions.}
+		\label{fig:4 mf conf}
+	\end{figure}
+	To illustrate this idea, we begin with a system of 4 Majorana fermions, corresponding to two fermions. The configuration of Majorana fermions is depicted in Figure~\ref{fig:4 mf conf}. The true braiding operator between $\gamma_0$ and $\gamma_3$ is given by
+	\begin{equation}
+		U = e^{\frac{\pm \pi}{4} \gamma_3 \gamma_0} = \frac{1}{\sqrt{2}} (1 \pm \gamma_3 \gamma_0).
+		\label{eq:braiding op}
+	\end{equation}
+\end{frame}
+
+\begin{frame}{4 Majorana Fermions Configuration}
+	\[
+		(1 + iS_3 \gamma_1 \gamma_2) (1 + iS_2 \gamma_3 \gamma_1) (1 + iS_1 \gamma_1 \gamma_0) (1 + iS_0 \gamma_1 \gamma_2)
+	\]
+	as illustrated in Figure~\ref{fig:meas 4 mfs}.
+	\begin{figure}
+		\begin{center}
+			\includesvg[width=0.4\linewidth]{./figures/conf-meas.svg}
+		\end{center}
+		\caption{a-d shows measurements sequence that eventually realizes braiding of $ \gamma_0 $ and $ \gamma_3 $.}
+		\label{fig:meas 4 mfs}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Analysis of Series of Measurements}
+	\[
+		(1 + iS_3 \gamma_1 \gamma_2)
+		[1 + iS_2 \gamma_3 \gamma_1 + iS_1 \gamma_1 \gamma_0 - S_2 S_1 \gamma_3 \gamma_0]
+		(1 + iS_0 \gamma_1 \gamma_2),
+	\]
+	we used $ \gamma_n^2 = 1 $ on the last term. We employ the operators on the sides to encapsulate each term within the brackets. Starting with the first terms we get
+	\[
+		(1 + iS_3 \gamma_1 \gamma_2) (1 + iS_0 \gamma_1 \gamma_2).
+	\]
+	We have two cases; $ S_3 = S_0 $, then we get just $ (1 + iS_0 \gamma_1 \gamma_2) $, since projectors are idempotent (i.e., $ P^2 = P $). And if $ S_3 \ne S_0 $, it vanishes; since getting a measurement output $ S_0 $, then trying to get a measurement on another output will always result in zero. In compact, we write
+	\[
+		\delta_{S_3, S_0} \, (1 + iS_0 \gamma_1 \gamma_2).
+	\]
+\end{frame}
+
+\begin{frame}{Analysis of Series of Measurements}
+	Moving to the second term, we get
+	\[
+		(1 + iS_3 \gamma_1 \gamma_2) iS_2 \gamma_3 \gamma_1 (1 + iS_0 \gamma_1 \gamma_2).
+	\]
+	As in Equation~\ref{eq:ferm as mf}, we exploit the property that all Majorana fermions anticommute with each other, and commute with themselves. Then, by moving the enclosed factor to the right we introduce a minus sign,
+	\[
+		(1 + iS_3 \gamma_1 \gamma_2)(1 - iS_0 \gamma_1 \gamma_2) iS_2 \gamma_3 \gamma_1 .
+	\]
+	In terms of the Kronecker Delta, we have
+	\[
+		\delta_{S_3, -S_0}(1 - iS_0 \gamma_1 \gamma_2)iS_2 \gamma_3 \gamma_1 .
+	\]
+\end{frame}
+
+\begin{frame}{Analysis of Series of Measurements}
+	We continue the same steps for the remaining terms, adding them app we get
+	\[
+		\begin{aligned}
+			 & \delta_{S_3, S_0} \, (1 + iS_0 \gamma_1 \gamma_2)
+			+\delta_{S_3, -S_0}\, (1 - iS_0 \gamma_1 \gamma_2)iS_2 \gamma_3 \gamma_1    \\
+			 & +\delta_{S_3, -S_0}\, (1 - iS_0 \gamma_1 \gamma_2)iS_1 \gamma_1 \gamma_0
+			+\delta_{S_3, S_0}\, (1 + iS_0 \gamma_1 \gamma_2)S_2 S_1 \gamma_3 \gamma_0 .
+		\end{aligned}
+	\]
+	Factoring out the same Kroneckers and projectors
+	\begin{equation}
+		\begin{aligned}
+			 & \delta_{S_3, S_0} \, (1 + iS_0 \gamma_1 \gamma_2)  ( 1 + S_2 S_1 \gamma_3 \gamma_0 )                    \\
+			 & +\delta_{S_3, -S_0} \, (1 - iS_0 \gamma_1 \gamma_2) ( iS_2 \gamma_3 \gamma_1 +iS_1 \gamma_1 \gamma_0) .
+		\end{aligned}
+		\label{eq:seq 8 mfs}
+	\end{equation}
+\end{frame}
+
+\begin{frame}{Analysis Results}
+	If $ S_3 = S_0 $, we get
+	\[
+		( 1 + S_2 S_1 \gamma_3 \gamma_0 );
+	\]
+	but $ S_2 S_1 = \pm 1 $, thus
+	\[
+		( 1 \pm \gamma_3 \gamma_0 ).
+	\]
+\end{frame}
+
+\begin{frame}{Analysis Results}
+	Now consider the case where $ -S_3 = S_0 $. We have
+	\[
+		( iS_2 \gamma_3 \gamma_1 +iS_1 \gamma_1 \gamma_0)
+		= -i S_2 \gamma_1\, ( \gamma_3 - S_1 S_2 \gamma_0) ,
+	\]
+	where $ S_1 S_2 = \pm 1 $. Since the global phase factor has no physically observable consequences, we can ignore the factor $ -iS_2 $.
+	\[
+		-iS_2 \gamma_1\, (1 \mp \gamma_3 \gamma_0).
+	\]
+\end{frame}
+
+\begin{frame}{Larger System}
+	\begin{figure}
+		\begin{center}
+			\includesvg[width=0.8\textwidth]{./figures/8-conf-meas.svg}
+		\end{center}
+		\caption{a-d shows measurements sequence that eventually realizes braiding of $ \gamma_0 $ and $ \gamma_7 $ for a system of eight Majorana fermions.}
+		\label{fig:8-conf-meas}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	So the series of measurements will be, written from right to left,
+	\begin{equation}
+		\begin{aligned}
+			 & (1+ i S_0 \gamma_1 \gamma_2)(1+ i S_1 \gamma_3 \gamma_4)(1+ i S_2 \gamma_0 \gamma_1) (1+ i S_3 \gamma_2 \gamma_3)         \\
+			 & \times (1+ i S_4 \gamma_1 \gamma_3)(1+ i S_5 \gamma_2 \gamma_5)(1+ i S_6 \gamma_1 \gamma_2)(1+ i S_7 \gamma_3 \gamma_4) .
+		\end{aligned}
+		\label{eq:meas seq 8 mfs}
+	\end{equation}
+\end{frame}
+
+\begin{titleframe}{Simulation with Ancilla Majorana Fermions}
+\end{titleframe}
+
+\begin{frame}{Simulation with Ancilla Majorana Fermions}
+	\begin{itemize}
+		\item Explore the impact of ancilla Majorana fermions on fidelity.
+		\item Ideal case vs. finite-time case.
+		\item Increasing ancilla Majorana fermions may not always improve fidelity.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\begin{center}
+			\includesvg[width=0.85\textwidth]{./figures/ideal-fid-all-combination.svg}
+		\end{center}
+		\caption{Shows the fidelity values, of all possible 4096 combinations of $ S_i $ for eight Majoranas, again their index. This implements the sequence in Equation~\ref{eq:meas seq 8 mfs}.}
+		\label{fig:ideal fids all combs}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\begin{center}
+			\includesvg[width=0.85\textwidth]{./figures/fid-vs-N.svg}
+		\end{center}
+		\caption{The fidelity of braiding operator realization plotted against the increasing number of employed ancilla Majoranas. The results are obtained using the sequence specified in Equation~\ref{eq:meas seq 8 mfs}.}
+		\label{fig:fid vs N ideal}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\begin{center}
+			\includesvg[width=0.85\textwidth]{./figures/apprx-fid-vs-time.svg}
+		\end{center}
+		\caption{Applying the measurement sequence detailed in Equation~\ref{eq:meas seq 8 mfs}, where the projectors take on a time-finite exponential form. The figure presents two plots corresponding to two different numbers of Majorana fermions.}
+		\label{fig:fid with approx proj}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\begin{center}
+			\includesvg[width=0.85\textwidth]{./figures/real-fid-vs-N.svg}
+		\end{center}
+		\caption{Illustrating fidelity under the approximate measurement operator, this plot depicts how fidelity varies with the changing number of utilized Majorana fermions. The analysis maintains a constant time value set at 1.}
+		\label{fig:fid vs N t=1}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Approximating Measurement Operators}
+	\[
+		e^{t ( iS_i \gamma_n \gamma_m )} = \cosh{t} + (i \gamma_n \gamma_m) \sinh{t},
+	\]
+	which implies
+	\[
+		\cosh{t} + (i \gamma_n \gamma_m) \sinh{t} \rightarrow (1 + i S_i \gamma_n \gamma_m)
+		\quad \text{as} \quad t \rightarrow \infty
+	\]
+\end{frame}
+
+\begin{titleframe}{Constructing Protocol \& Simulating on Quantum Circuit}
+\end{titleframe}
+
+\begin{frame}{Simulating Real-Life Conditions}
+	\begin{itemize}
+		\item Quantum circuit construction for braiding realization.
+		\item Utilizing qiskit for simulations.
+		\item Fidelity comparisons and visualization on the Bloch sphere.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item $ \gamma_0 = Z_0 $,
+		\item $ \gamma_1 = X_0 Z_1 $,
+		\item $ \gamma_2 = X_0 Y_1 $,
+		\item $ \gamma_3 = Y_0 $,
+	\end{itemize}
+	Here, \(X\), \(Y\), and \(Z\) represent the Pauli matrices associated with the two-level qubit,
+	\begin{enumerate}
+		\item $ (1 + i X_0 Z_1 X_0 Y_1) = (1 + X_1) $
+		\item $ (1 + i X_0 Z_1 Z_0) = (1 + Y_0 Z_1) $
+		\item $ (1 + i Y_0 X_0 Z_1) = (1 + Z_0 Z_1) $
+		\item $ (1 + X_1) $
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\begin{center}
+			\includesvg[width=\textwidth]{./figures/q-circuit.svg}
+		\end{center}
+		\caption{The figure illustrates the ultimate two-qubit circuit designed to implement the sequence of measurements outlined in. The drawing highlights the four distinct steps of applying each measurement operator, delineated by vertical dashed lines.}\label{fig:meas q circuit}
+	\end{figure}
+	\begin{figure}
+		\begin{center}
+			\includesvg[width=0.15\textwidth]{./figures/br-circuit.svg}
+		\end{center}
+		\caption{Illustration of the one-qubit circuit featuring a single unitary gate, denoted as Br.}\label{fig:br circuit}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\begin{center}
+			\includesvg[width=0.4\textwidth]{./figures/br-in-bloch.svg}
+		\end{center}
+		\caption{Visualization of the statevector for the single-qubit circuit subjected to the true braiding operator on the Bloch sphere.}\label{fig:br in bloch}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Error Assessment}
+	\begin{itemize}
+		\item Introducing Pauli X error and bit-flip error.
+		\item Examining the impact on the realization of braiding.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\begin{center}
+			\includesvg[width=0.7\textwidth]{./figures/bit-flip-error-on-meas.svg}
+		\end{center}
+		\caption{Illustration of the circuit in Figure~\ref{fig:meas q circuit} subjected to Pauli X error, with 1024 iterations for each probability setting. The resulting fidelities are averaged over the 1024 shots.}\label{fig:with bit flip error}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\begin{center}
+			\includesvg[width=0.7\textwidth]{./figures/error-on-cx-h.svg}
+		\end{center}
+		\caption{As in Figure~\ref{fig:with bit flip error}, but with bit-flip applied to before each occurrence of \c{h} and \c{cx} operations.}\label{fig:bit flip error on cx}
+	\end{figure}
+\end{frame}
+
+\section{References \& Conclusion}
+
+% --- Conclusion --- %
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item Majorana fermion braiding explored through a series of measurements.
+		\item Ancilla Majorana fermions contribute to robustness.
+		\item Error assessment provides insights into the fidelity of braiding.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{References}
+	\bibliographystyle{plain}
+	\bibliography{references}
+\end{frame}
+
+% ---- The End ---- %
+\begin{titleframe}{Thank you for listening!}
+\end{titleframe}
+
+\end{document}
