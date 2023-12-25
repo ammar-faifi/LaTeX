@@ -24,20 +24,20 @@
 \section{Introjection} % (fold)
 In 1937, Majorana proposed a groundbreaking idea suggesting that electrically neutral spin-1/2 particles could be accurately described by a wave equation with real-valued solutions, known as the Majorana equation \cite{Majorana2006}. This proposition introduced the concept that these particles and their antiparticles would be indistinguishable due to the unique relationship between their wave functions through complex conjugation, ultimately leaving the Majorana wave equation unaltered.
 
-Building upon Majorana's pioneering work, this paper delves into the fascinating realm of Majorana fermion braiding, transitioning from conventional approaches to a novel method centered around a sequence of measurements. A key aspect of this exploration involves leveraging the Jordan-Wigner transformation to express Majorana operators within the framework of a spin (fermionic) system. This transformative step not only enhances the understanding of Majorana fermions but also opens up possibilities for utilizing advanced techniques provided by the \c{qiskit} package.
+Building upon Majorana's pioneering work, this paper delves into the fascinating realm of Majorana fermion braiding, transitioning from conventional approaches to a novel method centred around a sequence of measurements. A key aspect of this exploration involves leveraging the Jordan-Wigner transformation to express Majorana operators within the framework of a spin (fermionic) system. This transformative step not only enhances the understanding of Majorana fermions but also opens up possibilities for utilizing advanced techniques provided by the \c{qiskit} package.
 
-In the realm of two dimensions, executing two exchanges of particle positions mirrors the topological equivalence of one quasiparticle encircling another along a closed path, known as a braid. This action of exchanging identical particles or maneuvering one particle around another is formally termed "braiding" in mathematical terms. The act of "braiding" two anyons not only encapsulates a historical record of the event but also results in altered wave functions that effectively "count" the number of braids involved.\cite{Nakamura_2020}
+In the realm of two dimensions, executing two exchanges of particle positions mirrors the topological equivalence of one quasiparticle encircling another along a closed path, known as a braid. This action of exchanging identical particles or manoeuvring one particle around another is formally termed "braiding" in mathematical terms. The act of "braiding" two anyons not only encapsulates a historical record of the event but also results in altered wave functions that effectively "count" the number of braids involved.\cite{Nakamura_2020}
 
-Furthermore, the introduction of the braiding operator adds another layer of complexity and significance to the discussion. The braiding operator is a mathematical entity that encapsulates the non-Abelian statistics associated with the braiding of anyons, a fundamental concept in the study of topological quantum computation. Exploring the properties and applications of the braiding operator provides valuable insights into the behavior of Majorana fermions during braiding processes.
+Furthermore, the introduction of the braiding operator adds another layer of complexity and significance to the discussion. The braiding operator is a mathematical entity that encapsulates the non-Abelian statistics associated with the braiding of anyons, a fundamental concept in the study of topological quantum computation. Exploring the properties and applications of the braiding operator provides valuable insights into the behaviour of Majorana fermions during braiding processes.
 
-Fault-tolerant quantum computing is of particular interest due to the inherent challenges posed by the delicate nature of quantum information. Unlike classical computation, which can often rely on the reliability of classical gates, quantum systems are highly susceptible to errors and decoherence. In the classical realm, information storage on magnetic media, for instance, benefits from the collective behavior of spins in individual atoms. Although each spin is sensitive to thermal fluctuations, the interactions between spins tend to align them in the same direction. Consequently, if a spin deviates, the interactions compel it to return to the alignment of other spins, resembling a self-correcting mechanism akin to the repetition code in error correction.\cite{Kitaev_2003}
+Fault-tolerant quantum computing is of particular interest due to the inherent challenges posed by the delicate nature of quantum information. Unlike classical computation, which can often rely on the reliability of classical gates, quantum systems are highly susceptible to errors and decoherence. In the classical realm, information storage on magnetic media, for instance, benefits from the collective behaviour of spins in individual atoms. Although each spin is sensitive to thermal fluctuations, the interactions between spins tend to align them in the same direction. Consequently, if a spin deviates, the interactions compel it to return to the alignment of other spins, resembling a self-correcting mechanism akin to the repetition code in error correction.\cite{Kitaev_2003}
 
 Quantum computers that operate based on measurements employ a sophisticated quantum state referred to as a cluster state. This state comprises three (or more) qubits interconnected through the non-classical phenomenon of entanglement, where the properties of quantum particles remain correlated even across vast distances. The functionality of measurement-based quantum computers revolves around initiating a measurement on the initial qubit within the cluster state. The result of this measurement dictates the subsequent measurement on the second entangled qubit, a process known as feedforward. Subsequently, this determination influences how the third qubit is measured. Through this approach, any desired quantum gate or circuit can be realized by carefully selecting the sequence of measurements.\cite{quantum_comp} Motivation behind utilizing a measurement-based protocol for realizing the braiding operator deserves attention. By adopting a measurement-based approach, the study aims to exploit the inherent advantages offered by this methodology, such as fault tolerance and scalability.
 
 Topological properties play a pivotal role in hosting quantum computation and Majorana braiding. The unique characteristics of topological systems, such as robustness against local perturbations, make them ideal candidates for quantum information processing. In the context of quantum gates simulation, the discussion extends to the utilization of measurement-only approaches for simulating quantum gates. Specifically, exploring how measurement-only strategies can effectively simulate quantum gates is crucial for comprehending the intricacies involved in the proposed Majorana fermion braiding scheme. Drawing parallels to existing quantum computing platforms, like the IBM Q computer, underscores the practicality and feasibility of implementing such schemes in real-world quantum hardware.
 
 The exploration of accessing and running circuits on platforms such as the IBM Q computer is a crucial aspect. It is imperative to comprehend the processes and mechanisms involved in accessing and executing circuits on quantum computing hardware, as this knowledge forms the foundation for translating theoretical advancements into practical applications. In this report, we successfully employed the \c{qiskit} library and IBM online quantum computers to simulate our conceptual framework. This involved the creation of a two-qubit system that realizes our sequence of measurements through Pauli unitary gates. Through a comparison with a true braiding operator for a single qubit system, we assessed the results and error sensitivity of such circuits by calculating the average fidelity between the final state vector of the circuit after execution.
-% section Instroduction (end)
+% section Introduction (end)
 
 \section{Majorana Definition \& Non-abelian Theory} % (fold)
 \label{sec:Majorana Definition}
@@ -58,31 +58,31 @@ Having an even number of Majorana fermions, $ 2n $, they obey the anitcommutatio
 		\gamma_i^2                        & = 1.
 	\end{aligned}
 \end{equation}
-Mathematically, the superconductor imposes electron hole "symmetry" on the quasiparticle excitations, relating the creation operator $\gamma(E)$ at energy $E$ to the annihilation operator $\gamma^{\dagger}(-E)$ at energy $-E$.\cite{Majorana-returns} Majorana fermions can be bound to a defect at zero energy, and then the combined objects are called Majorana bound states or Majorana zero modes. This name is more appropriate than Majorana fermion (although the distinction is not always made in the literature), because the statistics of these objects is no longer fermionic. Instead, the Majorana bound states are an example of non-abelian anyons: interchanging them changes the state of the system in a way that depends only on the order in which the exchange was performed. The non-abelian statistics that Majorana bound states possess allows them to be used as a building block for a topological quantum computer.
+Mathematically, the superconductor imposes electron-hole "symmetry" on the quasiparticle excitations, relating the creation operator $\gamma(E)$ at energy $E$ to the annihilation operator $\gamma^{\dagger}(-E)$ at energy $-E$.\cite{Majorana-returns} Majorana fermions can be bound to a defect at zero energy, and then the combined objects are called Majorana bound states or Majorana zero modes. This name is more appropriate than Majorana fermion (although the distinction is not always made in the literature) because the statistics of these objects are no longer fermionic. Instead, the Majorana bound states are an example of non-abelian anyons: interchanging them changes the state of the system in a way that depends only on the order in which the exchange was performed. The non-abelian statistics that Majorana bound states possess allow them to be used as a building block for a topological quantum computer.
 
-Consider the wavefunctions $ \psi_1 $ and $ \psi_2 $ associated with two indistinguishable particles. Indistinguishable particles gives
+Consider the wavefunctions $ \psi_1 $ and $ \psi_2 $ associated with two indistinguishable particles. Indistinguishable particles give
 \[
 	| \langle \psi_1 \psi_2 | \psi_2 \psi_1 \rangle |^2 = 1 .
 \]
-Upon applying an exchange operator, one anticipates the form
+Upon applying for an exchange operator, one anticipates the form
 \begin{equation}
 	\hat{B} | \psi_1\, \psi_2 \rangle = e^{i\phi} | \psi_2\, \psi_1 \rangle,
 \end{equation}
 where for fermions, $ \phi = \pi \rightarrow -1 $, and for bosons, $ \phi = 0 \rightarrow +1 $—both being constant. However, in the case of Majorana fermions, as we will elaborate on shortly, the constant takes the form of a matrix. This distinction categorizes the former as abelian particles and the latter as non-abelian particles \cite{Nayak_2008}. The parity operator plays a crucial role in describing the non-abelian statistics associated with the braiding of these particles. The braiding of Majorana fermions involves exchanging their positions in space, and the resulting transformation is characterized by non-trivial matrix elements rather than simple constants.
 
-To assign a state to a system of Majorana fermions, we need to consider them as fermionic system, i.e., as pairs of the form of Equation~\ref{eq:ferm as mf}. In general, for $ 2N $ Majorana modes will have $ N $ fermionic modes. Each mode has the flexibility to be occupied or unoccupied by a fermion, resulting in two potentially degenerate quantum states $ | 0 \rangle $ and $ | 1 \rangle $ for every pair of Majoranas. Consider the the \textit{fermion parity} operator
+To assign a state to a system of Majorana fermions, we need to consider them as a fermionic system, i.e., as pairs of the form of Equation~\ref{eq:ferm as mf}. In general, for $ 2N $ Majorana modes will have $ N $ fermionic modes. Each mode has the flexibility to be occupied or unoccupied by a fermion, resulting in two potentially degenerate quantum states $ | 0 \rangle $ and $ | 1 \rangle $ for every pair of Majoranas. Consider the the \textit{fermion parity} operator
 \begin{equation}
 	\hat{P} = 1- 2 \hat{N} = i \gamma_1 \gamma_2,
 	\label{eq:ferm parity}
 \end{equation}
-where $ N = \hat{a}^\dagger \hat{a} $ is the \textit{fermion number} operator. Let's apply it to a pair of Majoranas state as
+where $ N = \hat{a}^\dagger \hat{a} $ is the \textit{fermion number} operator. Let's apply it to a pair of Majoranas states as
 $$
 	\begin{aligned}
 		\hat{P} |0\rangle = (1-2\hat{N})\, |0\rangle = + |0\rangle, \\
 		\hat{P} |1\rangle = (1-2\hat{N})\, |1\rangle = - |1\rangle.
 	\end{aligned}
 $$
-The parity operator is characterized by eigenvalues of $ +1 $ and $ -1 $, hence its name. The Hilbert space associated with parity can be treated comparable to a qubit, functioning as a subspace within a qubit for information storage and quantum computation purposes. This non-local operator, endowed with robustness against errors in quantum computation, ensures stability over significant distances. Additionally, the preservation of the total parity within a system of Majorana particles becomes evident. Consequently, the application of unitary operators is constrained to those maintaining the conservation of total parity. This insight leads to the realization that the braiding of Majorana particles adheres to this conservation principle.
+The parity operator is characterized by eigenvalues of $ +1 $ and $ -1 $, hence its name. The Hilbert space associated with parity can be treated as comparable to a qubit, functioning as a subspace within a qubit for information storage and quantum computation purposes. This non-local operator, endowed with robustness against errors in quantum computation, ensures stability over significant distances. Additionally, the preservation of the total parity within a system of Majorana particles becomes evident. Consequently, the application of unitary operators is constrained to those maintaining the conservation of total parity. This insight leads to the realization that the braiding of Majorana particles adheres to this conservation principle.
 
 In general, any unitary operator $ U $ can be expressed in terms of a Hermitian operator $ A $ of the form $ U = e^{i\beta A} $ with some angle $ \beta $. For Majorana fermion operators, we can begin with their parity operator, denoted as $ P_{nm} = i \gamma_n \gamma_m $. This allows us to define
 \begin{equation}
@@ -104,14 +104,14 @@ $$
 		\label{eq:subst in transformation}
 	\end{aligned}
 $$
-This leads to the condition $ \beta = \pm \pi / 4 $-through the text, we will refer to $ \pi /4 $ as the braiding operator and $ -\pi /4 $ the inverse braiding operator. Substituting this into the expression, we obtain the braiding unitary operator for $ \gamma_n $ and $ \gamma_m $:
+This leads to the condition $ \beta = \pm \pi / 4 $-through the text, we will refer to $ \pi /4 $ as the braiding operator and $ -\pi /4 $ as the inverse braiding operator. Substituting this into the expression, we obtain the braiding unitary operator for $ \gamma_n $ and $ \gamma_m $:
 $$
 	\begin{aligned}
 		U = \exp \left( \pm \frac{\pi}{4} \gamma_n \gamma_m\right) = \frac{1}{\sqrt{2}}\left(1 \pm \gamma_n \gamma_m\right).
 	\end{aligned}
 $$
 
-In case of two-level fermionic systems, to make projective measurement along $ z $-axis we apply the following operator
+In case of two-level fermionic systems, to make projective measurements along $ z $-axis we apply the following operator
 \begin{equation*}
 	(1 + S \sigma_z),
 \end{equation*}
@@ -137,7 +137,7 @@ To illustrate this idea, we begin with a system of 4 Majorana fermions, correspo
 	U = e^{\frac{\pm \pi}{4} \gamma_3 \gamma_0} = \frac{1}{\sqrt{2}} (1 \pm \gamma_3 \gamma_0).
 	\label{eq:braiding op}
 \end{equation}
-We call $ \gamma_0 $ and $ \gamma_3 $ the main Majorana fermions, and the rest are called the ancilla Majorana fermions. By utilizing the ancilla Majorana fermions we want to realize braiding operator in Equation~\ref{eq:braiding op}, using only measurement operations. We do not want to do any measurement on both main Majorana fermions. Further, first step and last step should not involve the main Majoranas.
+We call $ \gamma_0 $ and $ \gamma_3 $ the main Majorana fermions, and the rest are called the ancilla Majorana fermions. By utilizing the ancilla Majorana fermions we want to realize the braiding operator in Equation~\ref{eq:braiding op}, using only measurement operations. We do not want to do any measurement on both main Majorana fermions. Further, the first step and last step should not involve the main Majoranas.
 
 To realize this braiding operator solely through a series of measurements, we follow these four steps:
 \begin{enumerate}
@@ -155,21 +155,21 @@ as illustrated in Figure~\ref{fig:meas 4 mfs}.
 	\label{fig:meas 4 mfs}
 \end{figure}
 
-Now we need to verify this result wether it realizes the braiding operator. We start by writing all steps as one multiplication series from right to left, as
+Now we need to verify this result whether it realizes the braiding operator. We start by writing all steps as one multiplication series from right to left, as
 \[
 	(1 + iS_3 \gamma_1 \gamma_2) (1 + iS_2 \gamma_3 \gamma_1) (1 + iS_1 \gamma_1 \gamma_0) (1 + iS_0 \gamma_1 \gamma_2)
 \]
-To simplify, we note the left most projector and the right most one are different only in $ S $, if we could bring them together we can use some helpful properties of projectors. First, expand the middle two projectors
+To simplify, we note the left-most projector and the right-most one are different only in $ S $, if we could bring them together we can use some helpful properties of projectors. First, expand the middle two projectors
 \[
 	(1 + iS_3 \gamma_1 \gamma_2)
 	[1 + iS_2 \gamma_3 \gamma_1 + iS_1 \gamma_1 \gamma_0 - S_2 S_1 \gamma_3 \gamma_0]
 	(1 + iS_0 \gamma_1 \gamma_2),
 \]
-we used $ \gamma_n^2 = 1 $ on the last term. We employ the operators on the sides to encapsulate each term within the brackets. Starting with first terms we get
+we used $ \gamma_n^2 = 1 $ on the last term. We employ the operators on the sides to encapsulate each term within the brackets. Starting with the first terms we get
 \[
 	(1 + iS_3 \gamma_1 \gamma_2) (1 + iS_0 \gamma_1 \gamma_2).
 \]
-We have two cases; $ S_3 = S_0 $, then we get just $ (1 + iS_0 \gamma_1 \gamma_2) $, since projectors are idempotent (i.e., $ P^2 = P $). And if $ S_3 \ne S_0 $, it vanishes; since getting a measurement output $ S_0 $, then trying to get a measurement on other output will always result in zero. In compact, we write
+We have two cases; $ S_3 = S_0 $, then we get just $ (1 + iS_0 \gamma_1 \gamma_2) $, since projectors are idempotent (i.e., $ P^2 = P $). And if $ S_3 \ne S_0 $, it vanishes; since getting a measurement output $ S_0 $, then trying to get a measurement on another output will always result in zero. In compact, we write
 \[
 	\delta_{S_3, S_0} \, (1 + iS_0 \gamma_1 \gamma_2).
 \]
@@ -177,11 +177,11 @@ Moving to the second term, we get
 \[
 	(1 + iS_3 \gamma_1 \gamma_2) iS_2 \gamma_3 \gamma_1 (1 + iS_0 \gamma_1 \gamma_2).
 \]
-As in Equation~\ref{eq:ferm as mf}, we exploit the property that all Majorana fermions anticommute with each other, and commute with themselves. Then, by moving enclosed factor to the right we introduce a minus sign,
+As in Equation~\ref{eq:ferm as mf}, we exploit the property that all Majorana fermions anticommute with each other, and commute with themselves. Then, by moving the enclosed factor to the right we introduce a minus sign,
 \[
 	(1 + iS_3 \gamma_1 \gamma_2)(1 - iS_0 \gamma_1 \gamma_2) iS_2 \gamma_3 \gamma_1 .
 \]
-In term of the Kronecker delta, we have
+In terms of the Kronecker Delta, we have
 \[
 	\delta_{S_3, -S_0}(1 - iS_0 \gamma_1 \gamma_2)iS_2 \gamma_3 \gamma_1 .
 \]
@@ -202,7 +202,7 @@ Factoring out the same Kroneckers and projectors
 	\end{aligned}
 	\label{eq:seq 8 mfs}
 \end{equation}
-Since we are concerned about the main Majorana fermions ($ \gamma_3 $ \& $ \gamma_0 $), we ignore the left most projector; it just affects the the ancilla Majorana fermions.
+Since we are concerned about the main Majorana fermions ($ \gamma_3 $ \& $ \gamma_0 $), we ignore the leftmost projector; it just affects the the ancilla Majorana fermions.
 If $ S_3 = S_0 $, we get
 \[
 	( 1 + S_2 S_1 \gamma_3 \gamma_0 );
@@ -211,7 +211,7 @@ but $ S_2 S_1 = \pm 1 $, thus
 \[
 	( 1 \pm \gamma_3 \gamma_0 ).
 \]
-That's it. We realize the braiding operator in Equation~\ref{eq:braiding op}. Based on the measurement outcomes, values of $ S_0 $ through $ S_3 $, we can get knowledge of the resulting overall operation as well as how to tune it gives always the braiding operator. Now consider the case where $ -S_3 = S_0 $. We have
+That's it. We realize the braiding operator in Equation~\ref{eq:braiding op}. Based on the measurement outcomes, values of $ S_0 $ through $ S_3 $, we can get knowledge of the resulting overall operation as well as how to tune it gives the braiding operator. Now consider the case where $ -S_3 = S_0 $. We have
 \[
 	( iS_2 \gamma_3 \gamma_1 +iS_1 \gamma_1 \gamma_0)
 	= -i S_2 \gamma_1\, ( \gamma_3 - S_1 S_2 \gamma_0) ,
@@ -220,7 +220,7 @@ where $ S_1 S_2 = \pm 1 $. Since the global phase factor has no physically obser
 \[
 	-iS_2 \gamma_1\, (1 \mp \gamma_3 \gamma_0).
 \]
-By implementing a protocol that reads the values of the measurement outcomes we can, in predictable way, realize the braiding of $ \gamma_3 $ \& $ \gamma_0 $ shown in Equation~\ref{eq:braiding op}.
+By implementing a protocol that reads the values of the measurement outcomes we can, predictably, realize the braiding of $ \gamma_3 $ \& $ \gamma_0 $ shown in Equation~\ref{eq:braiding op}.
 
 \vspace{12pt}
 As observed, employing the ancilla as an auxiliary resource for Majorana fermions allowed us to implement the braiding operator solely through a series of measurements. Does the augmentation of these ancilla quantities contribute to the robustness and interrelation of the braiding process? This concept needs to be extended to accommodate any number of ancilla Majorana fermions. To explore this, we begin with a configuration involving a total of 8 Majorana fermions, as depicted in Figure~\ref{fig:8-conf-meas}.
@@ -248,7 +248,7 @@ By automating the generation of measurement sequences for any number of Majorana
 where \(A\) represents the normalized flattened matrix resulting from the product of the series of projectors, and \(B\) denotes the true braiding operator. See Appendix~\ref{sec:Code for Calculating Fidelity} for Python code to calculate the fidelity. To conduct a meaningful comparison of braiding on the primary Majoranas while mitigating the influence of the ancilla system, it is essential to perform a partial trace, isolating only the main Majorana fermions subsystem. Subsequently, the fidelity measure described above can be employed. This computational step is implemented programmatically using the \texttt{qutip} package, as detailed in the Appendix~\ref{sec:Jordan-Wigner Transformation Code}.
 
 \vspace{12pt}
-We start implementing the sequences in Equation~\ref{eq:seq 8 mfs}; for values of $ S_i $, we use all possible combination for now.
+We start implementing the sequences in Equation~\ref{eq:seq 8 mfs}; for values of $ S_i $, we use all possible combinations for now.
 \begin{figure}
 	\begin{center}
 		\includesvg[width=0.85\textwidth]{./figures/ideal-fid-all-combination.svg}
@@ -271,7 +271,7 @@ realizes the braiding of $ \gamma_0 $ \& $ \gamma_7 $. We will be using this exa
 	\caption{The fidelity of braiding operator realization plotted against the increasing number of employed ancilla Majoranas. The results are obtained using the sequence specified in Equation~\ref{eq:meas seq 8 mfs}.}
 	\label{fig:fid vs N ideal}
 \end{figure}
-This is because we have been implicitly assuming infinite time for each measurement to take place. To model the real finite case, we rewrite the each measurement projector as
+This is because we have been implicitly assuming infinite time for each measurement to take place. To model the real finite case, we rewrite each measurement projector as
 \[
 	e^{t ( iS_i \gamma_n \gamma_m )}
 \]
@@ -294,7 +294,7 @@ Thus replace every projector in Equation~\ref{eq:meas seq 8 mfs}, with this appr
 \end{figure}
 The trends are evident in Figure~\ref{fig:fid with approx proj}, where two examples with a fixed number of Majorana fermions showcase a continual increase in fidelity as the duration for applying each measurement extends. In essence, granting a relatively prolonged time for the implementation of each measurement, as outlined in the modified sequence Equation~\ref{eq:meas seq 8 mfs}, leads to a more accurate realization of the braiding operator.
 
-Currently, we must employ this novel modeling of measurement operators to assess its impact as we incrementally increase the number of utilized ancilla Majorana fermions.
+Currently, we must employ this novel modelling of measurement operators to assess its impact as we incrementally increase the number of utilized ancilla Majorana fermions.
 \begin{figure}
 	\begin{center}
 		\includesvg[width=0.85\textwidth]{./figures/real-fid-vs-N.svg}
@@ -306,24 +306,24 @@ Currently, we must employ this novel modeling of measurement operators to assess
 	\begin{center}
 		\includesvg[width=0.85\textwidth]{./figures/apprx-fid-vs-dt.svg}
 	\end{center}
-	\caption{The figure displays two plots: one depicting the results of a noisy model with randomness in the waiting time for each measurement, and the other illustrating the ideal scenario similar to the previous ideal measurements—without the incorporation of the approximate finite-time form. The systems size used here is $ N=7 $.}
+	\caption{The figure displays two plots: one depicting the results of a noisy model with randomness in the waiting time for each measurement, and the other illustrating the ideal scenario similar to the previous ideal measurements—without the incorporation of the approximate finite-time form. The system size used here is $ N=7 $.}
 	\label{fig:fid vs dt N=7}
 \end{figure}
 In Figure~\ref{fig:fid vs N t=1}, a counterargument emerges regarding the notion that increasing the number of utilized ancilla Majorana fermions enhances the realization of the braiding operator, consequently providing greater robustness to the measurement sequence. The plot illustrates that, contrary to this expectation, employing more Majorana fermions, while maintaining a fixed waiting time for each measurement application, results in lower fidelity. This observation leads to the conclusion that using as few Majorana fermions as ancilla produces a braiding that closely aligns with the true braiding operator.
 
-In Figure~\ref{fig:fid vs dt N=7}, we examine the impact of introducing variable time intervals, ranging from -0.1 to +0.1, during the simulation. This not only accounts for variations in the waiting time for each measurement but also introduces noise into the process. Additionally, we present a reference scenario, which represents the ideal case without noise and utilizes the approximate finite-time measurements.
+In Figure~\ref{fig:fid vs dt N=7}, we examine the impact of introducing variable time intervals, ranging from -0.1 to +0.1, during the simulation. This not only accounts for variations in the waiting time for each measurement but also introduces noise into the process. Additionally, we present a reference scenario, which represents the ideal case without noise and utilizes approximate finite-time measurements.
 % section Realizations of Braiding Via a Series of Measurements (end)
 
 \section{Constructing Protocol \& Simulating on Quantum Circuit} % (fold)
 \label{sec:Constructing Protocol}
-In this section we will develop a quantum circuit as well as a protocol that can read the outcomes of each measurement to align the final projectors to be exactly \textit{the} braiding operator. To achieve this, we redefine the series of measurements from last section, for four Majorana fermions in total, in terms of two-level fermionic system, i.e., qubits. We shall redefine the $ \gamma $s in terms of fermionic spin operators, giving us a way to model this system in much more familiar systems, such as qubits in quantum computing information. So we'll have, based on Jordan-Wigner transformation \cite{Backens_2017},
+In this section, we will develop a quantum circuit as well as a protocol that can read the outcomes of each measurement to align the final projectors to be exactly \textit{the} braiding operator. To achieve this, we redefine the series of measurements from the last section, for four Majorana fermions in total, in terms of a two-level fermionic system, i.e., qubits. We shall redefine the $ \gamma $s in terms of fermionic spin operators, giving us a way to model this system in much more familiar systems, such as qubits in quantum computing information. So we'll have, based on Jordan-Wigner transformation \cite{Backens_2017},
 \begin{itemize}
 	\item $ \gamma_0 = Z_0 $,
 	\item $ \gamma_1 = X_0 Z_1 $,
 	\item $ \gamma_2 = X_0 Y_1 $,
 	\item $ \gamma_3 = Y_0 $,
 \end{itemize}
-Here, \(X\), \(Y\), and \(Z\) represent the Pauli matrices associated with the two-level qubit, with the subscripts indicating the specific subsystem (qubit) upon which a Pauli gate is applied. It's important to note that the tensor product is implied; if only one gate is present, it is tacitly understood that it is tensor-producted with the identity of other subsystem. Consequently, the four-step series of measurements on the system, when the redefined \( \gamma \) operators are substituted into the sequence originally designed for four Majorana fermions, becomes:
+Here, \(X\), \(Y\), and \(Z\) represent the Pauli matrices associated with the two-level qubit, with the subscripts indicating the specific subsystem (qubit) upon which a Pauli gate is applied. It's important to note that the tensor product is implied; if only one gate is present, it is tacitly understood that it is tensor-producted with the identity of other subsystems. Consequently, the four-step series of measurements on the system, when the redefined \( \gamma \) operators are substituted into the sequence originally designed for four Majorana fermions, becomes:
 \begin{enumerate}
 	\item $ (1 + i X_0 Z_1 X_0 Y_1) = (1 + X_1) $
 	\item $ (1 + i X_0 Z_1 Z_0) = (1 + Y_0 Z_1) $
@@ -355,11 +355,11 @@ $$
 	\end{aligned}
 $$
 Utilizing the Pauli gates anitcommutation relations, we move the LHS factor to RHS,
-as for first term we get
+as for the first term we get
 \begin{equation*}
 	(1 +S_3 X_1) (1 +S_0 X_1) = \delta_{S_0,S_3}\, (1 +S_0 X_1)
 \end{equation*}
-For second term,
+For the second term,
 \begin{equation*}
 	(1 +S_3 X_1) S_2 Z_0 Z_1 (1 +S_0 X_1) = \delta_{S_0,-S_3}\, S_2 Z_0 Z_1 (1 +S_0 X_1)
 \end{equation*}
@@ -372,9 +372,9 @@ For the 3rd term,
 	(1 +S_3 X_1) S_2 S_1 Z_0 Z_1 Y_0 Z_1 (1 +S_0 X_1) = \delta_{S_0,S_3}\, -i X_0 S_2 S_1 (1 +S_0 X_1)
 \end{equation*}
 
-Now, we'll investigate the protocol classic outcomes, then we shall decide based on it whether
+Now, we'll investigate the protocol's classic outcomes, then we shall decide based on it whether
 we did realize a braiding between $ \gamma_0 $ \& $ \gamma_3 $, if not, what operators
-to apply to fix it. From previous paragraph, we simplify it to
+to apply to fix it. From the previous paragraph, we simplify it to
 \begin{equation*}
 	[
 		\delta_{S_0,S_3} + \delta_{S_0,-S_3}\, S_2 Z_0 Z_1
@@ -434,7 +434,7 @@ Let's study different cases:
 
 
 \vspace{12pt}
-We move now to building the quantum circuits simulating the true braiding operator and its realization based on the above protocol. Using \texttt{qiskit}, we need to determine all unitary gates and measurements to apply, then applying our protocol to correct the statevector based on the readout values. According to Equation~\ref{eq:fermionic meas seq}, we need to apply a measurement on the $ x $-basis, but \texttt{qiskit} only provide measurement operator along the computational basis (along $ \sigma_z $ eigenvectors). We can change basis by enclosing any computational basis measurement by the Hadamard gate, named $ H $,
+We move now to building the quantum circuits simulating the true braiding operator and its realization based on the above protocol. Using \texttt{qiskit}, we need to determine all unitary gates and measurements to apply, then apply our protocol to correct the statevector based on the readout values. According to Equation~\ref{eq:fermionic meas seq}, we need to apply a measurement on the $ x $-basis, but \texttt{qiskit} only provides a measurement operator along the computational basis (along $ \sigma_z $ eigenvectors). We can change the basis by enclosing any computational basis measurement by the Hadamard gate, named $ H $,
 \[
 	H \rightarrow H (1 + Z) H^\dagger = (1 + HZH) = (1 + X),
 \]
@@ -465,34 +465,34 @@ For the true braiding circuit, so we can compare the end result of both circuits
 \end{equation}
 Evidently, there is a notable advantage in treating the primary Majorana fermions as a single pair, facilitating their mapping onto a single qubit and simplifying the isolation of the main Majoranas subsystem. Refer to Figure~\ref{fig:br circuit}, where we implemented this novel unitary gate within a single qubit circuit. Running the circuit only once suffices, given the absence of measurement operations, and the final circuit state vector is consistently predictable in a non-noisy environment.
 
-The dashed vertical bar labeled `statevector' in Figure~\ref{fig:meas q circuit} indicates the point at which we record the statevector for each run of the circuit. This recorded statevector is then processed through the protocol to validate the readout values and make corrections accordingly. Subsequently, we compare this statevector to the true-braiding circuit's statevector using fidelity; a fidelity closer to 1 indicates a higher alignment with the simulated sequence of measurements. However, a challenge arises as the first circuit represents a two-qubit system, resulting in a statevector representing the composite system—a \(4 \times 1\) vector. To address this, we utilize the \texttt{qiskit} method called \texttt{partial\_trace}. This method begins by transforming the statevector into a density matrix, given by 
+The dashed vertical bar labelled `statevector' in Figure~\ref{fig:meas q circuit} indicates the point at which we record the statevector for each run of the circuit. This recorded statevector is then processed through the protocol to validate the readout values and make corrections accordingly. Subsequently, we compare this statevector to the true-braiding circuit's statevector using fidelity; a fidelity closer to 1 indicates a higher alignment with the simulated sequence of measurements. However, a challenge arises as the first circuit represents a two-qubit system, resulting in a statevector representing the composite system—a \(4 \times 1\) vector. To address this, we utilize the \texttt{qiskit} method called \texttt{partial\_trace}. This method begins by transforming the statevector into a density matrix, given by
 \[\rho = | \psi \rangle \langle \psi | .\]
-However, a \(2 \times 2\) density matrix possesses two eigenvalues (0 and 1), with the statevector of the main qubit corresponding to the non-zero eigenvalue. See Appendix~\ref{sec:Protocol to Correct and get Fidelity}, for our implementation for the protocol and calculating the fidelity.
+However, a \(2 \times 2\) density matrix possesses two eigenvalues (0 and 1), with the statevector of the main qubit corresponding to the non-zero eigenvalue. See Appendix~\ref{sec:Protocol to Correct and get Fidelity}, for our implementation of the protocol and calculating the fidelity.
 \begin{figure}
-  \begin{center}
-    \includesvg[width=0.2\textwidth]{./figures/br-in-bloch.svg}
-  \end{center}
-  \caption{Visualization of the statevector for the single-qubit circuit subjected to the true braiding operator on the Bloch sphere.}\label{fig:br in bloch}
+	\begin{center}
+		\includesvg[width=0.2\textwidth]{./figures/br-in-bloch.svg}
+	\end{center}
+	\caption{Visualization of the statevector for the single-qubit circuit subjected to the true braiding operator on the Bloch sphere.}\label{fig:br in bloch}
 \end{figure}
-We can visualize the ultimate statevectors resulting from the true braiding circuit and its simulated counterpart after the tracing operation on the Bloch sphere. The statevector of the braiding circuit, depicted in Figure~\ref{fig:br circuit}, is illustrated in Figure~\ref{fig:br in bloch}. Our analysis of the measurement sequence indicates that the simulating circuit is capable of generating either the braiding operator or its inverse due randomness. Consequently, the traced statevector of the first circuit either precisely aligns with the representation in Figure~\ref{fig:br in bloch} or points in the opposite direction. And indeed, by running the code with this protocol we always match the braiding operator.
+We can visualize the ultimate statevectors resulting from the true braiding circuit and its simulated counterpart after the tracing operation on the Bloch sphere. The statevector of the braiding circuit, depicted in Figure~\ref{fig:br circuit}, is illustrated in Figure~\ref{fig:br in bloch}. Our analysis of the measurement sequence indicates that the simulating circuit is capable of generating either the braiding operator or its inverse due to randomness. Consequently, the traced statevector of the first circuit either precisely aligns with the representation in Figure~\ref{fig:br in bloch} or points in the opposite direction. And indeed, by running the code with this protocol we always match the braiding operator.
 
 \vspace{12pt}
-Given the correcting protocol and running the first and using fidelity to compare the result with second circuit, we are ready to simulate real life condition. Moreover, such circuits will always be exposed to different kind of noise. Our job to investigate the effect of this noise on the first circuit and redoing the same analysis without a change on the protocol.
+Given the correcting protocol running the first and using fidelity to compare the result with the second circuit, we are ready to simulate real-life conditions. Moreover, such circuits will always be exposed to different kinds of noise. Our job is to investigate the effect of this noise on the first circuit and redo the same analysis without a change in the protocol.
 \begin{figure}
-  \begin{center}
-    \includesvg[width=0.7\textwidth]{./figures/bit-flip-error-on-meas.svg}
-  \end{center}
-  \caption{Illustration of the circuit in Figure~\ref{fig:meas q circuit} subjected to Pauli X error, with 1024 iterations for each probability setting. The resulting fidelities are averaged over the 1024 shots.}\label{fig:with bit flip error}
+	\begin{center}
+		\includesvg[width=0.7\textwidth]{./figures/bit-flip-error-on-meas.svg}
+	\end{center}
+	\caption{Illustration of the circuit in Figure~\ref{fig:meas q circuit} subjected to Pauli X error, with 1024 iterations for each probability setting. The resulting fidelities are averaged over the 1024 shots.}\label{fig:with bit flip error}
 \end{figure}
 \begin{figure}
-  \begin{center}
-    \includesvg[width=0.7\textwidth]{./figures/error-on-cx-h.svg}
-  \end{center}
-  \caption{As in Figure~\ref{fig:with bit flip error}, but with bit-flip applied to before each occurrence of \c{h} and \c{cx} operations.}\label{fig:bit flip error on cx}
+	\begin{center}
+		\includesvg[width=0.7\textwidth]{./figures/error-on-cx-h.svg}
+	\end{center}
+	\caption{As in Figure~\ref{fig:with bit flip error}, but with bit-flip applied to before each occurrence of \c{h} and \c{cx} operations.}\label{fig:bit flip error on cx}
 \end{figure}
-The first type of errors introduced by the \c{qiskit} package is the Pauli Error, which involves applying a Pauli gate before each occurrence of operations with a probability assigned between 0 and 1. A probability of 0.5 implies a 50\% chance of applying a Pauli gate before an operation, while the remaining 50\% involves applying an identity gate (effectively doing nothing to the circuit). As an example, simulating a bit-flip error in each measurement operation within the circuit involves applying an X gate before any measurement with a probability \( P \). The outcome of this example is depicted in Figure~\ref{fig:with bit flip error}. Notably, the plot exhibits an interesting symmetry around a 0.5 probability. This symmetry arises because if a bit flip is applied 100\% of the time, it results in doing nothing—since there are four measurements, leading to four X gates, which collectively reduce to an identity operation.
+The first type of error introduced by the \c{qiskit} package is the Pauli Error, which involves applying a Pauli gate before each occurrence of operations with a probability assigned between 0 and 1. A probability of 0.5 implies a 50\% chance of applying a Pauli gate before an operation, while the remaining 50\% involves applying an identity gate (effectively doing nothing to the circuit). As an example, simulating a bit-flip error in each measurement operation within the circuit involves applying an X gate before any measurement with a probability \( P \). The outcome of this example is depicted in Figure~\ref{fig:with bit flip error}. Notably, the plot exhibits an interesting symmetry around a 0.5 probability. This symmetry arises because if a bit flip is applied 100\% of the time, it results in doing nothing—since there are four measurements, leading to four X gates, which collectively reduce to an identity operation.
 
-Now, let's introduce another type of error, specifically targeting different operations, namely the \c{h} (Hadamard) and \c{cx} (CNOT) gates. In Figure~\ref{fig:bit flip error on cx}, we observe the impact on the realization of braiding in the circuit when subjected to a bit-flip error on each occurrence of \c{h} and \c{cx} operations. It's important to note that \c{cx} is a two-qubit gate, so we extend the Pauli Error by taking the tensor product with itself to create a \(4 \times 4\) matrix operator. Additionally, we observe that around the middle of the plot, there is an almost constant averaged fidelity at approximately 0.5. However, as the probability exceeds 0.8, the fidelity drops to zero, significantly impairing the realization of the braiding process.
+Now, let's introduce another type of error, specifically targeting different operations, namely the \c{h} (Hadamard) and \c{cx} (CNOT) gates. In Figure~\ref{fig:bit flip error on cx}, we observe the impact on the realization of braiding in the circuit when subjected to a bit-flip error on each occurrence of \c{h} and \c{cx} operations. It's important to note that \c{cx} is a two-qubit gate, so we extend the Pauli Error by taking the tensor product with itself to create a \(4 \times 4\) matrix operator. Additionally, we observe that around the middle of the plot, there is an almost constant average fidelity of approximately 0.5. However, as the probability exceeds 0.8, the fidelity drops to zero, significantly impairing the realization of the braiding process.
 % section Constructing Protocol (end)
 
 \newpage
