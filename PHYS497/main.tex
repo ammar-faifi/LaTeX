@@ -90,7 +90,7 @@ In general, any unitary operator $ U $ can be expressed in terms of a Hermitian 
 	U \equiv e^{\beta \gamma_n \gamma_m} \quad \text{or} \quad U = \cos{\beta} + \gamma_n \gamma_m \sin{\beta},
 	\label{eq:U in beta}
 \end{equation}
-see Appendix~\ref{sec:Using Eauler's Formula Rewrite Exponential Form}. To find a unitary operator that evolves Majorana fermions according to the Heisenberg picture, i.e.,
+see Appendix~\ref{sec:Expanding Matrix Exponential} for a proof of this result. To find a unitary operator that evolves Majorana fermions according to the Heisenberg picture, i.e.,
 $$
 	\begin{aligned}
 		\gamma_n \rightarrow U \gamma_n U ^\dagger, \\
@@ -233,12 +233,13 @@ As observed, employing the ancilla as an auxiliary resource for Majorana fermion
 	\label{fig:8-conf-meas}
 \end{figure}
 So the seriers of measurements will be, written from right to left,
-\[
+\begin{equation}
 	\begin{aligned}
 		 & (1+ i S_0 \gamma_1 \gamma_2)(1+ i S_1 \gamma_3 \gamma_4)(1+ i S_2 \gamma_0 \gamma_1) (1+ i S_3 \gamma_2 \gamma_3)         \\
 		 & \times (1+ i S_4 \gamma_1 \gamma_3)(1+ i S_5 \gamma_2 \gamma_5)(1+ i S_6 \gamma_1 \gamma_2)(1+ i S_7 \gamma_3 \gamma_4) .
 	\end{aligned}
-\]
+	\label{eq:meas seq 8 mfs}
+\end{equation}
 
 \vspace{12pt}
 By automating the generation of measurement sequences for any number of Majorana fermions, we aim to investigate the impact of employing a larger number of ancilla Majorana fermions on achieving a more robust and fault-tolerant braiding process. However, to conduct these studies, it is imperative to transform the system into a fermionic one, leveraging established methods for running and simulating such processes. The Jordan-Wigner transformation, detailed in the next section, facilitates this conversion. Subsequently, a custom version of the concept of \textit{state fidelity} will be employed to assess the proximity of the measurement-only braiding operator to the exact one. This involves obtaining the final matrix by multiplying all measurement operators, flattening it into a vector, normalizing it, and then computing the inner product with the true braiding operator using the expression
@@ -253,32 +254,84 @@ We start implementing the sequences in Equation~\ref{eq:seq 8 mfs}; for values o
 	\begin{center}
 		\includesvg[width=0.85\textwidth]{./figures/ideal-fid-all-combination.svg}
 	\end{center}
-	\caption{Shows the fidelity values, of all possible 4096 combinations of $ S_i $ for eight Majoranas, agains their index. This implements the sequence in Equation~\ref{eq:seq 8 mfs}.}
+	\caption{Shows the fidelity values, of all possible 4096 combinations of $ S_i $ for eight Majoranas, agains their index. This implements the sequence in Equation~\ref{eq:meas seq 8 mfs}.}
 	\label{fig:ideal fids all combs}
 \end{figure}
-As illustrated in Figure~\ref{fig:ideal fids all combs}, in the ideal scenario of fidelity calculation, the results manifest as either 1, indicating that that specific combination of measurement outcomes ($ S_i $) perfectly realizes the true braiding operator, or 0, signifying that it falls short of realizing the true braiding operator.
+As illustrated in Figure~\ref{fig:ideal fids all combs}, in the ideal scenario of fidelity calculation, the results manifest as either 1, indicating that that specific combination of measurement outcomes ($ S_i $) perfectly realizes the true braiding operator, or 0, signifying that it falls short of realizing the true braiding operator. Further, the figure tells us that one of the cases where the fidelity equals one is the combination at index 0. This is the trivial case where all $ S_i=1 $, thus from Equation~\ref{eq:meas seq 8 mfs}, the sequence
+\[
+	\begin{aligned}
+		 & (1+ i \gamma_1 \gamma_2)(1+ i \gamma_3 \gamma_4)(1+ i \gamma_0 \gamma_1) (1+ i \gamma_2 \gamma_3)        \\
+		 & \times (1+ i \gamma_1 \gamma_3)(1+ i \gamma_2 \gamma_5)(1+ i \gamma_1 \gamma_2)(1+ i \gamma_3 \gamma_4),
+	\end{aligned}
+\]
+realizes the braiding of $ \gamma_0 $ \& $ \gamma_7 $. We will be using this exact form for the rest of the section. Now back to the main question; will increasing the number of ancilla Majoranas help in the fidelity? Clearly, in the ideal case, nothing to improve, as seen in Figure~\ref{fig:fid vs N ideal}.
+\begin{figure}
+	\begin{center}
+		\includesvg[width=0.5\textwidth]{./figures/fid-vs-N.svg}
+	\end{center}
+	\caption{The fidelity of braiding operator realization plotted against the increasing number of employed ancilla Majoranas. The results are obtained using the sequence specified in Equation~\ref{eq:meas seq 8 mfs}.}
+	\label{fig:fid vs N ideal}
+\end{figure}
+This is because we have been implicitly assuming infinite time for each measurement to take place. To model the real finite case, we rewrite the each measurement projector as
+\[
+	e^{t ( iS_i \gamma_n \gamma_m )}
+\]
+By using the same method explained in Appendix~\ref{sec:Expanding Matrix Exponential}, we get
+\[
+	e^{t ( iS_i \gamma_n \gamma_m )} = \cosh{t} + (i \gamma_n \gamma_m) \sinh{t},
+\]
+which implies
+\[
+	\cosh{t} + (i \gamma_n \gamma_m) \sinh{t} \rightarrow (1 + i S_i \gamma_n \gamma_m)
+	\quad \text{as} \quad t \rightarrow \infty
+\]
+Thus replace every projector in Equation~\ref{eq:meas seq 8 mfs}, with this approximate projector in the simulating code, see Appendix~\ref{sec:Applying Exponential Form of Measurements} for this modification.
+\begin{figure}
+	\begin{center}
+		\includesvg[width=0.85\textwidth]{./figures/apprx-fid-vs-time.svg}
+	\end{center}
+	\caption{Applying the measurement sequence detailed in Equation~\ref{eq:meas seq 8 mfs}, where the projectors take on a time-finite exponential form. The figure presents two plots corresponding to two different numbers of Majorana fermions.}
+	\label{fig:fid with approx proj}
+\end{figure}
+The trends are evident in Figure~\ref{fig:fid with approx proj}, where two examples with a fixed number of Majorana fermions showcase a continual increase in fidelity as the duration for applying each measurement extends. In essence, granting a relatively prolonged time for the implementation of each measurement, as outlined in the modified sequence Equation~\ref{eq:meas seq 8 mfs}, leads to a more accurate realization of the braiding operator.
 
+Currently, we must employ this novel modeling of measurement operators to assess its impact as we incrementally increase the number of utilized ancilla Majorana fermions.
+\begin{figure}
+	\begin{center}
+		\includesvg[width=0.85\textwidth]{./figures/real-fid-vs-N.svg}
+	\end{center}
+	\caption{Illustrating fidelity under the approximate measurement operator, this plot depicts how fidelity varies with the changing number of utilized Majorana fermions. The analysis maintains a constant time value set at 1.}
+	\label{fig:fid vs N t=1}
+\end{figure}
+\begin{figure}
+	\begin{center}
+		\includesvg[width=0.85\textwidth]{./figures/apprx-fid-vs-dt.svg}
+	\end{center}
+	\caption{The figure displays two plots: one depicting the results of a noisy model with randomness in the waiting time for each measurement, and the other illustrating the ideal scenario similar to the previous ideal measurements—without the incorporation of the approximate finite-time form. The systems size used here is $ N=7 $.}
+	\label{fig:fid vs dt N=7}
+\end{figure}
+In Figure~\ref{fig:fid vs N t=1}, a counterargument emerges regarding the notion that increasing the number of utilized ancilla Majorana fermions enhances the realization of the braiding operator, consequently providing greater robustness to the measurement sequence. The plot illustrates that, contrary to this expectation, employing more Majorana fermions, while maintaining a fixed waiting time for each measurement application, results in lower fidelity. This observation leads to the conclusion that using as few Majorana fermions as ancilla produces a braiding that closely aligns with the true braiding operator.
+
+In Figure~\ref{fig:fid vs dt N=7}, we examine the impact of introducing variable time intervals, ranging from -0.1 to +0.1, during the simulation. This not only accounts for variations in the waiting time for each measurement but also introduces noise into the process. Additionally, we present a reference scenario, which represents the ideal case without noise and utilizes the approximate finite-time measurements.
 % section Realizations of Braiding Via a Series of Measurements (end)
 
-\section{Constructing Protocol} % (fold)
+\section{Constructing Protocol \& Simulating on Quantum Circuit} % (fold)
 \label{sec:Constructing Protocol}
-We shall redefine the our $ \gamma $ s in term of fermionic spin operators, giving us a way to model
-this system in much more fimiliar systems, such as qubits in quantum computing information. So we'll have:
+In this secction we will deveople a quantum circuit as well as a protocol that can read the outcomes of each measurement to align the final projectors to be exactly \textit{the} braiding operator. To achieve this, we redefine the series of measurements from last section, for four Majorana fermions in total, in terms of two-level fermionic system, i.e., qubits. We shall redefine the $ \gamma $s in terms of fermionic spin operators, giving us a way to model this system in much more fimiliar systems, such as qubits in quantum computing information. So we'll have, based on Jordan-Wigner transformation \cite{Backens_2017},
 \begin{itemize}
-	\item $ \gamma_0 = Z_0 $
-	\item $ \gamma_1 = X_0 Z_1 $
-	\item $ \gamma_2 = X_0 Y_1 $
-	\item $ \gamma_3 = Y_0 $
+	\item $ \gamma_0 = Z_0 $,
+	\item $ \gamma_1 = X_0 Z_1 $,
+	\item $ \gamma_2 = X_0 Y_1 $,
+	\item $ \gamma_3 = Y_0 $,
 \end{itemize}
-Note that tensor product is understod, if there is one gate, tensor product with indentity of that subsystem is implicit.
-Then 4-step series of measurement on the system becomes
+Here, \(X\), \(Y\), and \(Z\) represent the Pauli matrices associated with the two-level qubit, with the subscripts indicating the specific subsystem (qubit) upon which a Pauli gate is applied. It's important to note that the tensor product is implied; if only one gate is present, it is tacitly understood that it is tensor-producted with the identity of other subsystem. Consequently, the four-step series of measurements on the system, when the redefined \( \gamma \) operators are substituted into the sequence originally designed for four Majorana fermions, becomes:
 \begin{enumerate}
 	\item $ (1 + i X_0 Z_1 X_0 Y_1) = (1 + X_1) $
 	\item $ (1 + i X_0 Z_1 Z_0) = (1 + Y_0 Z_1) $
 	\item $ (1 + i Y_0 X_0 Z_1) = (1 + Z_0 Z_1) $
 	\item $ (1 + X_1) $
 \end{enumerate}
-Also for true braiding operator we get
+Doing the same to redefine the true braiding operator in Equation~\ref{eq:braiding op}, we get
 $$
 	\begin{aligned}
 		e^{i \frac{\pi}{4} X_0} = \frac{1}{\sqrt{2}}\, (1 + i X_0 ) \quad \text{or} \quad
@@ -286,16 +339,16 @@ $$
 		\label{eq:br Jordan-Wigner}
 	\end{aligned}
 $$
-
-Let's understand the possible outcomes from the general case of the measurement operator,
-that is,
-$$
+Thus, the sequence of measurements that realizes braiding of $ \gamma_0 $ \& $ \gamma_3 $ in a spenful system is,
+\begin{equation}
 	\begin{aligned}
 		(1 +S_3 X_1) (1 +S_2 Z_0 Z_1) (1 +S_1 Y_0 Z_1) (1 +S_0 X_1)
-		\label{eq:general meas}
+		\label{eq:fermionic meas seq}
 	\end{aligned}
-$$
-Expanding the middle two factors as
+\end{equation}
+
+\vspace{12pt}
+Let's understand the possible outcomes from the general case of the measurement operator. Expanding the middle two factors as
 $$
 	\begin{aligned}
 		(1 +S_3 X_1) (1 + S_2 Z_0 Z_1 + S_1 Y_0 Z_1 + S_2 S_1 Z_0 Z_1 Y_0 Z_1) (1 +S_0 X_1)
@@ -379,12 +432,85 @@ Let's study different cases:
 		            relizing the braiding operator
 	      \end{description}
 \end{description}
+
+
+\vspace{12pt}
+We move now to building the quantum circuits simulating the true braiding operator and its realization based on the above protocol. Using \texttt{qiskit}, we need to determine all unitary gates and measurements to apply, then applying our protocol to correct the statevector based on the readout values. According to Equation~\ref{eq:fermionic meas seq}, we need to apply a measurement on the $ x $-basis, but \texttt{qiskit} only provide measurement operator along the computational basis (along $ \sigma_z $ eigenvectors). We can chnage basis by enclosing any computational basis measurement by the Hadamard gate, named $ H $,
+\[
+	H \rightarrow H (1 + Z) H^\dagger = (1 + HZH) = (1 + X),
+\]
+where $ H = H^\dagger $, i.e., Hermitian operator. For the joint measurement, $ (1 + S_2 Z_0 Z_1) $, we can encapsulate the computational measurement by a controlled-X gate (i.e., CX or CNOT). Applying the same to the measurement $ (1 + S_1 Y_0 Z_1) $, but with enclosing with a custom unitary gate to change the bases of $ Z_0 $ to $ Y_0 $, that is
+\[
+	A_0 = Y_0 + Z_0 \rightarrow A_0(1 + S_1 Z_0 Z_1)A_0^\dagger = (1 + S_1 Y_0 Z_1)
+\]
+
+Armed with this information, our construction of the quantum circuit proceeds from left to right, aligning with the right-to-left order of measurements specified in Equation~\ref{eq:fermionic meas seq}. This alignment mirrors the standard operation sequence in \texttt{qiskit} quantum circuits. Additionally, as indicated by the Jordan-Wigner transformation, it is observed that the inclusion of two qubits in the circuit is adequate for the required representation.
+\begin{figure}
+	\begin{center}
+		\includesvg[width=0.95\textwidth]{./figures/q-circuit.svg}
+	\end{center}
+	\caption{The figure illustrates the ultimate two-qubit circuit designed to implement the sequence of measurements outlined in Equation~\ref{eq:fermionic meas seq}. The drawing highlights the four distinct steps of applying each measurement operator, delineated by vertical dashed lines. The final line indicates the point where we extract the reference final state vector of the circuit for subsequent comparisons.}\label{fig:meas q circuit}
+\end{figure}
+As depicted in Figure~\ref{fig:meas q circuit}, the circuit comprises four classical registers, each dedicated to storing the readout value following the application of a computational basis measurement. For instance, in the initial section of the circuit, we observe operations involving \(H_1\), Measurement-Z, and \(H_1\), collectively simulating the operator \((1 + S_i X_1)\). This pattern extends to the subsequent parts of the circuit as well.
+
+\begin{figure}
+	\begin{center}
+		\includesvg[width=0.15\textwidth]{./figures/br-circuit.svg}
+	\end{center}
+	\caption{Illustration of the one-qubit circuit featuring a single unitary gate, denoted as Br, defined in Equation~\ref{eq:spinful braiding op}.}\label{fig:br circuit}
+\end{figure}
+For the true braiding circuit, so we can compare the end result of both circuits' statevectors, is as simple as one qubit applied to it the following redefined brading operator in terms spenful system, from Equation~\ref{eq:braiding op},
+\begin{equation}
+	\text{Br} = e^{\frac{\pm \pi}{4} \gamma_3 \gamma_0} = e^{\frac{\pi}{4} Y_0 Z_0} = e^{\frac{\pi}{4} i X_0}.
+	\label{eq:spinful braiding op}
+\end{equation}
+Evidently, there is a notable advantage in treating the primary Majorana fermions as a single pair, facilitating their mapping onto a single qubit and simplifying the isolation of the main Majoranas subsystem. Refer to Figure~\ref{fig:br circuit}, where we implemented this novel unitary gate within a single qubit circuit. Running the circuit only once suffices, given the absence of measurement operations, and the final circuit state vector is consistently predictable in a non-noisy environment.
+
+The dashed vertical bar labeled `statevector' in Figure~\ref{fig:meas q circuit} indicates the point at which we record the statevector for each run of the circuit. This recorded statevector is then processed through the protocol to validate the readout values and make corrections accordingly. Subsequently, we compare this statevector to the true-braiding circuit's statevector using fidelity; a fidelity closer to 1 indicates a higher alignment with the simulated sequence of measurements. However, a challenge arises as the first circuit represents a two-qubit system, resulting in a statevector representing the composite system—a \(4 \times 1\) vector. To address this, we utilize the \texttt{qiskit} method called \texttt{partial\_trace}. This method begins by transforming the statevector into a density matrix, given by 
+\[\rho = | \psi \rangle \langle \psi | .\]
+However, a \(2 \times 2\) density matrix possesses two eigenvalues (0 and 1), with the statevector of the main qubit corresponding to the non-zero eigenvalue. See Appendix~\ref{sec:Protocol to Correct and get Fidelity}, for our implementation for the protocol and calculating the fidelity.
+\begin{figure}
+  \begin{center}
+    \includesvg[width=0.2\textwidth]{./figures/br-in-bloch.svg}
+  \end{center}
+  \caption{Visualization of the statevector for the single-qubit circuit subjected to the true braiding operator on the Bloch sphere.}\label{fig:br in bloch}
+\end{figure}
+We can visualize the ultimate statevectors resulting from the true braiding circuit and its simulated counterpart after the tracing operation on the Bloch sphere. The statevector of the braiding circuit, depicted in Figure~\ref{fig:br circuit}, is illustrated in Figure~\ref{fig:br in bloch}. Our analysis of the measurement sequence indicates that the simulating circuit is capable of generating either the braiding operator or its inverse due randomness. Consequently, the traced statevector of the first circuit either precisely aligns with the representation in Figure~\ref{fig:br in bloch} or points in the opposite direction. And indeed, by running the code with this protocol we always match the brading operator.
+
+\vspace{12pt}
+Given the correcting protocol and running the first and using fidelity to compare the result with second circuit, we are ready to simulate real life condition. Moreover, such circuits will always be exposed to different kind of noise. Our job to investigate the efffect of this noise on the first circuit and redoing the same analysis without a change on the protocol.
+\begin{figure}
+  \begin{center}
+    \includesvg[width=0.7\textwidth]{./figures/bit-flip-error-on-meas.svg}
+  \end{center}
+  \caption{Illustration of the circuit in Figure~\ref{fig:meas q circuit} subjected to Pauli X error, with 1024 iterations for each probability setting. The resulting fidelities are averaged over the 1024 shots.}\label{fig:with bit flip error}
+\end{figure}
+\begin{figure}
+  \begin{center}
+    \includesvg[width=0.7\textwidth]{./figures/error-on-cx-h.svg}
+  \end{center}
+  \caption{As in Figure~\ref{fig:with bit flip error}, but with bit-flip applied to before each occurrence of \c{h} and \c{cx} operations.}\label{fig:bit flip error on cx}
+\end{figure}
+The first type of errors introduced by the \c{qiskit} package is the Pauli Error, which involves applying a Pauli gate before each occurrence of operations with a probability assigned between 0 and 1. A probability of 0.5 implies a 50\% chance of applying a Pauli gate before an operation, while the remaining 50\% involves applying an identity gate (effectively doing nothing to the circuit). As an example, simulating a bit-flip error in each measurement operation within the circuit involves applying an X gate before any measurement with a probability \( P \). The outcome of this example is depicted in Figure~\ref{fig:with bit flip error}. Notably, the plot exhibits an interesting symmetry around a 0.5 probability. This symmetry arises because if a bit flip is applied 100\% of the time, it results in doing nothing—since there are four measurements, leading to four X gates, which collectively reduce to an identity operation.
+
+Now, let's introduce another type of error, specifically targeting different operations, namely the \c{h} (Hadamard) and \c{cx} (CNOT) gates. In Figure~\ref{fig:bit flip error on cx}, we observe the impact on the realization of braiding in the circuit when subjected to a bit-flip error on each occurrence of \c{h} and \c{cx} operations. It's important to note that \c{cx} is a two-qubit gate, so we extend the Pauli Error by taking the tensor product with itself to create a \(4 \times 4\) matrix operator. Additionally, we observe that around the middle of the plot, there is an almost constant averaged fidelity at approximately 0.5. However, as the probability exceeds 0.8, the fidelity drops to zero, significantly impairing the realization of the braiding process.
 % section Constructing Protocol (end)
 
 \newpage
 \section{Conclusion \& Future Work} % (fold)
 \label{sec:Conclusion & Future Work}
+The paper delves into the realm of Majorana fermion braiding, exploring a novel method based on a sequence of measurements. Majorana fermions, initially proposed by Majorana in 1937, have unique properties, and their braiding plays a crucial role in topological quantum computation. The study introduces the braiding operator, a mathematical entity capturing non-Abelian statistics associated with anyon braiding.
 
+The work employs qiskit for simulations on IBM Q computers, aiming to assess the feasibility of realizing braiding operators via a series of measurements. The study investigates the impact of errors, specifically Pauli errors, on the braiding process. The introduction of ancilla Majorana fermions as auxiliary resources is explored, with a focus on increasing robustness through fault-tolerant approaches.
+
+The Jordan-Wigner transformation is utilized to represent Majorana operators within a qubit system. The paper then presents a protocol for realizing braiding operators solely through measurements, leveraging the conservation principle associated with fermion parity. The impact of employing different numbers of ancilla Majorana fermions on fidelity is examined, revealing unexpected results suggesting that fewer ancilla fermions may lead to higher fidelity.
+
+The study further addresses the challenges of finite-time measurements, noise, and the incorporation of variable time intervals. The quantum circuit construction is detailed, with a specialized unitary gate representing the braiding operator in a single-qubit system. The correcting protocol is applied, and the fidelity between the true braiding circuit and its simulated counterpart is used for validation.
+
+The investigation extends to real-life conditions, introducing Pauli X errors and exploring their effects on fidelity. Additionally, bit-flip errors on specific gates, such as h and cx, are analyzed. The study concludes with a comprehensive analysis of the impact of errors on the realization of braiding operators, providing valuable insights into the challenges and potential solutions in the field of Majorana fermion braiding for topological quantum computation.
+
+\vspace{12pt}
+Future work in this research could explore several avenues to enhance the depth and applicability of the study. Firstly, investigating additional error models beyond the Pauli errors, such as realistic noise profiles and decoherence, would provide a more comprehensive understanding of the challenges faced by Majorana fermion braiding in practical quantum computing environments. Moreover, the study could benefit from an exploration of error mitigation techniques and quantum error correction codes tailored to the unique characteristics of Majorana fermion systems. Additionally, considering more complex braiding scenarios involving multiple anyons or different braiding paths would contribute to a richer understanding of the topological quantum computation landscape. Furthermore, the paper could delve into experimental implementations, collaborating with experimentalists to validate the proposed protocols on physical quantum hardware. Finally, exploring the scalability of the proposed methods for larger quantum systems and assessing their compatibility with emerging quantum technologies would be crucial for the advancement of Majorana fermion braiding in the context of fault-tolerant quantum computation.
 % section Conclusion & Future Work (end)
 
 \newpage
@@ -393,15 +519,41 @@ Let's study different cases:
 
 \newpage
 \appendix
-\section{Using Eauler's Formula to Rewrite Exponential Form} % (fold)
-\label{sec:Using Eauler's Formula Rewrite Exponential Form}
-The Euler formula is commonly expressed as \(e^{ix} = \cos(x) + i \sin(x)\). To rewrite \(U = e^{\beta i \gamma_n \gamma_m}\) in the desired form, we can use this formula:
+\section{Expanding Matrix Exponential} % (fold)
+\label{sec:Expanding Matrix Exponential}
+We start from the follwoing expression
 \[
-	U = e^{\beta i \gamma_n \gamma_m} = \cos(\beta) + i \gamma_n \gamma_m \sin(\beta)
+	e^{\beta \gamma_n \gamma_m}.
 \]
-Here, \(\beta\) is the coefficient of the exponential, and \(\gamma_n\) and \(\gamma_m\) are matrices or operators. The rewritten expression utilizes the Euler formula to represent the exponential term as a combination of cosine and sine functions. Specifically, for $ \beta = \pi / 4 $
-$$ U = \frac{1}{\sqrt{2}}\, (1 + i \gamma_1 \gamma_2) $$
-% section Using Eauler's Formula Rewrite Exponential Form (end)
+Note that this is a matrix exponential, so we need to expand it using the matrix exponential formula,
+$$
+	e^X=\sum_{k=0}^{\infty} \frac{1}{k !} X^k
+$$
+Then we have
+\[
+	\begin{aligned}
+		e^{\beta \gamma_n \gamma_m} & = \sum_{k=0}^{\infty} \frac{1}{k !} (\beta \gamma_n \gamma_m)^k
+		= \sum_{k=0}^{\infty} \frac{\beta^k}{k !} (\gamma_n \gamma_m)^k                                        \\
+		                            & = 1 + \beta \gamma_n \gamma_m + \frac{\beta^2}{2!} (\gamma_n \gamma_m)^2
+		+ \frac{\beta^3}{3!} (\gamma_n \gamma_m)^3 + \cdots,
+	\end{aligned}
+\]
+where $ \beta $ is a real number. But Majoranas anitcommute with each other,
+\[
+	(\gamma_n \gamma_m)^2 = (\gamma_n \gamma_m)(\gamma_n \gamma_m)
+	= - \underbrace{\gamma_n \gamma_n}_1 \underbrace{\gamma_m \gamma_m}_1 = -1.
+\]
+Thus the expansion becomes
+\[
+	\begin{aligned}
+		e^{\beta \gamma_n \gamma_m} & = 1 + \frac{\beta}{1!} (\gamma_n \gamma_m) - \frac{\beta^2}{2!}
+		- \frac{\beta^3}{3!} (\gamma_n \gamma_m) + \frac{\beta^4}{4!} + \frac{\beta^5}{5!} (\gamma_n \gamma_m) + \cdots \\
+		                            & = \left( 1-\frac{\beta^2}{2 !}+\frac{\beta^4}{4 !}-\cdots \right)
+		+ (\gamma_n \gamma_m) \left( \beta-\frac{\beta^3}{3 !}+\frac{\beta^5}{5 !}-\cdots \right)                       \\
+		                            & = \cos{\beta} + \gamma_n \gamma_m \sin{\beta}.
+	\end{aligned}
+\]
+% section Expanding Matrix Exponential (end)
 
 \section{Statevector and Density Matrix} % (fold)
 \label{sec:Statevector and Density Matrix}
@@ -506,6 +658,62 @@ def gamma_b(N, n, Opers=None):
         Sa, Sb, Sc = Opers
     return oprd([Sb(N, j) for j in range(n)], d=I(N)) * Sc(N, n)
 \end{lstlisting}
+
+And to iterate through all measurement projector from singel method call, we have
+\begin{lstlisting}[language=Python]
+def calc_prj_meas(Ss, N):
+    pairs = get_prj_meas(N)
+    a, b, c = pairs.shape
+    assert len(Ss) == a*b
+    pairs = pairs.reshape((a * b, c))
+    
+    res = I(N)    
+    for i in range(a*b):
+        il, ir = pairs[i]
+        res *= (1 + Ss[i] * 1j  * get_gamma(N, il) * get_gamma(N, ir))
+    
+    return res
+\end{lstlisting}
+
 % section Jordan-Wigner Transformation Code (end)
+
+\section{Applying Exponential Form of Measurements} % (fold)
+\label{sec:Applying Exponential Form of Measurements}
+\begin{lstlisting}[language=Python]
+def calc_prj_meas_t(Ss, N, t):
+    pairs = get_prj_meas(N)
+    a, b, c = pairs.shape
+    assert len(Ss) == a*b
+    pairs = pairs.reshape((a * b, c))
+    
+    res = I(N)    
+    for i in range(a*b):
+        il, ir = pairs[i]
+        res *= (t * 1j * Ss[i] * get_gamma(N, il) * get_gamma(N, ir)).expm()
+\end{lstlisting}
+% section Applying Exponential Form of Measurements (end)
+
+\section{Protocol to Correct and get Fidelity} % (fold)
+\label{sec:Protocol to Correct and get Fidelity}
+\begin{lstlisting}[language=Python]
+def get_corrected_fid(circ_sv, mem):
+    for i in range(10):
+        s3, s2, s1, s0 = mem
+        
+        if s0 == s3:
+            if s1 == s2:
+                circ_sv = circ_sv.evolve(Pauli('ZZ'))
+            else:
+                pass
+        else:
+            if s1 == s2: 
+                pass
+            else: 
+                circ_sv = circ_sv.evolve(Pauli('ZZ'))
+                
+        circ_sv = partial_trace(circ_sv, [1]).to_statevector()
+        return np.abs(np.vdot(circ_sv, sv_br))**2
+\end{lstlisting}
+% section Protocol to Correct and get Fidelity (end)
 
 \end{document}
