@@ -1,0 +1,349 @@
+ICS424 – Project # 1 Horse Database Schema
+DDL & DML Definitions
+In this project, you will be working with a database containing horse racing information. Use
+Postgres version 16.2 for the project. The database has the following structure:
+Horse(horseId, horseName, age, gender, registration, stableId)
+Owner(ownerId, lname, fname)
+Owns(horseId, ownerId)
+Stable(stableId, stableName, location, colors)
+Trainer(trainerId, lname, fname, stableId)
+Race(raceId, raceName, trackName, raceDate, raceTime)
+RaceResults(raceId, horseId, results, prize)
+Track(trackName, location, length)
+
+The domain has the following rules:
+Horse gender is designated by:
+F - filly (young female)
+C - colt (young male)
+M - mare (older female)
+S - stallion (older male)
+G - gelding (older neutered male)
+Owners may own multiple horses at multiple different stables.
+Horses may be owned by multiple different owners.
+A single stable contains multiple horses.
+Trainers work for a single stable.
+A stable may employ multiple trainers.
+A horse may race in multiple races.
+A race may contain multiple horses.
+A trainer may also be an owner.
+The relational schema with all DDL statements is given at the end of this project description. .
+RACING Database - DDL Statements
+Horse(horseId, horseName, age, gender, registration, stableId)
+Owner(ownerId, lname, fname)
+Owns(horseId, ownerId)
+Stable(stableId, stableName, location, colors)
+Trainer(trainerId, lname, fname, stableId)
+Race(raceId, raceName, trackName, raceDate, raceTime)
+RaceResults(raceId, horseId, results, prize)
+Track(trackName, location, length)
+/* clean up old tables;
+
+must drop tables with foreign keys first
+due to referential integrity constraints
+*/
+delete from Owns;
+drop table Owns;
+delete from Owner;
+drop table Owner;
+delete from RaceResults;
+drop table RaceResults;
+delete from Race;
+drop table Race;
+delete from Track;
+drop table Track;
+delete from Horse;
+drop table Horse;
+delete from Trainer;
+drop table Trainer;
+delete from Stable;
+drop table Stable;
+
+
+create table stable
+(stableid varchar(15) not null,
+stablename varchar(30),
+location varchar(30),
+colors
+varchar(20),
+primary key (stableid));
+create table horse
+(horseid varchar(15) not null,
+horsename varchar(15) not null,
+age int,
+gender char,
+registration integer not null,
+stableid varchar(30) not null,
+foreign key(stableid) references stable(stableid),
+primary key(horseid));
+create table owner
+(ownerid varchar(15) not null,
+lname
+varchar(15),
+fname
+varchar(15),
+primary key(ownerid));
+create table owns
+(ownerid varchar(15) not null,
+horseid varchar(15) not null,
+primary key(ownerid, horseid),
+foreign key(ownerid) references owner(ownerid),
+foreign key(horseid) references horse(horseid));
+
+create table trainer
+(trainerid varchar(15) not null,
+lname varchar(30),
+fname varchar(30),
+stableid varchar(30),
+primary key(trainerid),
+foreign key(stableid) references stable(stableid));
+create table track
+(trackname varchar(30) not null,
+location
+varchar(30),
+length
+integer,
+primary key(trackname));
+create table race
+(raceid varchar(15) not null,
+racename varchar(30),
+trackname varchar(30),
+racedate date,
+racetime time,
+primary key(raceid),
+foreign key (trackname) references track(trackname));
+create table raceresults
+(raceid varchar(15) not null,
+horseid varchar(15) not null,
+results varchar(15),
+prize
+float(10),
+primary key (raceid, horseid),
+foreign key(raceid) references race(raceid),
+foreign key(horseid) references horse(horseid));
+/* add data to tables. */
+/* stables first */
+insert into stable values ('stable1', 'zobair farm', 'riyadh', 'orange');
+insert into stable values ('stable2', 'zayed farm', 'dubai', 'kiwi');
+insert into stable values ('stable3', 'zahra farm', 'jeddah', 'cinnamon');
+insert into stable values ('stable4', 'sunny stables', 'jubail', 'lemon');
+insert into stable values ('stable5', 'ajman stables', 'ajman', 'lemon');
+insert into stable values ('stable6', 'dubai stables', 'dubai', 'bright blue');
+
+insert into horse values ('horse1', 'warrior', 2, 'c', '11111', 'stable1');
+insert into horse values ('horse2', 'conquerer', 2, 'f', '22222', 'stable6');
+insert into horse values ('horse3', 'dove of peace', 3, 'c', '33333', 'stable1');
+insert into horse values ('horse4', 'ever faster', 3, 'f', '44444', 'stable3');
+insert into horse values ('horse5', 'slow winner', 2, 'c', '55555', 'stable3');
+insert into horse values ('horse6', 'windrunner', 2, 'f', '66666', 'stable2');
+insert into horse values ('horse7', 'catapult', 4, 'm', '77777', 'stable6');
+insert into horse values ('horse8', 'flying force', 2, 'c', '88888', 'stable4');
+
+insert into horse values ('horse9', 'laggard', 2, 'f', '99999', 'stable4');
+insert into horse values ('horse10', 'formula one', 6, 'g', '10101', 'stable2');
+insert into horse values ('horse11', 'frisky frolic', 3, 'c', '11011', 'stable4');
+insert into horse values ('horse12', 'fantastic', 3, 'f', '12121', 'stable2');
+insert into horse values ('horse13', 'midnight', 2, 'c', '13131', 'stable3');
+insert into horse values ('horse14', 'running wild', 4, 's', '14141', 'stable2');
+insert into horse values ('horse15', 'fastoffmyfeet', 3, 'c', '15151', 'stable1');
+insert into horse values ('horse16', 'slow poke', 2, 'c', '16161', 'stable3');
+insert into horse values ('horse17', 'slinger', 3, 'f', '17171', 'stable2');
+insert into horse values ('horse18', 'sublime', 5, 'm', '18181', 'stable6');
+insert into horse values ('horse19', 'front runner', 4, 'g', '19191', 'stable4');
+insert into horse values ('horse20', 'night', 3, 'c', '20200', 'stable1');
+insert into horse values ('horse21', 'negative', 3, 'f', '21210', 'stable3');
+insert into horse values ('horse22', 'lightening', 2, 'c', '22220', 'stable6');
+insert into horse values ('horse23', 'lazy loser', 4, 'g', '23230', 'stable1');
+insert into horse values ('horse24', 'leaping lizard', 2, 'c', '24240', 'stable1');
+insert into horse values ('horse25', 'beautiful brown ', 3, 'f', '25250', 'stable6');
+insert into horse values ('horse26', 'sick winner', 5, 'm', '26260', 'stable2');
+insert into owner values('owner1', 'saeed', 'ahmed');
+insert into owner values('owner2', 'mohammed', 'khalid');
+insert into owner values('owner3', 'mohammed', 'faisal');
+insert into owner values('owner4', 'fahd', 'abdul rahman');
+insert into owner values('owner5', 'nasr', '');
+insert into owner values('owner6', 'mohammed', 'sheikh');
+insert into owner values('owner7', 'abed', 'ahmed');
+insert into owner values('owner8', 'mashour', '');
+insert into owner values('owner9', 'said', 'sheikh');
+insert into owner values('owner10', 'faisal', 'khan');
+insert into owner values('owner11', 'jabr', 'mohammed');
+insert into owner values('owner12', 'faleh', 'mahmood');
+insert into owner values('owner13', 'yahya', 'mohammed');
+insert into owner values('owner14', 'sulaiman', '');
+insert into owner values('owner15', 'saeed', 'ali');
+insert into owner values('owner16', 'ahmed', 'faisal');
+insert into owner values('owner17', 'saud', 'mohammed');
+insert into owner values('owner18', 'nazir', 'mohammed');
+insert into owner values('owner19', 'saleh', 'fahd');
+insert into owner values('owner20', 'mohammed', 'naeem');
+
+insert into owns values('owner14', 'horse1');
+insert into owns values('owner3', 'horse2');
+insert into owns values('owner2', 'horse3');
+insert into owns values('owner2', 'horse4');
+insert into owns values('owner1', 'horse5');
+
+insert into owns values('owner12', 'horse5');
+insert into owns values('owner14', 'horse5');
+insert into owns values('owner1', 'horse6');
+insert into owns values('owner5', 'horse6');
+insert into owns values('owner20', 'horse7');
+insert into owns values('owner19', 'horse8');
+insert into owns values('owner2', 'horse9');
+insert into owns values('owner18', 'horse10');
+insert into owns values('owner3', 'horse10');
+insert into owns values('owner4', 'horse11');
+insert into owns values('owner16', 'horse12');
+insert into owns values('owner17', 'horse13');
+insert into owns values('owner15', 'horse14');
+insert into owns values('owner15', 'horse15');
+insert into owns values('owner20', 'horse16');
+insert into owns values('owner4', 'horse17');
+insert into owns values('owner6', 'horse19');
+insert into owns values('owner12', 'horse20');
+insert into owns values('owner7', 'horse21');
+insert into owns values('owner7', 'horse22');
+insert into owns values('owner10', 'horse23');
+insert into owns values('owner12', 'horse24');
+insert into owns values('owner13', 'horse25');
+insert into owns values('owner2', 'horse26');
+insert into owns values('owner9', 'horse23');
+insert into owns values('owner8', 'horse18');
+
+insert into trainer values('trainer1', 'mohammed', 'fahd', 'stable2');
+insert into trainer values('trainer2', 'saleh', 'saeed', 'stable1');
+insert into trainer values('trainer3', 'ali', 'raad', 'stable4');
+insert into trainer values('trainer4', 'sayed', 'wasim', 'stable3');
+insert into trainer values('trainer5', 'ahmed', 'ali', 'stable3');
+insert into trainer values('trainer6', 'faisal', 'salah', 'stable5');
+insert into trainer values('trainer7', 'hamid', 'ahmed', 'stable6');
+insert into trainer values('trainer8', 'khalid', 'ahmed', 'stable6');
+
+insert into track values('doha park', 'qt', 20);
+insert into track values('jubail', 'sa', 15);
+insert into track values('yanbu', 'sa', 18);
+insert into track values('deira', 'ue', 17);
+insert into track values('blue hills', 'sa', 19);
+insert into track values('bahrain', 'bh', 18);
+insert into track values('sharjah', 'ue', 20);
+insert into track values('real runs', 'sa', 22);
+insert into track values('dhahran', 'sa', 20);
+insert into track (trackname) values ('riyadh');
+
+insert into race values('race1', 'kings cup', 'riyadh', '2007-05-03','14:00');
+insert into race values('race2', '2-year-old fillies', 'doha park', '2007-05-03','13:00');
+insert into race values('race3', '2-year-old colts', 'doha park', '2007-05-03','13:30');
+insert into race values('race4', 'handicap', 'doha park', '2007-05-03','12:00');
+insert into race values('race5', 'claiming stake', 'sharjah', '2007-05-03','12:30');
+insert into race values('race6', '3-year-old fillies', 'jubail', '2007-06-02','12:30');
+insert into race values('race7', 'handicap', 'jubail', '2007-06-02','9:30');
+insert into race values('race8', '2-year-old colts', 'real runs', '2007-06-02','10:30');
+insert into race values('race9', '2-year-old fillies', 'jubail', '2007-06-02','11:30');
+insert into race values('race10', 'claiming stake', 'sharjah', '2007-06-02','12:30');
+insert into race values('race11', '3-year-old fillies', 'deira', '2007-04-02','10:30');
+insert into race values('race12', 'handicap', 'yanbu', '2007-05-03','11:30');
+insert into race values('race13', '3-year-old fillies', 'yanbu', '2007-05-03','11:00');
+insert into race values('race14', 'handicap', 'dhahran', '2007-05-10','10:00');
+insert into race values('race15', '3-year-old colts', 'deira', '2007-05-12','15:00');
+insert into race values('race16', 'claiming stake', 'yanbu', '2007-05-20','14:30');
+insert into race values('race17', 'handicap', 'doha park', '2007-05-20','13:00');
+insert into race values('race18', '3-year-old fillies', 'sharjah', '2007-05-21','8:00');
+insert into race values('race19', '2-year-old colts', 'dhahran', '2007-05-25','11:00');
+insert into race values('race20', 'claiming stake', 'blue hills', '2007-05-25','8:30');
+insert into race values('race21', '3-year-old colts', 'real runs', '2007-03-19','14:30');
+insert into race values('race22', 'handicap', 'dhahran', '2007-03-27','15:00');
+insert into race values('race23', '3-year-old fillies', 'blue hills', '2007-03-28','9:30');
+insert into race values('race24', '3-year-old colts', 'jubail', '2007-03-28','13:30');
+insert into race values('race25', 'claiming stake', 'blue hills', '2007-03-29','10:00');
+insert into race values('race26', '3-year-old colts', 'yanbu', '2007-03-30','12:30');
+insert into race values('race27', 'handicap', 'deira', '2007-04-03','14:00');
+insert into race values('race28', '2-year-old fillies', 'blue hills', '2007-04-04','8:30');
+insert into race values('race29', '3-year-old colts', 'bahrain', '2007-04-05','8:00');
+insert into race values('race30', 'claiming stake', 'dhahran', '2007-04-08','9:30');
+insert into race values('race31', 'handicap', 'dhahran', '2007-04-08','9:00');
+insert into race values('race32', '2-year-old colts', 'jubail', '2007-04-09','11:00');
+insert into race values('race33', 'claiming stake', 'bahrain', '2007-04-10','13:00');
+insert into race values('race34', '3-year-old colts', 'deira', '2007-05-12','12:00');
+insert into race values('race35', 'handicap', 'deira', '2007-04-13','10:30');
+insert into race values('race36', '3-year-old colts', 'blue hills', '2007-05-03','14:30');
+
+insert into raceresults (raceid, horseid, results, prize)
+values ('race1', 'horse1', 'winner', 1000.00),
+       ('race1', 'horse2', 'second place', 500.00),
+       ('race2', 'horse1', 'third place', 250.00);
+insert into raceresults values('race1', 'horse3', 'first', 500000);
+insert into raceresults values('race1', 'horse11', 'second', 200000);
+insert into raceresults values('race1', 'horse15', 'third', 500000);
+insert into raceresults values('race2', 'horse6', 'first', 100000);
+insert into raceresults values('race2', 'horse2', 'second', 50000);
+insert into raceresults values('race2', 'horse20', 'third', 20000);
+insert into raceresults values('race3', 'horse22', 'first', 70000);
+insert into raceresults values('race3', 'horse5', 'second', 50000);
+insert into raceresults values('race3', 'horse1', 'third', 20000);
+insert into raceresults values('race4', 'horse19', 'first', 50000);
+insert into raceresults values('race4', 'horse18', 'no show', 0);
+insert into raceresults values('race4', 'horse14', 'no show', 0);
+insert into raceresults values('race6', 'horse25', 'first', 5000);
+insert into raceresults values('race7', 'horse7', 'second', 2000);
+insert into raceresults values('race9', 'horse11', 'last', 0);
+insert into raceresults values('race10', 'horse18', 'fourth', 500);
+insert into raceresults values('race11', 'horse12', 'first', 50000);
+insert into raceresults values('race11', 'horse17', 'second',25000);
+insert into raceresults values('race11', 'horse21', 'fourth', 10000);
+insert into raceresults values('race12', 'horse14', 'first', 6000);
+insert into raceresults values('race12', 'horse18', 'second', 5000);
+insert into raceresults values('race13', 'horse25', 'first', 100000);
+insert into raceresults values('race13', 'horse4', 'second', 50000);
+insert into raceresults values('race13', 'horse12', 'third', 30000);
+insert into raceresults values('race14', 'horse23', 'first', 25000);
+insert into raceresults values('race14', 'horse26', 'second', 20000);
+insert into raceresults values('race15', 'horse11', 'second', 10000);
+insert into raceresults values('race15', 'horse24', 'third', 8000);
+insert into raceresults values('race16', 'horse10', 'second', 5000);
+insert into raceresults values('race16', 'horse14', 'third', 4000);
+insert into raceresults values('race17', 'horse7', 'first', 15000);
+insert into raceresults values('race17', 'horse10', 'second',1100);
+insert into raceresults values('race18', 'horse6', 'first', 70000);
+insert into raceresults values('race19', 'horse22', 'first', 1000000);
+insert into raceresults values('race19', 'horse1', 'second', 80000);
+insert into raceresults values('race19', 'horse8', 'third', 60000);
+insert into raceresults values('race20', 'horse23', 'first', 1500);
+insert into raceresults values('race20', 'horse14', 'second', 1000);
+insert into raceresults values('race20', 'horse26', 'third', 800);
+insert into raceresults values('race20', 'horse10', 'fourth', 500);
+insert into raceresults values('race21', 'horse24', 'first', 70000);
+insert into raceresults values('race21', 'horse15', 'second', 55000);
+insert into raceresults values('race21', 'horse3', 'third', 40000);
+insert into raceresults values('race22', 'horse18', 'first', 10000);
+insert into raceresults values('race22', 'horse19', 'second', 8000);
+insert into raceresults values('race23', 'horse25', 'first', 150000 );
+insert into raceresults values('race24', 'horse7', 'first', 10000);
+insert into raceresults values('race25', 'horse10', 'second', 8000);
+insert into raceresults values('race25', 'horse20', 'fourth', 2000);
+insert into raceresults values('race26', 'horse24', 'first', 8000);
+insert into raceresults values('race26', 'horse20', 'fourth', 2000);
+insert into raceresults values('race27', 'horse18', 'first', 70000);
+insert into raceresults values('race27', 'horse23', 'third', 40000);
+insert into raceresults values('race28', 'horse25', 'first', 90000);
+insert into raceresults values('race29', 'horse15', 'first', 80000);
+insert into raceresults values('race29', 'horse3', 'second', 65000);
+insert into raceresults values('race29', 'horse24', 'third', 50000);
+insert into raceresults values('race30', 'horse14', 'second', 1500);
+insert into raceresults values('race30', 'horse10', 'fourth', 500);
+insert into raceresults values('race31', 'horse7', 'first', 90000);
+insert into raceresults values('race31', 'horse26', 'second', 70000);
+insert into raceresults values('race31', 'horse23', 'third', 50000);
+insert into raceresults values('race31', 'horse10', 'fourth', 30000);
+insert into raceresults values('race32', 'horse22', 'first', 150000);
+insert into raceresults values('race32', 'horse13', 'second', 125000);
+insert into raceresults values('race32', 'horse16', 'third', 100000);
+insert into raceresults values('race33', 'horse23', 'second', 1700);
+insert into raceresults values('race33', 'horse26', 'third', 1200);
+insert into raceresults values('race34', 'horse11', 'first', 50000);
+insert into raceresults values('race34', 'horse15', 'second', 30000);
+insert into raceresults values('race35', 'horse7', 'first', 45000);
+insert into raceresults values('race35', 'horse19', 'second', 25000);
+insert into raceresults values('race36', 'horse11', 'first', 100000);
+insert into raceresults values('race36', 'horse15', 'second', 80000);
+insert into raceresults values('race36', 'horse20', 'third', 50000);
+
